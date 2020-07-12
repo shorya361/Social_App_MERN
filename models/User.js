@@ -20,5 +20,21 @@ const UserSchema = new mongoose.Schema({
   description: {
     type: String,
   },
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Comment',
+    },
+  ],
+  Arts_created: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Arts',
+    },
+  ],
 });
 module.exports = User = mongoose.model('user', UserSchema);

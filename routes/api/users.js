@@ -27,8 +27,8 @@ router.post(
       });
     }
 
-    const { name, email, password } = req.body;
-
+    const { name, email, password, city, description } = req.body;
+    const { AdminCode } = req.body;
     try {
       // See if the user exists.
 
@@ -38,10 +38,17 @@ router.post(
           .status(400)
           .json({ errors: { msg: ' User already exists !!' } });
       }
+      var isAdmin = false;
+      if (AdminCode == 'cloberine_time') {
+        isAdmin = true;
+      }
       user = new User({
         name,
         email,
         password,
+        city,
+        description,
+        isAdmin,
       });
       // Encrypt User
       const salt = await bcrypt.genSalt(10);
