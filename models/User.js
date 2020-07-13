@@ -24,13 +24,17 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  activated: {
+    type: Boolean,
+    default: true,
+  },
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Comment',
     },
   ],
-  Arts_created: [
+  Posts: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Arts',

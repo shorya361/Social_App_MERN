@@ -75,4 +75,20 @@ router.post(
     }
   }
 );
+
+//Deactivate Account
+router.post('/changeStatus', async (req, res) => {
+  try {
+    const { Profile } = req.body;
+    let user = await User.findById(Profile);
+    // console.log(user);
+    user.activated = !user.activated;
+    user.save();
+    res.json({ user });
+  } catch (error) {
+    console.log('error in deativating :' + error.message);
+    res.status(500).send('server error');
+  }
+});
+
 module.exports = router;

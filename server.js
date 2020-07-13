@@ -17,3 +17,5 @@ app.listen(PORT, () => {
 // Define Route
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/comment', require('./routes/api/comments'));
+app.use('/api/Arts', require('./routes/api/Arts'));

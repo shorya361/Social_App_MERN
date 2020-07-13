@@ -1,9 +1,8 @@
 var mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
-var campgroundSchema = new mongoose.Schema({
+var ArtSchema = new mongoose.Schema({
   name: String,
   image: String,
-  price: String,
   description: String,
   author: {
     id: {
@@ -19,4 +18,4 @@ var campgroundSchema = new mongoose.Schema({
     },
   ],
 });
-module.exports = mongoose.model('Arts', campgroundSchema);
+module.exports = mongoose.model('Arts', ArtSchema);
