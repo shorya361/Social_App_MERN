@@ -19,6 +19,7 @@ router.post(
     ).isLength({ min: 5 }),
   ],
   async (req, res) => {
+    console.log('inside register backend', req);
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
