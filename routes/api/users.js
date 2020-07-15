@@ -10,34 +10,18 @@ const config = require('config');
 // Register User
 router.post(
   '/register',
-  [
-    check('name', 'Name is Required').not().isEmpty(),
-    check('email', 'Plz include a valid email').isEmail(),
-    check(
-      'password',
-      ' Plz enter a password with 5 or more characters'
-    ).isLength({ min: 5 }),
-  ],
+
   async (req, res) => {
-    console.log('inside register backend', req);
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        errors: errors.array(),
-      });
-    }
-
-    const { name, email, password, city, description } = req.body;
-    const { AdminCode } = req.body;
     try {
+      const { name, email, password, city, description } = req.body;
+      const { AdminCode } = req.body;
       // See if the user exists.
+      // console.log(req.body);
 
+      // console.log('inside register backend: ', req.body);
       let user = await User.findOne({ email });
       if (user) {
-        return res
-          .status(400)
-          .json({ errors: { msg: ' User already exists !!' } });
+        return res.json({ errors: { msg: ' User already exists !!' } });
       }
       var isAdmin = false;
       if (AdminCode == 'cloberine_time') {
@@ -60,12 +44,15 @@ router.post(
           id: user.id,
         },
       };
+      // console.log(user);
       jwt.sign(
         payload,
         config.get('jwtsecret'),
         { expiresIn: 36000 },
         (err, token) => {
-          if (err) throw err;
+          if (err) {
+            throw err;
+          }
           res.json({ token });
         }
       );

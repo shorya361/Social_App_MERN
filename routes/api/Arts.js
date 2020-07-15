@@ -8,6 +8,8 @@ const User = require('../../models/User'),
 router.get('/', async (req, res) => {
   try {
     const Posts = await Arts.find({});
+    console.log('inside get Arts Route');
+    console.log(Posts);
     res.json({ Posts });
   } catch (error) {
     console.log('error in getting posts :' + error.message);

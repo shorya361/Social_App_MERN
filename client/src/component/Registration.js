@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card } from 'react-bootstrap';
 import axios from 'axios';
+
 class Registration extends Component {
   constructor(props) {
     super(props);
@@ -17,30 +18,43 @@ class Registration extends Component {
   onChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
-
   onSubmit = async (e) => {
-    e.preventDefault();
-    const newUser = {
-      name: this.state.name,
-      password: this.state.password,
-      city: this.state.city,
-      description: this.state.description,
-    };
     try {
-      const body = JSON.stringify(newUser);
-      console.log(body);
-
+      e.preventDefault();
+      console.log('before calling!!');
       const config = {
         headers: {
           'Content-Type': 'application/json',
         },
       };
-
-      const res = await axios.post(
+      const body = {
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password,
+        city: this.state.city,
+        description: this.state.description,
+        AdminCode: 'NO',
+      };
+      // console.log('before calling!!');
+      const response = await axios.post(
         'http://localhost:5000/api/users/register',
-        body
+        body,
+        config
       );
-      console.log('response from backend:' + res);
+      if (response.data.errors) {
+        alert(response.data.errors.msg);
+      } else {
+        alert('User Created');
+      }
+      console.log(response);
+      console.log('after calling');
+      this.setState({
+        name: '',
+        email: '',
+        password: '',
+        city: '',
+        description: '',
+      });
     } catch (error) {
       console.error(error);
     }
