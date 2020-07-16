@@ -1,5 +1,17 @@
 import React, { Component } from 'react';
 import { Toast } from 'react-bootstrap';
+import { setAlert, removeAlert } from '../redux/ActionCreater';
+import { connect } from 'react-redux';
+
+const mapDispatchToProps = (dispatch) => ({
+  setAlert: (message, AlertType) => {
+    dispatch(setAlert(message, AlertType));
+  },
+  removeAlert: () => {
+    dispatch(removeAlert());
+  },
+});
+
 class Alert extends Component {
   constructor(props) {
     super(props);
@@ -14,8 +26,14 @@ class Alert extends Component {
     });
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.toggleShow();
+      this.props.removeAlert();
+      console.log(this.props);
+    }, 3000);
+  }
   render() {
-    console.log(this);
     return (
       <Toast
         className={this.props.cls}
@@ -34,4 +52,4 @@ class Alert extends Component {
     );
   }
 }
-export default Alert;
+export default connect(null, mapDispatchToProps)(Alert);

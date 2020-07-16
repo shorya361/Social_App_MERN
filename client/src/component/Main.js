@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
-import Alert from './Alert';
 import Footer from '../component/footer';
 import Landing from '../component/Landing';
 import Home from '../component/Home';
