@@ -1,22 +1,20 @@
-import React, { Fragment } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, { Fragment, Component } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Main from './component/Main';
 import './App.css';
-import Footer from './component/footer';
-import Landing from './component/Landing';
-import Home from './component/Home';
-import Header from './component/Header';
-const App = () => (
-  <Router>
-    <Fragment>
-      <Route exact path='/' component={Landing} />
-      <section>
-        <Switch>
-          <Route exact path='/Home' component={Home} />
-        </Switch>
-      </section>
-      <Footer />
-    </Fragment>
-  </Router>
-);
+import { Provider } from 'react-redux';
+import { ConfigureStore } from './redux/configureStore';
+const store = ConfigureStore();
 
+class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <Router>
+          <Main />
+        </Router>
+      </Provider>
+    );
+  }
+}
 export default App;

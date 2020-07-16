@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Card } from 'react-bootstrap';
 import axios from 'axios';
-
+import { connect } from 'react-redux';
+import { setAlert } from '../redux/ActionCreater';
 class Registration extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +22,7 @@ class Registration extends Component {
   onSubmit = async (e) => {
     try {
       e.preventDefault();
-      console.log('before calling!!');
+      // console.log('before calling!!');
       const config = {
         headers: {
           'Content-Type': 'application/json',
@@ -42,12 +43,14 @@ class Registration extends Component {
         config
       );
       if (response.data.errors) {
-        alert(response.data.errors.msg);
+        this.props.setAlert(response.data.errors.msg, 'danger');
+        // alert(response.data.errors.msg);
+        this.props.ALERT();
       } else {
-        alert('User Created');
+        this.props.setAlert('Account Created', 'success');
       }
-      console.log(response);
-      console.log('after calling');
+      // console.log(response);
+      console.log('after calling :' + this);
       this.setState({
         name: '',
         email: '',
@@ -78,6 +81,7 @@ class Registration extends Component {
                     value={this.state.name}
                     class='form-control'
                     placeholder='Name'
+                    required
                   />
                 </div>
 
@@ -91,6 +95,7 @@ class Registration extends Component {
                     name='email'
                     value={this.state.email}
                     placeholder='Email'
+                    required
                   />
                 </div>
 
@@ -104,6 +109,7 @@ class Registration extends Component {
                     value={this.state.password}
                     name='password'
                     placeholder='Password'
+                    required
                   />
                 </div>
 
@@ -147,4 +153,4 @@ class Registration extends Component {
   }
 }
 
-export default Registration;
+export default connect(null, { setAlert })(Registration);

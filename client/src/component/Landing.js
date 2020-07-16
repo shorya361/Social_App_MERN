@@ -3,12 +3,17 @@ import { Tabs, Tab } from 'react-bootstrap';
 import Registration from './Registration';
 import Login from './Login';
 import { Form, Col } from 'react-bootstrap';
+import Alert from './Alert';
 import { Navbar, Nav, Button, Carousel } from 'react-bootstrap';
 class Landing extends Component {
   constructor(props) {
     super(props);
+    this.ALERT = this.ALERT.bind(this);
+    console.log('landing Constructor: ' + this);
   }
-
+  ALERT() {
+    return <Alert />;
+  }
   render() {
     return (
       <div className='full-width'>
@@ -20,13 +25,14 @@ class Landing extends Component {
               </Navbar.Brand>
             </div>
           </Navbar>
+          {this.ALERT()}
           <div className='container ' style={{ paddingTop: '18%' }}>
             <Tabs>
               <Tab eventKey='Login' title='Login'>
                 <Login />
               </Tab>
               <Tab eventKey='Sign Up' title='Sign Up'>
-                <Registration />
+                <Registration ALERT={this.ALERT} />
               </Tab>
             </Tabs>
           </div>
@@ -56,6 +62,8 @@ class Landing extends Component {
               </Nav>
             </div>
           </Navbar>
+
+          {this.ALERT()}
           <div className='row' style={{ marginTop: '5%' }}>
             <div className='col-6 ' style={{ marginLeft: '5%' }}>
               <Carousel>
@@ -83,7 +91,7 @@ class Landing extends Component {
               </Carousel>
             </div>
             <div className='col-4' style={{ marginLeft: '3%' }}>
-              <Registration />
+              <Registration ALERT={this.ALERT} />
             </div>
           </div>
         </div>
