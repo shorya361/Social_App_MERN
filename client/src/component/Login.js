@@ -8,40 +8,43 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <div class='card'>
-          <div class='card-body'>
+        <div className='card'>
+          <div className='card-body'>
             <form>
-              <p class='h4 text-center py-4'>Login</p>
+              <p className='h4 text-center py-4'>Login</p>
 
-              <div class='md-form'>
-                <i class='fa fa-envelope prefix grey-text'></i>
+              <div className='md-form'>
+                <i className='fa fa-envelope prefix grey-text'></i>
                 <input
                   type='email'
                   id='materialFormCardEmailEx'
-                  class='form-control'
+                  className='form-control'
                 />
-                <label for='materialFormCardEmailEx' class='font-weight-light'>
+                <label
+                  htmlFor='materialFormCardEmailEx'
+                  className='font-weight-light'
+                >
                   Your email
                 </label>
               </div>
 
-              <div class='md-form'>
-                <i class='fa fa-lock prefix grey-text'></i>
+              <div className='md-form'>
+                <i className='fa fa-lock prefix grey-text'></i>
                 <input
                   type='password'
                   id='materialFormCardPasswordEx'
-                  class='form-control'
+                  className='form-control'
                 />
                 <label
-                  for='materialFormCardPasswordEx'
-                  class='font-weight-light'
+                  htmlFor='materialFormCardPasswordEx'
+                  className='font-weight-light'
                 >
                   Your password
                 </label>
               </div>
 
-              <div class='text-center py-4 mt-3'>
-                <button class='btn btn-cyan' type='submit'>
+              <div className='text-center py-4 mt-3'>
+                <button className='btn btn-cyan' type='submit'>
                   Login
                 </button>
               </div>

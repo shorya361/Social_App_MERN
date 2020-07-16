@@ -2,10 +2,24 @@ import React, { Component } from 'react';
 import { Card } from 'react-bootstrap';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { setAlert } from '../redux/ActionCreater';
+import { setAlert, removeAlert } from '../redux/ActionCreater';
+const mapStateToProps = (state) => {
+  return {
+    Alert: state.Alert,
+  };
+};
+const mapDispatchToProps = (dispatch) => ({
+  setAlert: (message, AlertType) => {
+    dispatch(setAlert(message, AlertType));
+  },
+  removeAlert: () => {
+    dispatch(removeAlert());
+  },
+});
 class Registration extends Component {
   constructor(props) {
     super(props);
+    // console.log(this);
     this.state = {
       name: '',
       email: '',
@@ -19,6 +33,7 @@ class Registration extends Component {
   onChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
+
   onSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -42,15 +57,16 @@ class Registration extends Component {
         body,
         config
       );
+      // console.log(this);
       if (response.data.errors) {
         this.props.setAlert(response.data.errors.msg, 'danger');
         // alert(response.data.errors.msg);
-        this.props.ALERT();
       } else {
         this.props.setAlert('Account Created', 'success');
       }
       // console.log(response);
-      console.log('after calling :' + this);
+      // console.log('after calling :');
+      // console.log(this);
       this.setState({
         name: '',
         email: '',
@@ -58,6 +74,7 @@ class Registration extends Component {
         city: '',
         description: '',
       });
+      // this.props.showAlert(this.props.Alert);
     } catch (error) {
       console.error(error);
     }
@@ -69,29 +86,29 @@ class Registration extends Component {
           <Card style={{ padding: '5% auto' }}>
             <Card.Body>
               <form onSubmit={this.onSubmit}>
-                <p class='h4 text-center py-4'>Create Account</p>
+                <p className='h4 text-center py-4'>Create Account</p>
 
-                <div class='md-form'>
-                  <i class='fa fa-user prefix grey-text'></i>
+                <div className='md-form'>
+                  <i className='fa fa-user prefix grey-text'></i>
                   <input
                     type='text'
                     id='name'
                     name='name'
                     onChange={this.onChange}
                     value={this.state.name}
-                    class='form-control'
+                    className='form-control'
                     placeholder='Name'
                     required
                   />
                 </div>
 
-                <div class='md-form'>
-                  <i class='fa fa-envelope prefix grey-text'></i>
+                <div className='md-form'>
+                  <i className='fa fa-envelope prefix grey-text'></i>
                   <input
                     type='email'
                     id='email'
                     onChange={this.onChange}
-                    class='form-control'
+                    className='form-control'
                     name='email'
                     value={this.state.email}
                     placeholder='Email'
@@ -99,12 +116,12 @@ class Registration extends Component {
                   />
                 </div>
 
-                <div class='md-form'>
-                  <i class='fa fa-lock prefix grey-text'></i>
+                <div className='md-form'>
+                  <i className='fa fa-lock prefix grey-text'></i>
                   <input
                     type='password'
                     id='password'
-                    class='form-control'
+                    className='form-control'
                     onChange={this.onChange}
                     value={this.state.password}
                     name='password'
@@ -113,12 +130,12 @@ class Registration extends Component {
                   />
                 </div>
 
-                <div class='md-form'>
-                  <i class='fa fa-map-marker prefix grey-text'></i>
+                <div className='md-form'>
+                  <i className='fa fa-map-marker prefix grey-text'></i>
                   <input
                     type='text'
                     id='city'
-                    class='form-control'
+                    className='form-control'
                     onChange={this.onChange}
                     value={this.state.city}
                     placeholder='City'
@@ -126,12 +143,12 @@ class Registration extends Component {
                   />
                 </div>
 
-                <div class='md-form'>
-                  <i class='fa fa-sticky-note-o prefix grey-text'></i>
+                <div className='md-form'>
+                  <i className='fa fa-sticky-note-o prefix grey-text'></i>
                   <input
                     type='text'
                     id='description'
-                    class='form-control'
+                    className='form-control'
                     onChange={this.onChange}
                     name='description'
                     value={this.state.description}
@@ -139,8 +156,8 @@ class Registration extends Component {
                   />
                 </div>
 
-                <div class='text-center py-4 mt-3'>
-                  <button class='btn btn-cyan' type='submit'>
+                <div className='text-center py-4 mt-3'>
+                  <button className='btn btn-cyan' type='submit'>
                     Register
                   </button>
                 </div>
@@ -153,4 +170,4 @@ class Registration extends Component {
   }
 }
 
-export default connect(null, { setAlert })(Registration);
+export default connect(mapStateToProps, mapDispatchToProps)(Registration);

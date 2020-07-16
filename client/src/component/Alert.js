@@ -1,35 +1,37 @@
-// import React from 'react';
-// import PropTypes from 'prop-types';
-
-// const Alert = (alerts) =>
-//   alerts !== null &&
-//   alerts.length > 0 &&
-//   alerts.map((alert) => (
-//     <div key={alert.id} className={'alert alert-${alert.alertType}'}>
-//       {alert.msg}
-//     </div>
-//   ));
-
-// Alert.propTypes = {
-//   alerts: PropTypes.array.isRequired,
-// };
-// export default connect(mapStateToProps)(Alert);
-
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-
-const mapStateToProps = (state) => ({
-  Alert: state.Alert,
-});
-
+import { Toast } from 'react-bootstrap';
 class Alert extends Component {
   constructor(props) {
     super(props);
-    console.log('Alert: ' + this);
+    this.state = {
+      show: true,
+    };
+    this.toggleShow = this.toggleShow.bind(this);
   }
+  toggleShow() {
+    this.setState({
+      show: !this.state.show,
+    });
+  }
+
   render() {
-    return <h1 style={{ textAlign: 'center' }}>Alert Component</h1>;
+    console.log(this);
+    return (
+      <Toast
+        className={this.props.cls}
+        style={{ marginLeft: '42%' }}
+        show={this.state.show}
+        onClose={this.toggleShow}
+      >
+        <Toast.Header>
+          <img src='holder.js/20x20?text=%20' className='rounded mr-2' alt='' />
+          <strong className='mr-auto'>{this.props.heading}</strong>
+          <small>now</small>
+        </Toast.Header>
+
+        <h4>{this.props.message}</h4>
+      </Toast>
+    );
   }
 }
-
-export default connect(mapStateToProps)(Alert);
+export default Alert;

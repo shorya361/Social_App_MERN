@@ -2,17 +2,55 @@ import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
 import Registration from './Registration';
 import Login from './Login';
-import { Form, Col } from 'react-bootstrap';
+import { Form, Col, Toast } from 'react-bootstrap';
 import Alert from './Alert';
 import { Navbar, Nav, Button, Carousel } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { setAlert, removeAlert } from '../redux/ActionCreater';
+
+const mapStateToProps = (state) => {
+  return {
+    Alert: state.Alert,
+  };
+};
+const mapDispatchToProps = (dispatch) => ({
+  setAlert: (message, AlertType) => {
+    dispatch(setAlert(message, AlertType));
+  },
+  removeAlert: () => {
+    dispatch(removeAlert());
+  },
+});
+
 class Landing extends Component {
   constructor(props) {
     super(props);
-    this.ALERT = this.ALERT.bind(this);
-    console.log('landing Constructor: ' + this);
+    this.AA = this.AA.bind(this);
   }
-  ALERT() {
-    return <Alert />;
+  componentDidMount() {
+    this.props.removeAlert();
+  }
+
+  AA() {
+    if (this.props.Alert[0]) {
+      const cls = 'alert alert-'.concat(this.props.Alert[0].AlertType);
+      let heading = '';
+      if (this.props.Alert[0].AlertType == 'danger') {
+        heading = 'Sorry..';
+      } else {
+        heading = 'Congrats';
+      }
+      console.log(this.props.Alert[0]);
+      return (
+        <Alert
+          cls={cls}
+          message={this.props.Alert[0].message}
+          heading={heading}
+        />
+      );
+    } else {
+      return <div></div>;
+    }
   }
   render() {
     return (
@@ -25,14 +63,14 @@ class Landing extends Component {
               </Navbar.Brand>
             </div>
           </Navbar>
-          {this.ALERT()}
+          {this.AA()}
           <div className='container ' style={{ paddingTop: '18%' }}>
             <Tabs>
               <Tab eventKey='Login' title='Login'>
                 <Login />
               </Tab>
               <Tab eventKey='Sign Up' title='Sign Up'>
-                <Registration ALERT={this.ALERT} />
+                <Registration />
               </Tab>
             </Tabs>
           </div>
@@ -44,7 +82,7 @@ class Landing extends Component {
                 <strong> Art-App</strong>
               </Navbar.Brand>
               <Nav className='justify-content-end'>
-                <Form Inline>
+                <Form>
                   <Form.Row>
                     <Col>
                       <Form.Control placeholder='Email' />
@@ -53,7 +91,7 @@ class Landing extends Component {
                       <Form.Control type='password' placeholder='Password' />
                     </Col>
                     <Col>
-                      <button class='btn-xm btn-cyan mt-1' type='submit'>
+                      <button className='btn-xm btn-cyan mt-1' type='submit'>
                         Register
                       </button>
                     </Col>
@@ -62,8 +100,7 @@ class Landing extends Component {
               </Nav>
             </div>
           </Navbar>
-
-          {this.ALERT()}
+          {this.AA()}
           <div className='row' style={{ marginTop: '5%' }}>
             <div className='col-6 ' style={{ marginLeft: '5%' }}>
               <Carousel>
@@ -91,7 +128,7 @@ class Landing extends Component {
               </Carousel>
             </div>
             <div className='col-4' style={{ marginLeft: '3%' }}>
-              <Registration ALERT={this.ALERT} />
+              <Registration />
             </div>
           </div>
         </div>
@@ -99,4 +136,4 @@ class Landing extends Component {
     );
   }
 }
-export default Landing;
+export default connect(mapStateToProps, mapDispatchToProps)(Landing);
