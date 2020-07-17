@@ -1,78 +1,119 @@
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
 import Registration from './Registration';
-import Login from './Login';
-import { Form, Col, Toast } from 'react-bootstrap';
+import LoginComponent from './LoginComponent';
+import { Form, Col } from 'react-bootstrap';
 import Alert from './Alert';
-import { Navbar, Nav, Button, Carousel } from 'react-bootstrap';
+import { Navbar, Nav, Carousel } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { setAlert, removeAlert } from '../redux/ActionCreater';
+import { Redirect } from 'react-router-dom';
+import { Login } from '../redux/ActionCreater';
+
+const mapDispatchToProps = (dispatch) => ({
+  LoginUser: (body) => {
+    dispatch(Login(body));
+  },
+});
 
 const mapStateToProps = (state) => {
   return {
     Alert: state.Alert,
+    Auth: state.Auth,
   };
 };
-const mapDispatchToProps = (dispatch) => ({
-  setAlert: (message, AlertType) => {
-    dispatch(setAlert(message, AlertType));
-  },
-  removeAlert: () => {
-    dispatch(removeAlert());
-  },
-});
 
 class Landing extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      email: '',
+      password: '',
+    };
     this.AA = this.AA.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
-  componentDidMount() {
-    this.props.removeAlert();
-  }
+  onChange = (e) => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+  onSubmit = (e) => {
+    e.preventDefault();
+    console.log(this.state);
+    const body = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+    this.props.LoginUser(body);
+    this.setState({
+      email: '',
+      password: '',
+    });
+  };
 
-  AA() {
+  componentDidMount() {
+    if (this.props.Auth.isAuthenticated) {
+      return <Redirect to='/Home' />;
+    }
+  }
+  AA(mr) {
     if (this.props.Alert[0]) {
       const cls = 'alert alert-'.concat(this.props.Alert[0].AlertType);
       let heading = '';
+      const ml = mr;
       if (this.props.Alert[0].AlertType == 'danger') {
         heading = 'Sorry..';
       } else {
         heading = 'Congrats';
       }
-      console.log(this.props.Alert[0]);
+      // console.log(this.props.Alert[0]);
       return (
         <Alert
+          ml={ml}
           cls={cls}
           message={this.props.Alert[0].message}
           heading={heading}
         />
       );
     } else {
-      return <div></div>;
+      return <div style={{ height: '10%' }}> </div>;
     }
   }
   render() {
+    if (this.props.Auth.isAuthenticated) {
+      return <Redirect to='/Home' />;
+    }
     return (
       <div className='full-width'>
-        <div className='d-xl-none'>
-          <Navbar variant='dark' bg='dark'>
-            <div className='container'>
+        <div className='d-xl-none' style={{ height: '100%' }}>
+          <Navbar bg='dark' variant='dark'>
+            <div className='container' style={{ justifyContent: 'center' }}>
               <Navbar.Brand>
-                <strong> Art-App</strong>
+                <h3>
+                  <strong> Art-App</strong>
+                </h3>
               </Navbar.Brand>
             </div>
           </Navbar>
-          {this.AA()}
-          <div className='container ' style={{ paddingTop: '18%' }}>
-            <Tabs>
-              <Tab eventKey='Login' title='Login'>
-                <Login />
-              </Tab>
-              <Tab eventKey='Sign Up' title='Sign Up'>
-                <Registration />
-              </Tab>
-            </Tabs>
+          <div className='container '>
+            <div className='row'>
+              <div
+                style={{ height: '100px', justifyContent: 'center' }}
+                className='col-12'
+              >
+                {' '}
+                <p></p> {this.AA('27%')}
+              </div>
+              <div className='col-12' style={{ height: '100%' }}>
+                <Tabs>
+                  <Tab eventKey='Login' title='Login'>
+                    <LoginComponent />
+                  </Tab>
+                  <Tab eventKey='Sign Up' title='Sign Up'>
+                    <Registration />
+                  </Tab>
+                </Tabs>
+              </div>
+            </div>
           </div>
         </div>
         <div className='d-none d-xl-block '>
@@ -82,17 +123,30 @@ class Landing extends Component {
                 <strong> Art-App</strong>
               </Navbar.Brand>
               <Nav className='justify-content-end'>
-                <Form>
+                <Form onSubmit={this.onSubmit}>
                   <Form.Row>
                     <Col>
-                      <Form.Control placeholder='Email' />
+                      <Form.Control
+                        placeholder='Email'
+                        required
+                        id='email'
+                        value={this.state.email}
+                        onChange={this.onChange}
+                      />
                     </Col>
                     <Col>
-                      <Form.Control type='password' placeholder='Password' />
+                      <Form.Control
+                        type='password'
+                        placeholder='Password'
+                        required
+                        id='password'
+                        value={this.state.password}
+                        onChange={this.onChange}
+                      />
                     </Col>
                     <Col>
                       <button className='btn-xm btn-cyan mt-1' type='submit'>
-                        Register
+                        Login
                       </button>
                     </Col>
                   </Form.Row>
@@ -100,8 +154,15 @@ class Landing extends Component {
               </Nav>
             </div>
           </Navbar>
-          {this.AA()}
-          <div className='row' style={{ marginTop: '5%' }}>
+          <div className='row'>
+            <div
+              style={{ height: '130px', justifyContent: 'center' }}
+              className='col-12'
+            >
+              {' '}
+              {this.AA('42%')}
+            </div>
+
             <div className='col-6 ' style={{ marginLeft: '5%' }}>
               <Carousel>
                 <Carousel.Item style={{ height: '100%' }}>

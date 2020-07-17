@@ -12,7 +12,6 @@ class Main extends Component {
   render() {
     return (
       <Fragment>
-        {/* <Alert alerts={this.props.Alert} /> */}
         <Route exact path='/' component={Landing} />
         <section>
           <Switch>

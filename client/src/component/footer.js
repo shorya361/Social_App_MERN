@@ -8,16 +8,16 @@ class Footer extends Component {
     return (
       <div
         style={{
-          position: 'fixed',
           bottom: '0',
           width: '100%',
+          position: 'fixed',
           justifyContent: 'center',
           textAlign: 'center',
           color: 'white',
           backgroundColor: '#646665',
         }}
       >
-        <p>Copyright@: Shorya Upadhayay</p>
+        <p style={{ margin: 0 }}>Copyright@: Shorya Upadhayay</p>
       </div>
     );
   }

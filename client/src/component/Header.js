@@ -1,23 +1,32 @@
 import React, { Component } from 'react';
 import {
-  Collapse,
+  NavDropdown,
+  Form,
+  FormControl,
   Navbar,
-  NavbarToggler,
-  NavbarBrand,
   Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
-} from 'reactstrap';
+  Button,
+} from 'react-bootstrap';
+import { Logout } from '../redux/ActionCreater';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => {
+  return {
+    Auth: state.Auth,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  Logout: () => {
+    dispatch(Logout());
+  },
+});
 
 class Header extends Component {
   constructor(props) {
     super(props);
     this.toggleNav = this.toggleNav.bind(this);
+    this.AuthUser = this.AuthUser.bind(this);
     this.state = {
       isNavOpen: false,
     };
@@ -27,40 +36,47 @@ class Header extends Component {
       isNavOpen: !this.state.isNavOpen,
     });
   }
-
+  AuthUser() {
+    if (this.props.Auth.user) {
+      return <Nav.Link href='#'>{this.props.Auth.user.name}</Nav.Link>;
+    }
+  }
   render() {
+    console.log(this.props.Auth.user);
     return (
       <div>
-        <Navbar color='info' light expand='md'>
-          <NavbarBrand href='/'>reactstrap</NavbarBrand>
-          <NavbarToggler onClick={this.toggleNav} />
-          <Collapse isOpen={this.state.isNavOpen} navbar>
-            <Nav className='mr-auto' navbar>
-              <NavItem>
-                <NavLink href='/components/'>Components</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href='https://github.com/reactstrap/reactstrap'>
-                  GitHub
-                </NavLink>
-              </NavItem>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Options
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>Option 1</DropdownItem>
-                  <DropdownItem>Option 2</DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>Reset</DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
+        <Navbar bg='dark' variant='dark' expand='md'>
+          <Navbar.Brand href='/'>Art-App</Navbar.Brand>
+          <Navbar.Toggle aria-controls='basic-navbar-nav' />
+          <Navbar.Collapse id='basic-navbar-nav'>
+            <Nav className='mr-auto'>
+              <Nav.Link href='/Home'>Dashboard</Nav.Link>
+              {this.AuthUser()}
+
+              <div className='row'>
+                <div className='col-8'>
+                  <FormControl
+                    type='text'
+                    placeholder='Search'
+                    className='mr-sm-1'
+                  />
+                </div>
+                <div className='col-4'>
+                  <Button variant='outline-success' size='sm'>
+                    Search
+                  </Button>
+                </div>
+              </div>
             </Nav>
-            <NavbarText>Simple Text</NavbarText>
-          </Collapse>
+            <Nav>
+              <Nav.Link href='/' onClick={this.props.Logout}>
+                Logout
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
         </Navbar>
       </div>
     );
   }
 }
-export default Header;
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

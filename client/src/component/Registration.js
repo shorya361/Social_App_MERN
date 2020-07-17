@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 import { Card } from 'react-bootstrap';
-import axios from 'axios';
 import { connect } from 'react-redux';
-import { setAlert, removeAlert } from '../redux/ActionCreater';
+import { Register } from '../redux/ActionCreater';
 const mapStateToProps = (state) => {
   return {
     Alert: state.Alert,
+    Auth: state.Auth,
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  setAlert: (message, AlertType) => {
-    dispatch(setAlert(message, AlertType));
-  },
-  removeAlert: () => {
-    dispatch(removeAlert());
+  Register: (body) => {
+    dispatch(Register(body));
   },
 });
 class Registration extends Component {
@@ -34,54 +31,31 @@ class Registration extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
-  onSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      // console.log('before calling!!');
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-      const body = {
-        name: this.state.name,
-        email: this.state.email,
-        password: this.state.password,
-        city: this.state.city,
-        description: this.state.description,
-        AdminCode: 'NO',
-      };
-      // console.log('before calling!!');
-      const response = await axios.post(
-        'http://localhost:5000/api/users/register',
-        body,
-        config
-      );
-      // console.log(this);
-      if (response.data.errors) {
-        this.props.setAlert(response.data.errors.msg, 'danger');
-        // alert(response.data.errors.msg);
-      } else {
-        this.props.setAlert('Account Created', 'success');
-      }
-      // console.log(response);
-      // console.log('after calling :');
-      // console.log(this);
-      this.setState({
-        name: '',
-        email: '',
-        password: '',
-        city: '',
-        description: '',
-      });
-      // this.props.showAlert(this.props.Alert);
-    } catch (error) {
-      console.error(error);
-    }
+  onSubmit = (e) => {
+    e.preventDefault();
+    // console.log('before calling!!');
+
+    const body = {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      city: this.state.city,
+      description: this.state.description,
+      AdminCode: 'NO',
+    };
+    this.props.Register(body);
+    this.setState({
+      name: '',
+      email: '',
+      password: '',
+      city: '',
+      description: '',
+    });
+    console.log(this);
   };
   render() {
     return (
-      <div className='row'>
+      <div className='row' style={{ height: '100%' }}>
         <div className='col-12'>
           <Card style={{ padding: '5% auto' }}>
             <Card.Body>
