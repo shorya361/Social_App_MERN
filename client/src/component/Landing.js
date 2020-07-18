@@ -52,7 +52,7 @@ class Landing extends Component {
 
   componentDidMount() {
     // console.log(this);
-    if (this.props.Auth.isAuthenticated) {
+    if (this.props.Auth.isAuthenticated && this.props.Auth.user) {
       return <Redirect to='/Home' />;
     }
   }
@@ -125,7 +125,7 @@ class Landing extends Component {
             </div>
           </div>
         </div>
-        <div className='d-none dmd-block '>
+        <div className='d-none d-xl-block '>
           <Navbar variant='dark' bg='dark'>
             <div className='container'>
               <Navbar.Brand>

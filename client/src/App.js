@@ -4,7 +4,6 @@ import { Route, Switch } from 'react-router-dom';
 import Profile from './component/Profile';
 import Landing from './component/Landing';
 import Home from './component/Home';
-
 import './App.css';
 import { Provider } from 'react-redux';
 import { ConfigureStore } from './redux/configureStore';
@@ -26,6 +25,7 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <Route exact path='/' component={Landing} />
+
           <section>
             <Switch>
               <Route exact path='/Home' component={Home} />

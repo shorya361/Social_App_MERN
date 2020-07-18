@@ -37,6 +37,7 @@ class HeaderMobile extends Component {
           top: '0',
           width: '100%',
           marginBottom: '50px',
+          zIndex: '1',
         }}
       >
         <Navbar bg='dark' variant='dark' fixed='top'>
@@ -50,7 +51,9 @@ class HeaderMobile extends Component {
             Art-App
           </Navbar.Brand>
           <Nav className='ml-auto'>
-            <Nav.Link onClick={this.props.Logout}>Logout</Nav.Link>
+            <Nav.Link href='/' onClick={this.props.Logout}>
+              Logout
+            </Nav.Link>
           </Nav>
         </Navbar>
       </div>

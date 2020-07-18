@@ -5,7 +5,7 @@ import FooterMobile from './FooterMobile';
 import Footer from './footer';
 import { Image, Button, Spinner } from 'react-bootstrap';
 import { connect } from 'react-redux';
-
+import Loading from './Loading';
 const mapStateToProps = (state) => {
   return {
     Auth: state.Auth,
@@ -55,49 +55,8 @@ class Home extends Component {
     }
   }
   render() {
-    if (this.props.Auth.loading == true) {
-      return (
-        <div style={{ height: '100%' }}>
-          <div className='d-xl-none' style={{ height: '100%' }}>
-            <HeaderMobile />
-            <div className='col-12 offset-5'>
-              <span className='fa fa-spinner fa-pulse fa-3x fa-fw text-primary'></span>
-              <p>loading...</p>
-            </div>
-            <FooterMobile />
-          </div>
-          <div className='d-none d-xl-block '>
-            <Header />
-            <div className='col-12 offset-5'>
-              <span className='fa fa-spinner fa-pulse fa-3x fa-fw text-primary'></span>
-              <p>loading...</p>
-            </div>
-            <Footer />
-          </div>
-        </div>
-      );
-    }
-    if (!this.props.Auth.token) {
-      return (
-        <div style={{ height: '100%' }}>
-          <div className='d-xl-none' style={{ height: '100%' }}>
-            <HeaderMobile />
-            <div className='col-12 offset-5'>
-              <h2>Server Error</h2>
-              <h3>Login Again</h3>
-            </div>
-            <FooterMobile />
-          </div>
-          <div className='d-none d-xl-block '>
-            <Header />
-            <div className='col-12 offset-5'>
-              <h2>Server Error</h2>
-              <h3>Login Again</h3>
-            </div>
-            <Footer />
-          </div>
-        </div>
-      );
+    if (this.props.Auth.loading == true || !this.props.Auth.token) {
+      return <Loading />;
     }
     return (
       <div style={{ height: '100%' }}>
