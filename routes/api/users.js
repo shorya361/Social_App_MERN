@@ -21,7 +21,7 @@ router.post(
       // console.log('inside register backend: ', req.body);
       let user = await User.findOne({ email });
       if (user) {
-        return res.json({ errors: { msg: ' User already exists !!' } });
+        return res.json({ errors: { msg: ' This Email ID is not available' } });
       }
       var isAdmin = false;
       if (AdminCode == 'cloberine_time') {

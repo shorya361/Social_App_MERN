@@ -27,8 +27,8 @@ export const Auth = (
         loading: false,
       };
 
-    case ActionTypes.REGISTER_FAIL:
     case ActionTypes.AUTH_ERROR:
+    case ActionTypes.REGISTER_FAIL:
     case ActionTypes.LOGIN_FAIL:
     case ActionTypes.LOGOUT:
       localStorage.removeItem('token');

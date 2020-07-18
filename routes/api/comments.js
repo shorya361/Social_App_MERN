@@ -4,6 +4,16 @@ const User = require('../../models/User'),
   Arts = require('../../models/Arts'),
   comments = require('../../models/comments');
 
+//Get all Comments
+router.get('/', async (req, res) => {
+  try {
+    let allComments = await comments.find({});
+    res.json(allComments);
+  } catch (error) {
+    console.error('error in fetching all comments' + error.message);
+  }
+});
+
 // Add comments to art.
 router.post('/addComment', async (req, res) => {
   const { Art, UserId, comment } = req.body;

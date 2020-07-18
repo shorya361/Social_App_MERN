@@ -38,7 +38,7 @@ class Landing extends Component {
   };
   onSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    // console.log(this.state);
     const body = {
       email: this.state.email,
       password: this.state.password,
@@ -51,6 +51,7 @@ class Landing extends Component {
   };
 
   componentDidMount() {
+    // console.log(this);
     if (this.props.Auth.isAuthenticated) {
       return <Redirect to='/Home' />;
     }
@@ -89,7 +90,15 @@ class Landing extends Component {
             <div className='container' style={{ justifyContent: 'center' }}>
               <Navbar.Brand>
                 <h3>
-                  <strong> Art-App</strong>
+                  <strong>
+                    <img
+                      src='https://i.pinimg.com/564x/4e/f1/5a/4ef15af8f8c11ae561460de81c920387.jpg'
+                      height='30'
+                      width='41'
+                      alt='Art-App'
+                    />{' '}
+                    Art-App
+                  </strong>
                 </h3>
               </Navbar.Brand>
             </div>
@@ -116,7 +125,7 @@ class Landing extends Component {
             </div>
           </div>
         </div>
-        <div className='d-none d-xl-block '>
+        <div className='d-none dmd-block '>
           <Navbar variant='dark' bg='dark'>
             <div className='container'>
               <Navbar.Brand>

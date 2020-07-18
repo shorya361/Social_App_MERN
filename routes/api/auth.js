@@ -11,7 +11,9 @@ const bcrypt = require('bcryptjs');
 // Signing UP
 router.get('/', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('-password');
+    const user = await User.findById(req.user.id)
+      .select('-password')
+      .populate('Posts');
     res.json(user);
   } catch (err) {
     console.error(err.message);
@@ -22,60 +24,42 @@ router.get('/', auth, async (req, res) => {
 // GET api/auth
 // Public
 // log in
-router.post(
-  '/login',
-  [
-    check('email', 'Plz include a valid email').isEmail(),
-    check('password', ' Plz enter a password ').exists(),
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    // See if the user exists.
 
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        errors: errors.array(),
-      });
+    let user = await User.findOne({ email });
+    // console.log(user);
+    if (!user) {
+      // console.log('no user');
+      return res.json({ errors: [{ msg: ' Email ID is invalid' }] });
     }
 
-    const { email, password } = req.body;
-
-    try {
-      // See if the user exists.
-
-      let user = await User.findOne({ email });
-      if (!user) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: ' Invalid credentials' }] });
-      }
-
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: ' Invalid credentials' }] });
-      }
-
-      const payload = {
-        user: {
-          id: user.id,
-        },
-      };
-      jwt.sign(
-        payload,
-        config.get('jwtsecret'),
-        { expiresIn: 36000 },
-        (err, token) => {
-          if (err) throw err;
-          res.json({ token });
-        }
-      );
-      //      res.send('User registered. ');
-    } catch (err) {
-      console.log('error in registration :' + err.message);
-      res.status(500).send('Server Error');
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.json({ errors: [{ msg: ' Wrong Password' }] });
     }
+
+    const payload = {
+      user: {
+        id: user.id,
+      },
+    };
+    jwt.sign(
+      payload,
+      config.get('jwtsecret'),
+      { expiresIn: 36000 },
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      }
+    );
+    //      res.send('User registered. ');
+  } catch (err) {
+    console.log('error in logging in  :' + err.message);
+    res.status(500).send('Server Error');
   }
-);
+});
 
 module.exports = router;

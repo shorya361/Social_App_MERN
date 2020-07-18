@@ -3,6 +3,19 @@ import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 
+export const LoadComments = () => async (dispatch) => {
+  try {
+    const res = await axios.get('http://localhost:5000/api/comment/');
+    dispatch({
+      type: Action_Types.LOAD_COMMENTS,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: Action_Types.AUTH_ERROR,
+    });
+  }
+};
 // LOAD USER
 // if there is a token available
 export const LoadUser = () => async (dispatch) => {
@@ -91,7 +104,7 @@ export const Login = (body) => async (dispatch) => {
       config
     );
 
-    console.log(response);
+    // console.log(response);
     if (response.data.errors) {
       dispatch({
         type: Action_Types.LOGIN_FAIL,

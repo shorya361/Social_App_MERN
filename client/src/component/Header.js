@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import {
-  NavDropdown,
-  Form,
-  FormControl,
-  Navbar,
-  Nav,
-  Button,
-} from 'react-bootstrap';
+import { FormControl, Navbar, Nav, Button } from 'react-bootstrap';
 import { Logout } from '../redux/ActionCreater';
 import { connect } from 'react-redux';
 
@@ -38,30 +31,37 @@ class Header extends Component {
   }
   AuthUser() {
     if (this.props.Auth.user) {
-      return <Nav.Link href='#'>{this.props.Auth.user.name}</Nav.Link>;
+      return <Nav.Link href='/profile'>{this.props.Auth.user.name}</Nav.Link>;
     }
   }
   render() {
-    console.log(this.props.Auth.user);
     return (
-      <div>
-        <Navbar bg='dark' variant='dark' expand='md'>
-          <Navbar.Brand href='/'>Art-App</Navbar.Brand>
+      <div style={{ marginBottom: '50px' }}>
+        <Navbar bg='dark' variant='dark' fixed='top' expand='md'>
+          <Navbar.Brand href='/'>
+            <img
+              src='https://i.pinimg.com/564x/4e/f1/5a/4ef15af8f8c11ae561460de81c920387.jpg'
+              height='30'
+              width='41'
+              alt='Art-App'
+            />
+            Art-App
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
-            <Nav className='mr-auto'>
+            <Nav>
               <Nav.Link href='/Home'>Dashboard</Nav.Link>
-              {this.AuthUser()}
-
-              <div className='row'>
-                <div className='col-8'>
+            </Nav>
+            <Nav className=' ml-auto mr-auto '>
+              <div className='row' style={{ justifyContent: 'center' }}>
+                <div className='col-9'>
                   <FormControl
                     type='text'
-                    placeholder='Search'
+                    placeholder='Search User'
                     className='mr-sm-1'
                   />
                 </div>
-                <div className='col-4'>
+                <div className='col-3'>
                   <Button variant='outline-success' size='sm'>
                     Search
                   </Button>
@@ -69,6 +69,7 @@ class Header extends Component {
               </div>
             </Nav>
             <Nav>
+              {this.AuthUser()}
               <Nav.Link href='/' onClick={this.props.Logout}>
                 Logout
               </Nav.Link>
