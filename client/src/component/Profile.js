@@ -3,7 +3,6 @@ import Header from './Header';
 import HeaderMobile from './HeaderMobile';
 import FooterMobile from './FooterMobile';
 import Footer from './footer';
-
 import Loading from './Loading';
 import { Image, Button, Card, Spinner } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -51,7 +50,7 @@ class Profile extends Component {
             {this.props.Auth.user.city}
           </div>
           <div className='row pt-4'>
-            <div className='col-5 offset-2'>
+            <div className='col-5 offset-1'>
               <i className='fas fa-users'></i> 0 Followers
             </div>
             <div className='col-5'>
@@ -116,7 +115,7 @@ class Profile extends Component {
               Edit Profile
             </Button>
           </div>
-          <Card style={{ marginBottom: '30px' }}>
+          <Card style={{ marginBottom: '30px', marginTop: '15px' }}>
             <Card.Header>
               <h3>Your Posts</h3>
             </Card.Header>

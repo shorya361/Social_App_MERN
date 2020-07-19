@@ -40,10 +40,10 @@ class HeaderMobile extends Component {
           zIndex: '1',
         }}
       >
-        <Navbar bg='dark' variant='dark' fixed='top'>
+        <Navbar bg='dark' variant='dark' color='black' fixed='top'>
           <Navbar.Brand href='/'>
             <img
-              src='https://i.pinimg.com/564x/4e/f1/5a/4ef15af8f8c11ae561460de81c920387.jpg'
+              src='https://lh3.googleusercontent.com/pw/ACtC-3cK8sGe_YfICN18-P1sqNkaJMhGNfRgZxd3yl2PJSEJE7g60fECjIi62HtwD6w-yjyLyphNhF83vpN22OI99H4i-ElJ-8ZecayXB0UimB2gBvigmR9oSUs62GL_-HiCKNUAvvRlCTLTsPQ64MbYhdMt=s937-no?authuser=0'
               height='35'
               width='41'
               alt='Art-App'

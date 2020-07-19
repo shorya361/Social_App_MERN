@@ -62,7 +62,10 @@ class Home extends Component {
       <div style={{ height: '100%' }}>
         <div className='d-xl-none' style={{ height: '100%' }}>
           <HeaderMobile />
-          <h1>Home Page</h1>
+          <div style={{ marginTop: '75px' }}>
+            <h1>Home Page</h1>
+            <p>Coming Soon</p>
+          </div>
           <FooterMobile />
         </div>
         <div className='d-none d-xl-block '>

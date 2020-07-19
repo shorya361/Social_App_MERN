@@ -14,6 +14,7 @@ class FooterMobile extends Component {
           bottom: 0,
           position: 'fixed',
           width: '100%',
+          zIndex: '1',
         }}
       >
         <Navbar variant='dark' bg='dark' fixed='bottom'>

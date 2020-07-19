@@ -48,11 +48,20 @@ class Landing extends Component {
       email: '',
       password: '',
     });
+    if (
+      this.props.Auth.isAuthenticated == true &&
+      this.props.Auth.user !== null
+    ) {
+      return <Redirect to='/Home' />;
+    }
   };
 
   componentDidMount() {
     // console.log(this);
-    if (this.props.Auth.isAuthenticated && this.props.Auth.user) {
+    if (
+      this.props.Auth.isAuthenticated == true &&
+      this.props.Auth.user !== null
+    ) {
       return <Redirect to='/Home' />;
     }
   }

@@ -36,7 +36,7 @@ class Header extends Component {
   }
   render() {
     return (
-      <div style={{ marginBottom: '50px' }}>
+      <div style={{ marginBottom: '50px', zIndex: '1' }}>
         <Navbar bg='dark' variant='dark' fixed='top' expand='md'>
           <Navbar.Brand href='/'>
             <img
