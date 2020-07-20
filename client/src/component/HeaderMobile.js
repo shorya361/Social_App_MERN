@@ -40,15 +40,14 @@ class HeaderMobile extends Component {
           zIndex: '1',
         }}
       >
-        <Navbar bg='dark' variant='dark' color='black' fixed='top'>
+        <Navbar bg='dark' variant='dark' fixed='top'>
           <Navbar.Brand href='/'>
             <img
-              src='https://lh3.googleusercontent.com/pw/ACtC-3cK8sGe_YfICN18-P1sqNkaJMhGNfRgZxd3yl2PJSEJE7g60fECjIi62HtwD6w-yjyLyphNhF83vpN22OI99H4i-ElJ-8ZecayXB0UimB2gBvigmR9oSUs62GL_-HiCKNUAvvRlCTLTsPQ64MbYhdMt=s937-no?authuser=0'
+              src='https://lh3.googleusercontent.com/pw/ACtC-3dbz8yAfqdhnKiCqUsVJ6PaKVJtfcCftixF-BvEWgOyZpFJfBN36WJ_cN1god3MmpYVPMX3St4vgVKJIw9n-seTMhuFZuwCULd796bfQhB6vmKH3zj1zKElOUJT5vngjBc9fdSiDdICrcFpuuNMQbi-=w781-h672-no?authuser=0'
               height='35'
               width='41'
               alt='Art-App'
             />
-            Art-App
           </Navbar.Brand>
           <Nav className='ml-auto'>
             <Nav.Link href='/' onClick={this.props.Logout}>

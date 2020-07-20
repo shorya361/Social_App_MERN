@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormControl, Navbar, Nav, Button } from 'react-bootstrap';
+import { Form, FormControl, Navbar, Nav, Button } from 'react-bootstrap';
 import { Logout } from '../redux/ActionCreater';
 import { connect } from 'react-redux';
 
@@ -40,12 +40,11 @@ class Header extends Component {
         <Navbar bg='dark' variant='dark' fixed='top' expand='md'>
           <Navbar.Brand href='/'>
             <img
-              src='https://i.pinimg.com/564x/4e/f1/5a/4ef15af8f8c11ae561460de81c920387.jpg'
+              src='https://lh3.googleusercontent.com/pw/ACtC-3dbz8yAfqdhnKiCqUsVJ6PaKVJtfcCftixF-BvEWgOyZpFJfBN36WJ_cN1god3MmpYVPMX3St4vgVKJIw9n-seTMhuFZuwCULd796bfQhB6vmKH3zj1zKElOUJT5vngjBc9fdSiDdICrcFpuuNMQbi-=w781-h672-no?authuser=0'
               height='30'
               width='41'
               alt='Art-App'
             />
-            Art-App
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
@@ -53,20 +52,13 @@ class Header extends Component {
               <Nav.Link href='/Home'>Dashboard</Nav.Link>
             </Nav>
             <Nav className=' ml-auto mr-auto '>
-              <div className='row' style={{ justifyContent: 'center' }}>
-                <div className='col-9'>
-                  <FormControl
-                    type='text'
-                    placeholder='Search User'
-                    className='mr-sm-1'
-                  />
-                </div>
-                <div className='col-3'>
-                  <Button variant='outline-success' size='sm'>
-                    Search
-                  </Button>
-                </div>
-              </div>
+              <Form>
+                <FormControl
+                  type='text'
+                  placeholder='Search User'
+                  className='mr-sm-1'
+                />
+              </Form>
             </Nav>
             <Nav>
               {this.AuthUser()}
