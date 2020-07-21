@@ -106,7 +106,7 @@ class Landing extends Component {
     return (
       <div className='full-width'>
         <div className='d-xl-none' style={{ height: '100%' }}>
-          <Navbar bg='dark' variant='dark'>
+          <Navbar>
             <div className='container' style={{ justifyContent: 'center' }}>
               <Navbar.Brand>
                 <h3>
@@ -146,7 +146,7 @@ class Landing extends Component {
           </div>
         </div>
         <div className='d-none d-xl-block '>
-          <Navbar variant='dark' bg='dark'>
+          <Navbar>
             <div className='container'>
               <Navbar.Brand>
                 <h3>

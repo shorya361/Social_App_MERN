@@ -4,6 +4,7 @@ var ArtSchema = new mongoose.Schema({
   name: String,
   image: String,
   description: String,
+  created: { type: Date, default: Date.now },
 
   author: {
     id: {

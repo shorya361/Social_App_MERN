@@ -121,7 +121,7 @@ class Profile extends Component {
             <Card.Header>
               <h3>Your Posts</h3>
             </Card.Header>
-            <Card.Body>{this.showData()}</Card.Body>
+            <Card.Body style={{ padding: '0' }}>{this.showData()}</Card.Body>
           </Card>
           <FooterMobile />
         </div>
