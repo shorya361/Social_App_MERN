@@ -15,12 +15,20 @@ import {
 import { Modal, ModalBody, ModalHeader, Label } from 'reactstrap';
 import { connect } from 'react-redux';
 import Comment from './Comment';
+import { addNewComment } from '../redux/ActionCreater';
 const mapStateToProps = (state) => {
   return {
     Comments: state.Comments,
     Auth: state.Auth,
   };
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  addNewComment: (body) => {
+    dispatch(addNewComment(body));
+  },
+});
+
 class Posts extends Component {
   constructor() {
     super();
@@ -33,10 +41,11 @@ class Posts extends Component {
       image: '',
     };
     this.toggleShow = this.toggleShow.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.onCommentSubmit = this.onCommentSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.toggleDeletePost = this.toggleDeletePost.bind(this);
     this.toggleUpdatePost = this.toggleUpdatePost.bind(this);
+    this.onEditSubmit = this.onEditSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -62,15 +71,30 @@ class Posts extends Component {
       ...this.state,
       UpdatePost: !this.state.UpdatePost,
     });
-    console.log(this);
   }
-  onSubmit = (e) => {
+  onCommentSubmit = (e) => {
     e.preventDefault();
+    const body = {
+      Art: this.props.postDetails._id,
+      UserId: this.props.Auth.user._id,
+      comment: this.state.newcomment,
+    };
+    this.props.addNewComment(body);
     this.setState({
       ...this.state,
       newcomment: '',
     });
   };
+
+  onEditSubmit(e) {
+    e.preventDefault();
+    console.log(this.state);
+    this.setState({
+      ...this.state,
+      description: this.props.postDetails.description,
+      image: this.props.postDetails.image,
+    });
+  }
 
   toggleShow = () => {
     this.setState({
@@ -101,7 +125,7 @@ class Posts extends Component {
           <div style={{ backgroundColor: '#ebedeb' }}>
             <h4 style={{ paddingLeft: '30%' }}>Comments</h4>
             {coments}
-            <Form onSubmit={this.onSubmit} style={{ marginTop: '5px' }}>
+            <Form onSubmit={this.onCommentSubmit} style={{ marginTop: '5px' }}>
               <FormControl
                 type='text'
                 placeholder='Add Comment'
@@ -165,7 +189,7 @@ class Posts extends Component {
         >
           <ModalHeader toggle={this.toggleUpdatePost}>Update Post</ModalHeader>
           <ModalBody>
-            <Form>
+            <Form onSubmit={this.onEditSubmit}>
               <Label htmlFor='description'>Dscription</Label>
 
               <FormControl
@@ -186,7 +210,11 @@ class Posts extends Component {
                 value={this.state.image}
                 onChange={this.onChange}
               />
-              <Button variant='outline-success' onClick={this.toggleUpdatePost}>
+              <Button
+                variant='outline-success'
+                type='submit'
+                onClick={this.toggleUpdatePost}
+              >
                 Update
               </Button>
               <Button variant='outline-danger' onClick={this.toggleUpdatePost}>
@@ -316,4 +344,4 @@ class Posts extends Component {
   };
 }
 
-export default connect(mapStateToProps)(Posts);
+export default connect(mapStateToProps, mapDispatchToProps)(Posts);
