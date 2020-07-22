@@ -125,7 +125,7 @@ class Posts extends Component {
 
   ShowComment = () => {
     if (this.props.postDetails.comments.length == 0)
-      var coments = <p>No comments..</p>;
+      var coments = <p style={{ paddingLeft: '5%' }}>No comments..</p>;
     else {
       var coments = this.props.postDetails.comments.map((each) => {
         // console.log(this);
@@ -146,7 +146,10 @@ class Posts extends Component {
           <div style={{ backgroundColor: '#ebedeb' }}>
             <h4 style={{ paddingLeft: '30%' }}>Comments</h4>
             {coments}
-            <Form onSubmit={this.onCommentSubmit} style={{ marginTop: '5px' }}>
+            <Form
+              onSubmit={this.onCommentSubmit}
+              style={{ marginTop: '5px', width: '96%', marginLeft: '2%' }}
+            >
               <FormControl
                 type='text'
                 placeholder='Add Comment'
@@ -338,7 +341,31 @@ class Posts extends Component {
               <Card style={{ width: '70%', marginBottom: '3px' }}>
                 <Card.Img src={this.props.postDetails.image} />
               </Card>
-              <p>Created on :___________ 0 Upvotes 0 Downvotes 0 Comments</p>
+              <p>
+                Created on :{' '}
+                {new Intl.DateTimeFormat('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: '2-digit',
+                }).format(
+                  new Date(Date.parse(this.props.postDetails.created))
+                )}{' '}
+                <i
+                  className='fas fa-grip-lines-vertical'
+                  style={{ marginLeft: '4px' }}
+                ></i>{' '}
+                {this.props.postDetails.Likes.length} Upvotes{' '}
+                <i
+                  className='fas fa-grip-lines-vertical'
+                  style={{ marginLeft: '4px' }}
+                ></i>{' '}
+                {this.props.postDetails.Dislikes.length} Downvotes{' '}
+                <i
+                  className='fas fa-grip-lines-vertical'
+                  style={{ marginLeft: '4px' }}
+                ></i>{' '}
+                {this.props.postDetails.comments.length} Comments
+              </p>
               <Navbar>
                 <Nav className='m-auto'>
                   <Nav.Link>

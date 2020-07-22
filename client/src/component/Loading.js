@@ -18,7 +18,7 @@ class Loading extends Component {
   }
   render() {
     return (
-      <div style={{ marginTop: '100px' }}>
+      <div style={{ marginTop: '150px' }}>
         <div className='d-xl-none' style={{ height: '100%' }}>
           <HeaderMobile />
           <div className='col-12 offset-5'>
@@ -29,7 +29,7 @@ class Loading extends Component {
         </div>
         <div className='d-none d-xl-block '>
           <Header />
-          <div className='col-12 offset-5'>
+          <div className='col-12 offset-5' style={{ marginTop: '150px' }}>
             <span className='fa fa-spinner fa-pulse fa-3x fa-fw text-secondary'></span>
             <p>loading...</p>
           </div>

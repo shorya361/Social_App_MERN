@@ -86,6 +86,7 @@ export const Login = (body) => async (dispatch) => {
         payload: response.data,
       });
       dispatch(LoadUser());
+      dispatch(setAlert('Welcome ', 'success'));
     }
   } catch (error) {
     console.error(error.message);

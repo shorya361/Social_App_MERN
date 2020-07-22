@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Logout } from '../redux/ActionCreater';
 import { connect } from 'react-redux';
+import Alert from './Alert';
 const mapStateToProps = (state) => {
   return {
     Auth: state.Auth,
+    Alert: state.Alert,
   };
 };
 
@@ -18,6 +20,8 @@ class HeaderMobile extends Component {
   constructor(props) {
     super(props);
     this.toggleNav = this.toggleNav.bind(this);
+    this.showAlert = this.showAlert.bind(this);
+
     this.state = {
       isNavOpen: false,
     };
@@ -27,7 +31,25 @@ class HeaderMobile extends Component {
       isNavOpen: !this.state.isNavOpen,
     });
   }
+  showAlert() {
+    if (this.props.Alert.length > 0) {
+      let heading = '';
 
+      if (this.props.Alert[0].AlertType == 'danger') {
+        heading = 'Sorry..';
+      } else {
+        heading = 'Congrats';
+      }
+      return (
+        <Alert
+          ml={'0'}
+          message={this.props.Alert[0].message}
+          cls={'alert alert-'.concat(this.props.Alert[0].AlertType)}
+          heading={heading}
+        />
+      );
+    }
+  }
   render() {
     // console.log(this.props.Auth.user);
     return (
@@ -55,6 +77,7 @@ class HeaderMobile extends Component {
             </Nav.Link>
           </Nav>
         </Navbar>
+        {this.showAlert()}
       </div>
     );
   }

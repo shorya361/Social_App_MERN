@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Form, FormControl, Navbar, Nav, Button } from 'react-bootstrap';
 import { Logout } from '../redux/ActionCreater';
 import { connect } from 'react-redux';
-
+import Alert from './Alert';
 const mapStateToProps = (state) => {
   return {
     Auth: state.Auth,
+    Alert: state.Alert,
   };
 };
 
@@ -20,6 +21,7 @@ class Header extends Component {
     super(props);
     this.toggleNav = this.toggleNav.bind(this);
     this.AuthUser = this.AuthUser.bind(this);
+    this.showAlert = this.showAlert.bind(this);
     this.state = {
       isNavOpen: false,
     };
@@ -34,9 +36,28 @@ class Header extends Component {
       return <Nav.Link href='/profile'>{this.props.Auth.user.name}</Nav.Link>;
     }
   }
+  showAlert() {
+    if (this.props.Alert.length > 0) {
+      let heading = '';
+
+      if (this.props.Alert[0].AlertType == 'danger') {
+        heading = 'Sorry..';
+      } else {
+        heading = 'Congrats';
+      }
+      return (
+        <Alert
+          ml={'42%'}
+          message={this.props.Alert[0].message}
+          cls={'alert alert-'.concat(this.props.Alert[0].AlertType)}
+          heading={heading}
+        />
+      );
+    }
+  }
   render() {
     return (
-      <div style={{ marginBottom: '50px', zIndex: '1' }}>
+      <div style={{ marginBottom: '50px', zIndex: '1' }} className='fixed-top'>
         <Navbar bg='dark' variant='dark' fixed='top' expand='md'>
           <Navbar.Brand href='/'>
             <img
@@ -68,6 +89,7 @@ class Header extends Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
+        {this.showAlert()}
       </div>
     );
   }

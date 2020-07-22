@@ -59,7 +59,7 @@ class Home extends Component {
       return <Loading />;
     }
     return (
-      <div style={{ height: '100%' }}>
+      <div style={{ height: '100%', marginTop: '40px' }}>
         <div className='d-xl-none' style={{ height: '100%' }}>
           <HeaderMobile />
           <div style={{ marginTop: '75px' }}>

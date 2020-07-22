@@ -51,10 +51,12 @@ class Profile extends Component {
           </div>
           <div className='row pt-4'>
             <div className='col-5 offset-1'>
-              <i className='fas fa-users'></i> 0 Followers
+              <i className='fas fa-users'></i>{' '}
+              {this.props.Auth.user.Followers.length} Followers
             </div>
             <div className='col-5'>
-              <i className='fas fa-users'></i> 0 Followings
+              <i className='fas fa-users'></i>{' '}
+              {this.props.Auth.user.Followings.length} Followings
             </div>
           </div>
         </div>
@@ -80,7 +82,7 @@ class Profile extends Component {
       return <Loading />;
     }
     return (
-      <div style={{ height: '100%', width: '100%' }}>
+      <div style={{ height: '100%', width: '100%', marginTop: '50px' }}>
         <div className='d-xl-none' style={{ height: '100%' }}>
           <HeaderMobile />
           <div style={{ marginTop: '75px', width: '100%' }}>
@@ -95,10 +97,12 @@ class Profile extends Component {
                 />
               </div>
               <div className='col-3' style={{ paddingTop: '5%' }}>
-                <i className='fas fa-users'></i> 0 Followers
+                <i className='fas fa-users'></i>{' '}
+                {this.props.Auth.user.Followers.length} Followers
               </div>
               <div className='col-3' style={{ paddingTop: '5%' }}>
-                <i className='fas fa-users'></i> 0 Followings
+                <i className='fas fa-users'></i>{' '}
+                {this.props.Auth.user.Followings.length} Followings
               </div>
             </div>
             <h4>{this.props.Auth.user.name}</h4>
@@ -123,7 +127,7 @@ class Profile extends Component {
               </Button>
             </div>
           </div>
-          <Card style={{ marginBottom: '30px', marginTop: '15px' }}>
+          <Card style={{ marginBottom: '60px', marginTop: '15px' }}>
             <Card.Header>
               <h3>Your Posts</h3>
             </Card.Header>
