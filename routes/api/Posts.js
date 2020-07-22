@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../../models/User'),
-  Arts = require('../../models/Arts'),
+  Posts = require('../../models/Posts'),
   comments = require('../../models/comments');
 
-// GET ALL ART/POST
+// GET ALL POST
 router.get('/', async (req, res) => {
   try {
-    const Posts = await Arts.find({});
+    const Posts = await Posts.find({});
     console.log('inside get Arts Route');
     console.log(Posts);
     res.json({ Posts });
@@ -17,13 +17,13 @@ router.get('/', async (req, res) => {
   }
 });
 
-//ADD NEW POST/ART
-router.post('/addArt', async (req, res) => {
+//ADD NEW POST
+router.post('/addPost', async (req, res) => {
   try {
     const { name, image, description, userID } = req.body;
     let user = await User.findById({ _id: userID });
 
-    let newPost = await new Arts({
+    let newPost = await new Posts({
       name: name,
       image: image,
       description: description,
@@ -43,10 +43,10 @@ router.post('/addArt', async (req, res) => {
 });
 
 //UPDATE ART/POST
-router.put('/updateArt', async (req, res) => {
+router.put('/updatePost', async (req, res) => {
   try {
     const { name, image, description, PostID } = req.body;
-    let thisPost = await Arts.findById({ _id: PostID });
+    let thisPost = await Posts.findById({ _id: PostID });
     thisPost.name = name;
     thisPost.image = image;
     thisPost.description = description;
@@ -59,15 +59,16 @@ router.put('/updateArt', async (req, res) => {
 });
 
 //DELETE THE POST
-router.delete('/deleteArt', async (req, res) => {
+router.put('/deletePost', async (req, res) => {
   try {
     const { Post } = req.body;
-    let Arttobedeleted = await Arts.findById(Post);
+    console.log(req);
+    let Arttobedeleted = await Posts.findById(Post);
     for (const id in Arttobedeleted.comments) {
       const comment = Arttobedeleted.comments[id];
-      console.log(comment);
+      // console.log(comment);
       let tobedeleted = await comments.findById(comment);
-      console.log(tobedeleted);
+      // console.log(tobedeleted);
       user = await User.findById(tobedeleted.author.id);
       await user.comments.splice(user.comments.indexOf(comment), 1);
       await user.save();
@@ -76,7 +77,7 @@ router.delete('/deleteArt', async (req, res) => {
     let author = await User.findById(Arttobedeleted.author.id);
     await author.Posts.splice(author.Posts.indexOf(Post), 1);
     await author.save();
-    await Arts.findByIdAndDelete(Post);
+    await Posts.findByIdAndDelete(Post);
     res.json({ author });
   } catch (error) {
     console.log('error in deleting the art :' + error.message);

@@ -37,10 +37,34 @@ const UserSchema = new mongoose.Schema({
       ref: 'Comment',
     },
   ],
+  Followers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user',
+    },
+  ],
+  Followings: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user',
+    },
+  ],
+  Likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Posts',
+    },
+  ],
+  Dislikes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Posts',
+    },
+  ],
   Posts: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Arts',
+      ref: 'Posts',
     },
   ],
 });

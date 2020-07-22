@@ -15,7 +15,7 @@ import {
 import { Modal, ModalBody, ModalHeader, Label } from 'reactstrap';
 import { connect } from 'react-redux';
 import Comment from './Comment';
-import { addNewComment } from '../redux/ActionCreater';
+import { addNewComment, updatePost, deletePost } from '../redux/ActionCreater';
 const mapStateToProps = (state) => {
   return {
     Comments: state.Comments,
@@ -26,6 +26,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   addNewComment: (body) => {
     dispatch(addNewComment(body));
+  },
+  updatePost: (body) => {
+    dispatch(updatePost(body));
+  },
+  deletePost: (body) => {
+    dispatch(deletePost(body));
   },
 });
 
@@ -46,6 +52,7 @@ class Posts extends Component {
     this.toggleDeletePost = this.toggleDeletePost.bind(this);
     this.toggleUpdatePost = this.toggleUpdatePost.bind(this);
     this.onEditSubmit = this.onEditSubmit.bind(this);
+    this.onDeletePost = this.onDeletePost.bind(this);
   }
 
   componentDidMount() {
@@ -57,6 +64,13 @@ class Posts extends Component {
   }
   onChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
+  };
+
+  toggleShow = () => {
+    this.setState({
+      ...this.state,
+      show: !this.state.show,
+    });
   };
 
   toggleDeletePost() {
@@ -75,7 +89,7 @@ class Posts extends Component {
   onCommentSubmit = (e) => {
     e.preventDefault();
     const body = {
-      Art: this.props.postDetails._id,
+      Post: this.props.postDetails._id,
       UserId: this.props.Auth.user._id,
       comment: this.state.newcomment,
     };
@@ -89,6 +103,13 @@ class Posts extends Component {
   onEditSubmit(e) {
     e.preventDefault();
     console.log(this.state);
+    const body = {
+      name: '',
+      image: this.state.image,
+      description: this.state.description,
+      PostID: this.props.postDetails._id,
+    };
+    this.props.updatePost(body);
     this.setState({
       ...this.state,
       description: this.props.postDetails.description,
@@ -96,12 +117,11 @@ class Posts extends Component {
     });
   }
 
-  toggleShow = () => {
-    this.setState({
-      ...this.state,
-      show: !this.state.show,
-    });
-  };
+  onDeletePost() {
+    this.toggleDeletePost();
+    const body = { Post: this.props.postDetails._id };
+    this.props.deletePost(body);
+  }
 
   ShowComment = () => {
     if (this.props.postDetails.comments.length == 0)
@@ -115,8 +135,9 @@ class Posts extends Component {
         ) {
           if (post._id == each) return post;
         });
-
-        return <Comment eachcomment={eachcomment} />;
+        if (eachcomment) {
+          return <Comment key={eachcomment._id} eachcomment={eachcomment} />;
+        }
       });
     }
     if (this.state.show == true) {
@@ -173,7 +194,7 @@ class Posts extends Component {
             Are You Sure , you want to delete this post ?
           </ModalHeader>
           <ModalBody>
-            <Button variant='outline-danger' onClick={this.toggleDeletePost}>
+            <Button variant='outline-danger' onClick={this.onDeletePost}>
               YES
             </Button>
             <Button variant='outline-success' onClick={this.toggleDeletePost}>

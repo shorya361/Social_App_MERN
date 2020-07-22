@@ -19,5 +19,17 @@ var ArtSchema = new mongoose.Schema({
       ref: 'Comment',
     },
   ],
+  Likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user',
+    },
+  ],
+  Dislikes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user',
+    },
+  ],
 });
-module.exports = mongoose.model('Arts', ArtSchema);
+module.exports = mongoose.model('Posts', ArtSchema);

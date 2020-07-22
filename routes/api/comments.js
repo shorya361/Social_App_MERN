@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../../models/User'),
-  Arts = require('../../models/Arts'),
+  Posts = require('../../models/Posts'),
   comments = require('../../models/comments');
 
 //Get all Comments
@@ -16,20 +16,21 @@ router.get('/', async (req, res) => {
 
 // Add comments to art.
 router.post('/addComment', async (req, res) => {
-  const { Art, UserId, comment } = req.body;
+  const { Post, UserId, comment } = req.body;
   try {
     let founduser = await User.findById(UserId);
     let newComment = new comments({
       text: comment,
       author: { id: UserId, username: founduser.name },
+      Post: Post,
     });
     founduser.comments.push(newComment.id);
-    let ART = await Arts.findById(Art);
-    ART.comments.push(newComment.id);
-    await ART.save();
+    let POST = await Posts.findById(Post);
+    POST.comments.push(newComment.id);
+    await POST.save();
     await founduser.save();
     await newComment.save();
-    res.json({ founduser, ART, newComment });
+    res.json({ founduser, POST, newComment });
   } catch (error) {
     console.log('error in adding a comment :' + error.message);
     res.status(500).send('Server Error');
@@ -51,13 +52,16 @@ router.put('/updateComment', async (req, res) => {
 });
 
 // delete a comment
-router.delete('/deleteComment', async (req, res) => {
+router.put('/deleteComment', async (req, res) => {
   try {
     const { comment } = req.body;
     let tobedeleted = await comments.findById(comment);
     user = await User.findById(tobedeleted.author.id);
     await user.comments.splice(user.comments.indexOf(comment), 1);
     await user.save();
+    let POST = await Posts.findById(tobedeleted.Post);
+    await POST.comments.splice(POST.comments.indexOf(comment), 1);
+    await POST.save();
     await comments.findByIdAndDelete(comment);
     res.json(user);
   } catch (error) {

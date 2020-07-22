@@ -64,7 +64,13 @@ class Profile extends Component {
 
   showData() {
     const posts = this.props.Auth.user.Posts.map((eachPost) => {
-      return <Posts user={this.props.Auth.user} postDetails={eachPost} />;
+      return (
+        <Posts
+          key={eachPost._id}
+          user={this.props.Auth.user}
+          postDetails={eachPost}
+        />
+      );
     });
     return posts;
   }

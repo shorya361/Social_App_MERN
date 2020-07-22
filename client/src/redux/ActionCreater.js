@@ -139,8 +139,8 @@ export const LoadComments = () => async (dispatch) => {
 //ADD COMMENTS
 export const addNewComment = (body) => async (dispatch) => {
   try {
-    const { Art, comment, UserId } = body;
-    const Body = JSON.stringify({ Art, comment, UserId });
+    const { Post, comment, UserId } = body;
+    const Body = JSON.stringify({ Post, comment, UserId });
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -157,5 +157,104 @@ export const addNewComment = (body) => async (dispatch) => {
     dispatch(setAlert('Comment Added', 'success'));
   } catch (error) {
     dispatch(setAlert('Cannot add new comment, Plz try again', 'danger'));
+  }
+};
+
+//EDIT COMMENT
+export const updateComment = (body) => async (dispatch) => {
+  try {
+    const { comment, commentID } = body;
+    const Body = JSON.stringify({ comment, commentID });
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const res = await axios.put(
+      'http://localhost:5000/api/comment/updateComment',
+      Body,
+      config
+    );
+    console.log(res.data);
+    dispatch(LoadComments());
+    dispatch(LoadUser());
+    dispatch(setAlert('Comment Updated', 'success'));
+  } catch (error) {
+    dispatch(setAlert('Server Error, Plz try again', 'danger'));
+  }
+};
+
+//DELETE A COMMENT
+export const deleteComment = (body) => async (dispatch) => {
+  try {
+    const { comment } = body;
+    const Body = JSON.stringify({ comment });
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const res = await axios.put(
+      'http://localhost:5000/api/comment/deleteComment',
+      Body,
+      config
+    );
+    console.log(res.data);
+    dispatch(LoadComments());
+    dispatch(LoadUser());
+    dispatch(setAlert('Comment Deleted', 'success'));
+  } catch (error) {
+    dispatch(setAlert('Server Error, Plz try again', 'danger'));
+  }
+};
+//==================================================================================
+// POST SECTION
+
+export const updatePost = (body) => async (dispatch) => {
+  try {
+    // console.log(body);
+
+    const { name, image, description, PostID } = body;
+    const Body = JSON.stringify({ name, image, description, PostID });
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const res = await axios.put(
+      'http://localhost:5000/api/Posts/updatePost',
+      Body,
+      config
+    );
+    // console.log(res);
+    dispatch(LoadUser());
+    dispatch(setAlert('Post Updated', 'success'));
+  } catch (error) {
+    dispatch(setAlert('Server Error, Plz try again', 'danger'));
+  }
+};
+
+export const deletePost = (body) => async (dispatch) => {
+  try {
+    const { Post } = body;
+    // const Body = JSON.stringify({ Post });
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    // console.log(Body);
+    const res = await axios.put(
+      'http://localhost:5000/api/Posts/deletePost',
+      body,
+      config
+    );
+    dispatch(LoadUser());
+    dispatch(setAlert('Post Deleted', 'success'));
+  } catch (error) {
+    dispatch(setAlert('Server Error, Plz try again', 'danger'));
   }
 };
