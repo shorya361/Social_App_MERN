@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  Media,
   Row,
   Button,
   ListGroup,
@@ -103,8 +102,8 @@ class Comment extends Component {
     if (this.props.eachcomment) {
       var option = null;
       if (
-        this.props.eachcomment.author.id == this.props.Auth.user._id ||
-        this.props.Auth.user.isAdmin == true
+        this.props.eachcomment.author.id === this.props.Auth.user._id ||
+        this.props.Auth.user.isAdmin === true
       ) {
         option = <i className='fas fa-ellipsis-v'></i>;
       }

@@ -35,7 +35,7 @@ class HeaderMobile extends Component {
     if (this.props.Alert.length > 0) {
       let heading = '';
 
-      if (this.props.Alert[0].AlertType == 'danger') {
+      if (this.props.Alert[0].AlertType === 'danger') {
         heading = 'Sorry..';
       } else {
         heading = 'Congrats';

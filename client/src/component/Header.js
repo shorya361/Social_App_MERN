@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormControl, Navbar, Nav, Button } from 'react-bootstrap';
+import { Form, FormControl, Navbar, Nav } from 'react-bootstrap';
 import { Logout } from '../redux/ActionCreater';
 import { connect } from 'react-redux';
 import Alert from './Alert';
@@ -40,7 +40,7 @@ class Header extends Component {
     if (this.props.Alert.length > 0) {
       let heading = '';
 
-      if (this.props.Alert[0].AlertType == 'danger') {
+      if (this.props.Alert[0].AlertType === 'danger') {
         heading = 'Sorry..';
       } else {
         heading = 'Congrats';
@@ -73,7 +73,11 @@ class Header extends Component {
               <Nav.Link href='/Home'>Dashboard</Nav.Link>
             </Nav>
             <Nav className=' ml-auto mr-auto '>
-              <Form>
+              <Form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                }}
+              >
                 <FormControl
                   type='text'
                   placeholder='Search User'

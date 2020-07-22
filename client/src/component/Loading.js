@@ -13,9 +13,6 @@ const mapStateToProps = (state) => {
 };
 
 class Loading extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <div style={{ marginTop: '150px' }}>

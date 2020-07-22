@@ -8,8 +8,6 @@ import {
   Nav,
   FormControl,
   Image,
-  Row,
-  Col,
   Card,
 } from 'react-bootstrap';
 import { Modal, ModalBody, ModalHeader, Label } from 'reactstrap';
@@ -124,23 +122,28 @@ class Posts extends Component {
   }
 
   ShowComment = () => {
-    if (this.props.postDetails.comments.length == 0)
+    if (this.props.postDetails.comments.length === 0)
       var coments = <p style={{ paddingLeft: '5%' }}>No comments..</p>;
     else {
-      var coments = this.props.postDetails.comments.map((each) => {
+      coments = this.props.postDetails.comments.map((each) => {
         // console.log(this);
         var eachcomment = this.props.Comments.Comments.find(function (
           post,
           index
         ) {
-          if (post._id == each) return post;
+          if (post._id === each) return post;
+          else {
+            return null;
+          }
         });
         if (eachcomment) {
           return <Comment key={eachcomment._id} eachcomment={eachcomment} />;
+        } else {
+          return null;
         }
       });
     }
-    if (this.state.show == true) {
+    if (this.state.show === true) {
       return (
         <div style={{ paddingTop: '4px' }}>
           <div style={{ backgroundColor: '#ebedeb' }}>
@@ -170,7 +173,7 @@ class Posts extends Component {
   render = () => {
     var option = null;
 
-    if (this.props.postDetails.author.id == this.props.Auth.user._id) {
+    if (this.props.postDetails.author.id === this.props.Auth.user._id) {
       option = (
         <Nav style={{ padding: '0' }}>
           <NavDropdown title='options' style={{ paddingLeft: 'auto' }}>

@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 
 class FooterMobile extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div

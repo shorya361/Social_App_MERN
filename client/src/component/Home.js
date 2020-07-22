@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import Header from './Header';
 import HeaderMobile from './HeaderMobile';
 import FooterMobile from './FooterMobile';
-import Footer from './footer';
-import { Image, Button, Spinner } from 'react-bootstrap';
+import { Image, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Loading from './Loading';
 const mapStateToProps = (state) => {
@@ -55,7 +54,7 @@ class Home extends Component {
     }
   }
   render() {
-    if (this.props.Auth.loading == true || !this.props.Auth.token) {
+    if (this.props.Auth.loading === true || !this.props.Auth.token) {
       return <Loading />;
     }
     return (
@@ -83,7 +82,6 @@ class Home extends Component {
               <h1> POSTS FEED</h1>
             </div>
           </div>
-          <Footer />
         </div>
       </div>
     );

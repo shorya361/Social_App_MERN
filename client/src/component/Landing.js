@@ -49,7 +49,7 @@ class Landing extends Component {
       password: '',
     });
     if (
-      this.props.Auth.isAuthenticated == true &&
+      this.props.Auth.isAuthenticated === true &&
       this.props.Auth.user !== null
     ) {
       return <Redirect to='/Home' />;
@@ -59,7 +59,7 @@ class Landing extends Component {
   componentDidMount() {
     // console.log(this);
     if (
-      this.props.Auth.isAuthenticated == true &&
+      this.props.Auth.isAuthenticated === true &&
       this.props.Auth.user !== null
     ) {
       return <Redirect to='/Home' />;
@@ -70,7 +70,7 @@ class Landing extends Component {
       const cls = 'alert alert-'.concat(this.props.Alert[0].AlertType);
       let heading = '';
       const ml = mr;
-      if (this.props.Alert[0].AlertType == 'danger') {
+      if (this.props.Alert[0].AlertType === 'danger') {
         heading = 'Sorry..';
       } else {
         heading = 'Congrats';

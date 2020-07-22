@@ -148,7 +148,7 @@ export const addNewComment = (body) => async (dispatch) => {
       },
     };
 
-    const res = await axios.post(
+    await axios.post(
       'http://localhost:5000/api/comment/addComment',
       Body,
       config
@@ -224,11 +224,7 @@ export const updatePost = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    const res = await axios.put(
-      'http://localhost:5000/api/Posts/updatePost',
-      Body,
-      config
-    );
+    await axios.put('http://localhost:5000/api/Posts/updatePost', Body, config);
     // console.log(res);
     dispatch(LoadUser());
     dispatch(setAlert('Post Updated', 'success'));
@@ -239,7 +235,6 @@ export const updatePost = (body) => async (dispatch) => {
 
 export const deletePost = (body) => async (dispatch) => {
   try {
-    const { Post } = body;
     // const Body = JSON.stringify({ Post });
     const config = {
       headers: {
@@ -248,11 +243,7 @@ export const deletePost = (body) => async (dispatch) => {
     };
 
     // console.log(Body);
-    const res = await axios.put(
-      'http://localhost:5000/api/Posts/deletePost',
-      body,
-      config
-    );
+    await axios.put('http://localhost:5000/api/Posts/deletePost', body, config);
     dispatch(LoadUser());
     dispatch(setAlert('Post Deleted', 'success'));
   } catch (error) {

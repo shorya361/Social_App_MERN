@@ -4,7 +4,7 @@ import HeaderMobile from './HeaderMobile';
 import FooterMobile from './FooterMobile';
 import Footer from './footer';
 import Loading from './Loading';
-import { Image, Button, Card, Spinner } from 'react-bootstrap';
+import { Image, Button, Card } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Posts from './Posts';
 const mapStateToProps = (state) => {
@@ -78,7 +78,7 @@ class Profile extends Component {
   }
 
   render() {
-    if (this.props.Auth.loading == true || !this.props.Auth.token) {
+    if (this.props.Auth.loading === true || !this.props.Auth.token) {
       return <Loading />;
     }
     return (
