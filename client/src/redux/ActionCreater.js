@@ -100,6 +100,35 @@ export const Logout = () => (dispatch) => {
   });
 };
 
+//DEACTIVATE ACCOUNT
+
+export const deactivate = (body) => async (dispatch) => {
+  try {
+    const { Profile } = body;
+    var Body = JSON.stringify({ Profile });
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const res = await axios.post(
+      'http://localhost:5000/api/users/changeStatus',
+      Body,
+      config
+    );
+    console.log(res);
+    dispatch(LoadUser());
+    if (res.data.user.activated) {
+      dispatch(setAlert('Account is Now Activated!!!', 'success'));
+    } else {
+      dispatch(setAlert('Account Deactivated !!', 'success'));
+    }
+  } catch (error) {
+    dispatch(setAlert('Server Error, Try Again', 'danger'));
+  }
+};
+
 //==================================================================================
 //ALERT SECTION
 export const setAlert = (message, AlertType) => (dispatch) => {

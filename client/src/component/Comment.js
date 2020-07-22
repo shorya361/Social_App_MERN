@@ -111,7 +111,12 @@ class Comment extends Component {
       return (
         <div>
           <div className='d-xl-none'>
-            <Modal isOpen={this.state.isOption} toggle={this.onClic} centered>
+            <Modal
+              isOpen={this.state.isOption}
+              toggle={this.onClic}
+              centered
+              style={{ color: '#212E36' }}
+            >
               <ModalBody style={{ padding: '0' }}>
                 <ListGroup>
                   <ListGroup.Item onClick={this.toggleUpdateComment}>
@@ -127,6 +132,7 @@ class Comment extends Component {
               isOpen={this.state.DeleteModal}
               toggle={this.toggleDelete}
               centered
+              style={{ color: '#212E36' }}
             >
               <ModalHeader toggle={this.toggleDelete}>
                 Are You Sure , you want to delete this Comment ?
@@ -144,6 +150,7 @@ class Comment extends Component {
               isOpen={this.state.EditModal}
               toggle={this.toggleUpdateComment}
               centered
+              style={{ color: '#212E36' }}
             >
               <ModalHeader toggle={this.toggleUpdateComment}>
                 Update Comment
@@ -175,6 +182,9 @@ class Comment extends Component {
                 marginBottom: '3px',
                 padding: '0',
                 borderRadius: '15px',
+                backgroundColor: '#f5f5f6',
+                width: '96%',
+                marginLeft: '2%',
               }}
             >
               <Nav
@@ -215,6 +225,7 @@ class Comment extends Component {
                   width: '96%',
                   marginLeft: '2%',
                   borderRadius: '10px',
+                  backgroundColor: '#f5f5f6',
                 }}
               >
                 <Nav

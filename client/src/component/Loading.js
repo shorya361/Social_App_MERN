@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Header from './Header';
 import HeaderMobile from './HeaderMobile';
 import FooterMobile from './FooterMobile';
-import Footer from './footer';
+
 const mapStateToProps = (state) => {
   return {
     Alert: state.Alert,
@@ -19,7 +19,7 @@ class Loading extends Component {
         <div className='d-xl-none' style={{ height: '100%' }}>
           <HeaderMobile />
           <div className='col-12 offset-5'>
-            <span className='fa fa-spinner fa-pulse fa-3x fa-fw text-secondary'></span>
+            <span className='fa fa-spinner fa-pulse fa-3x fa-fw '></span>
             <p>loading...</p>
           </div>
           <FooterMobile />
@@ -27,10 +27,9 @@ class Loading extends Component {
         <div className='d-none d-xl-block '>
           <Header />
           <div className='col-12 offset-5' style={{ marginTop: '150px' }}>
-            <span className='fa fa-spinner fa-pulse fa-3x fa-fw text-secondary'></span>
+            <span className='fa fa-spinner fa-pulse fa-3x fa-fw '></span>
             <p>loading...</p>
           </div>
-          <Footer />
         </div>
       </div>
     );

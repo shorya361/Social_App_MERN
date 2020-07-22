@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { ConfigureStore } from './redux/configureStore';
 import { LoadUser, LoadComments } from './redux/ActionCreater';
 import setAuthToken from './utils/setAuthToken';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 const store = ConfigureStore();
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -16,10 +17,14 @@ if (localStorage.token) {
 class App extends Component {
   componentDidMount() {
     console.log('App Component running');
-    // console.log(this);
     store.dispatch(LoadUser());
     store.dispatch(LoadComments());
   }
+
+  // componentWillReceiveProps(nextProps) {
+
+  //   console.log(nextProps);
+  // }
   render() {
     return (
       <Provider store={store}>
@@ -27,10 +32,18 @@ class App extends Component {
           <Route exact path='/' component={Landing} />
 
           <section>
+            {/* <TransitionGroup>
+              <CSSTransition
+                key={this.props.location.key}
+                classNames='page'
+                timeout={300}
+              > */}
             <Switch>
               <Route exact path='/Home' component={Home} />
               <Route exact path='/profile' component={Profile} />
             </Switch>
+            {/* </CSSTransition>
+            </TransitionGroup> */}
           </section>
         </Router>
       </Provider>
