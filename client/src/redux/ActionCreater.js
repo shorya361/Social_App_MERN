@@ -101,7 +101,6 @@ export const Logout = () => (dispatch) => {
 };
 
 //DEACTIVATE ACCOUNT
-
 export const deactivate = (body) => async (dispatch) => {
   try {
     const { Profile } = body;
@@ -124,6 +123,29 @@ export const deactivate = (body) => async (dispatch) => {
     } else {
       dispatch(setAlert('Account Deactivated !!', 'success'));
     }
+  } catch (error) {
+    dispatch(setAlert('Server Error, Try Again', 'danger'));
+  }
+};
+
+//UPDATE PROFILE
+export const update = (body) => async (dispatch) => {
+  try {
+    const { userId, name, description, city } = body;
+    const Body = JSON.stringify({ userId, name, description, city });
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    await axios.put(
+      'http://localhost:5000/api/users/updateProfile',
+      Body,
+      config
+    );
+    dispatch(LoadUser());
+    dispatch(LoadComments());
+    dispatch(setAlert('Profile Updated!!', 'success'));
   } catch (error) {
     dispatch(setAlert('Server Error, Try Again', 'danger'));
   }
@@ -242,6 +264,27 @@ export const deleteComment = (body) => async (dispatch) => {
 //==================================================================================
 // POST SECTION
 
+//ADD NEW POST
+
+export const addnewPost = (body) => async (dispatch) => {
+  try {
+    const { name, image, description, userID } = body;
+    const Body = JSON.stringify({ name, image, description, userID });
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    await axios.post('http://localhost:5000/api/Posts/addPost', Body, config);
+    // console.log(res);
+    dispatch(LoadUser());
+    dispatch(setAlert('Post Added', 'success'));
+  } catch (error) {
+    dispatch(setAlert('Server Error, Plz try again', 'danger'));
+  }
+};
+
+//UPDATE POST
 export const updatePost = (body) => async (dispatch) => {
   try {
     // console.log(body);
@@ -262,6 +305,7 @@ export const updatePost = (body) => async (dispatch) => {
   }
 };
 
+//DELETE POST
 export const deletePost = (body) => async (dispatch) => {
   try {
     // const Body = JSON.stringify({ Post });

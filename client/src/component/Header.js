@@ -58,7 +58,7 @@ class Header extends Component {
   render() {
     return (
       <div style={{ marginBottom: '50px', zIndex: '1' }} className='fixed-top'>
-        <Navbar bg='dark' variant='dark' fixed='top' expand='md'>
+        <Navbar variant='light' bd='light' expand='md'>
           <Navbar.Brand href='/'>
             <img
               src='https://lh3.googleusercontent.com/pw/ACtC-3dbz8yAfqdhnKiCqUsVJ6PaKVJtfcCftixF-BvEWgOyZpFJfBN36WJ_cN1god3MmpYVPMX3St4vgVKJIw9n-seTMhuFZuwCULd796bfQhB6vmKH3zj1zKElOUJT5vngjBc9fdSiDdICrcFpuuNMQbi-=w781-h672-no?authuser=0'
@@ -69,9 +69,13 @@ class Header extends Component {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
-            <Nav>
+            <Nav style={{ border: '1px solid black' }}>
               <Nav.Link href='/Home'>Dashboard</Nav.Link>
             </Nav>
+            <Nav style={{ border: '1px solid black' }}>
+              <Nav.Link href='/newPost'>Create Post</Nav.Link>
+            </Nav>
+
             <Nav className=' ml-auto mr-auto '>
               <Form
                 onSubmit={(e) => {

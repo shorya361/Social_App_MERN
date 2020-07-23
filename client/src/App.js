@@ -10,6 +10,7 @@ import { ConfigureStore } from './redux/configureStore';
 import { LoadUser, LoadComments } from './redux/ActionCreater';
 import setAuthToken from './utils/setAuthToken';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import NewPost from './component/NewPost';
 const store = ConfigureStore();
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -41,6 +42,7 @@ class App extends Component {
             <Switch>
               <Route exact path='/Home' component={Home} />
               <Route exact path='/profile' component={Profile} />
+              <Route exact path='/newPost' component={NewPost} />
             </Switch>
             {/* </CSSTransition>
             </TransitionGroup> */}

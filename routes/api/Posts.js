@@ -62,7 +62,6 @@ router.put('/updatePost', async (req, res) => {
 router.put('/deletePost', async (req, res) => {
   try {
     const { Post } = req.body;
-    console.log(req);
     let Arttobedeleted = await Posts.findById(Post);
     for (const id in Arttobedeleted.comments) {
       const comment = Arttobedeleted.comments[id];

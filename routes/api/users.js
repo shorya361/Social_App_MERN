@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const User = require('../../models/User');
+const Posts = require('../../models/Posts');
+const Comment = require('../../models/comments');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
@@ -71,11 +73,37 @@ router.post('/changeStatus', async (req, res) => {
     let user = await User.findById(Profile);
     // console.log(user);
     user.activated = !user.activated;
-    user.save();
+    await user.save();
     res.json({ user });
   } catch (error) {
     console.log('error in deativating :' + error.message);
     res.status(500).send('server error');
+  }
+});
+
+//update Profile
+router.put('/updateProfile', async (req, res) => {
+  try {
+    const { userId, name, description, city } = req.body;
+    let user = await User.findById(userId);
+    user.name = name;
+    (user.description = description), (user.city = city);
+    user.Posts.map(async (eachPost) => {
+      let post = await Posts.findById(eachPost);
+      post.author.username = name;
+      await post.save();
+    });
+    user.comments.map(async (eachComment) => {
+      let comment = await Comment.findById(eachComment);
+      comment.author.username = name;
+      await comment.save();
+      // console.log(comment);
+    });
+
+    await user.save();
+    res.json({ user });
+  } catch (error) {
+    console.log('error in updating :' + error.message);
   }
 });
 

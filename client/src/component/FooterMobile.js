@@ -29,7 +29,7 @@ class FooterMobile extends Component {
             </Nav.Link>
           </Nav>
           <Nav className='m-auto'>
-            <Nav.Link href='#'>
+            <Nav.Link href='/newPost'>
               <span>
                 <i className='fas fa-plus-circle'></i>
               </span>
