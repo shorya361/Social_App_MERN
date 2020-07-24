@@ -7,10 +7,12 @@ import Home from './component/Home';
 import './App.css';
 import { Provider } from 'react-redux';
 import { ConfigureStore } from './redux/configureStore';
-import { LoadUser, LoadComments } from './redux/ActionCreater';
+import { LoadUser, LoadComments, LoadAllUsers } from './redux/ActionCreater';
 import setAuthToken from './utils/setAuthToken';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import NewPost from './component/NewPost';
+import FindFriends from './component/FIndFriends';
+import ProfileID from './component/ProfileID';
 const store = ConfigureStore();
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -20,6 +22,7 @@ class App extends Component {
     console.log('App Component running');
     store.dispatch(LoadUser());
     store.dispatch(LoadComments());
+    store.dispatch(LoadAllUsers());
   }
 
   // componentWillReceiveProps(nextProps) {
@@ -27,6 +30,10 @@ class App extends Component {
   //   console.log(nextProps);
   // }
   render() {
+    const ProfileUser = ({ match }) => {
+      //   console.log(match.params);
+      return <ProfileID userID={match.params.profileID} />;
+    };
     return (
       <Provider store={store}>
         <Router>
@@ -43,6 +50,8 @@ class App extends Component {
               <Route exact path='/Home' component={Home} />
               <Route exact path='/profile' component={Profile} />
               <Route exact path='/newPost' component={NewPost} />
+              <Route exact path='/findFriends' component={FindFriends} />
+              <Route path='/Userprofile/:profileID' component={ProfileUser} />
             </Switch>
             {/* </CSSTransition>
             </TransitionGroup> */}

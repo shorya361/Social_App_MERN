@@ -22,7 +22,7 @@ class FooterMobile extends Component {
             </Nav.Link>
           </Nav>
           <Nav className='m-auto'>
-            <Nav.Link href='#'>
+            <Nav.Link href='/findFriends'>
               <span>
                 <i className='fas fa-search'></i>
               </span>

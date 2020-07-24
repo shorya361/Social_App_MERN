@@ -7,7 +7,7 @@ import { Label } from 'reactstrap';
 import { connect } from 'react-redux';
 import Loading from './Loading';
 import { addnewPost } from '../redux/ActionCreater';
-import { Redirect } from 'react-router-dom';
+
 const mapStateToProps = (state) => {
   return {
     Auth: state.Auth,
@@ -105,7 +105,7 @@ class NewPost extends Component {
               <FormControl
                 type='text'
                 className='mr-sm-1'
-                id='Image'
+                id='image'
                 onChange={this.onChange}
                 value={this.state.Image}
               />

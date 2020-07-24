@@ -107,4 +107,15 @@ router.put('/updateProfile', async (req, res) => {
   }
 });
 
+//get all users
+router.get('/', async (req, res) => {
+  try {
+    let user = await User.find({}).populate('Posts');
+
+    res.json(user);
+  } catch (error) {
+    console.log('error in updating :' + error.message);
+  }
+});
+
 module.exports = router;

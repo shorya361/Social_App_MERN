@@ -265,6 +265,7 @@ class Posts extends Component {
             height: '100%',
             marginTop: '10px',
             color: '#F5F5F6',
+            marginBottom: '70px',
           }}
         >
           <Card style={{ color: '#212e36' }}>
@@ -329,9 +330,8 @@ class Posts extends Component {
           <div
             style={{
               paddingBottom: '2px',
-              marginBottom: '40px',
+              marginBottom: '70px',
               marginTop: '10px',
-              borderBottom: '2px solid black',
               paddingLeft: '14px',
             }}
           >

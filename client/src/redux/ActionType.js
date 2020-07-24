@@ -8,3 +8,4 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 export const LOAD_COMMENTS = 'LOAD_COMMENTS';
+export const LOAD_ALL_USERS = 'LOAD_ALL_USERS';

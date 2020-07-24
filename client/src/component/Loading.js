@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Header from './Header';
-import HeaderMobile from './HeaderMobile';
 import FooterMobile from './FooterMobile';
+import HeaderMobile from './HeaderMobile';
 
 const mapStateToProps = (state) => {
   return {

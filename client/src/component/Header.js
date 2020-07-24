@@ -75,20 +75,11 @@ class Header extends Component {
             <Nav style={{ border: '1px solid black' }}>
               <Nav.Link href='/newPost'>Create Post</Nav.Link>
             </Nav>
-
-            <Nav className=' ml-auto mr-auto '>
-              <Form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                }}
-              >
-                <FormControl
-                  type='text'
-                  placeholder='Search User'
-                  className='mr-sm-1'
-                />
-              </Form>
+            <Nav style={{ border: '1px solid black' }}>
+              <Nav.Link href='/findFriends'>Find Friends</Nav.Link>
             </Nav>
+
+            <Nav className=' ml-auto mr-auto '></Nav>
             <Nav>
               {this.AuthUser()}
               <Nav.Link href='/' onClick={this.props.Logout}>

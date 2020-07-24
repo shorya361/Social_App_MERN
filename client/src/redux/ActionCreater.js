@@ -23,6 +23,19 @@ export const LoadUser = () => async (dispatch) => {
   }
 };
 
+//AllUsers
+export const LoadAllUsers = () => async (dispatch) => {
+  try {
+    const res = await axios.get('http://localhost:5000/api/users/');
+    dispatch({
+      type: Action_Types.LOAD_ALL_USERS,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 //REGISTER USER
 export const Register = (body) => async (dispatch) => {
   try {
@@ -207,6 +220,7 @@ export const addNewComment = (body) => async (dispatch) => {
     dispatch(LoadComments());
     dispatch(LoadUser());
     dispatch(setAlert('Comment Added', 'success'));
+    dispatch(LoadAllUsers());
   } catch (error) {
     dispatch(setAlert('Cannot add new comment, Plz try again', 'danger'));
   }
@@ -231,6 +245,7 @@ export const updateComment = (body) => async (dispatch) => {
     console.log(res.data);
     dispatch(LoadComments());
     dispatch(LoadUser());
+    dispatch(LoadAllUsers());
     dispatch(setAlert('Comment Updated', 'success'));
   } catch (error) {
     dispatch(setAlert('Server Error, Plz try again', 'danger'));
@@ -256,6 +271,7 @@ export const deleteComment = (body) => async (dispatch) => {
     console.log(res.data);
     dispatch(LoadComments());
     dispatch(LoadUser());
+    dispatch(LoadAllUsers());
     dispatch(setAlert('Comment Deleted', 'success'));
   } catch (error) {
     dispatch(setAlert('Server Error, Plz try again', 'danger'));
