@@ -31,7 +31,11 @@ class FindFriends extends Component {
                     <Card.Title>{each.name}</Card.Title>
                     <Card.Text>{each.description}</Card.Text>
                   </Card.Body>
-                  <Button variant='info' href={`/Userprofile/${each._id}`}>
+                  <Button
+                    variant='info'
+                    href={`/Userprofile/${each._id}`}
+                    style={{ height: '40px', borderRadius: '24px' }}
+                  >
                     View Profile
                   </Button>
                 </Card>
@@ -58,31 +62,30 @@ class FindFriends extends Component {
                 style={{ marginBottom: '5px' }}
               >
                 <Card>
-                  <Card.Body style={{ textAlign: 'center', padding: '0' }}>
+                  <Card.Body style={{ padding: '0' }}>
                     <div className='row w-100 m-0'>
                       <div className='col-2'></div>
-                      <div className='col-6' style={{ paddingTop: '6px' }}>
+                      <div
+                        className='col-10'
+                        style={{ padding: '0', paddingTop: '6px' }}
+                      >
                         <Nav>
-                          <div className='row w-100'>
-                            <Card.Title style={{ margin: '0' }}>
-                              {each.name}
-                            </Card.Title>
-                          </div>
-
-                          <div className='row w-100'>
-                            <Card.Text>{each.description}</Card.Text>
-                          </div>
-                        </Nav>
-                      </div>
-                      <div className='col-3'>
-                        <Nav>
-                          <Button
-                            variant='info'
-                            size='sm'
+                          <Nav.Link
                             href={`/Userprofile/${each._id}`}
+                            style={{ width: '100%', color: 'black' }}
                           >
-                            View Profile
-                          </Button>
+                            <div className='row w-100'>
+                              <Card.Title
+                                style={{ margin: '0', textAlign: 'left' }}
+                              >
+                                {each.name}
+                              </Card.Title>
+                            </div>
+
+                            <div className='row w-100'>
+                              <Card.Text>{each.description}</Card.Text>
+                            </div>
+                          </Nav.Link>
                         </Nav>
                       </div>
                     </div>
@@ -102,7 +105,11 @@ class FindFriends extends Component {
   }
 
   render() {
-    if (this.props.Auth.loading === true || !this.props.Auth.token) {
+    if (
+      this.props.Auth.loading === true ||
+      !this.props.Auth.token ||
+      !this.props.AllUsers.Users
+    ) {
       return <Loading />;
     }
     return (
@@ -118,7 +125,10 @@ class FindFriends extends Component {
           <CardGroup>
             <div className='container'>
               <h2 style={{ textAlign: 'center' }}>Add Friends</h2>
-              <div className='row'> {this.ShowUsers()}</div>
+              <div className='row' style={{ width: '100%' }}>
+                {' '}
+                {this.ShowUsers()}
+              </div>
             </div>
           </CardGroup>
         </div>

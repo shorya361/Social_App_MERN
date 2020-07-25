@@ -124,7 +124,7 @@ class Landing extends Component {
             </div>
           </Navbar>
           <div className='container '>
-            <div className='row'>
+            <div className='row w-100'>
               <div
                 style={{ height: '100px', justifyContent: 'center' }}
                 className='col-12'
@@ -193,7 +193,7 @@ class Landing extends Component {
               </Nav>
             </div>
           </Navbar>
-          <div className='row'>
+          <div className='row w-100'>
             <div
               style={{ height: '130px', justifyContent: 'center' }}
               className='col-12'

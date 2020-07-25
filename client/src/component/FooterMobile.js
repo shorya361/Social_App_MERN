@@ -9,7 +9,7 @@ class FooterMobile extends Component {
           marginTop: '60px',
           bottom: 0,
           position: 'fixed',
-          width: '100%',
+          // width: '100%',
           zIndex: '1',
         }}
       >

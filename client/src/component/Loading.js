@@ -16,19 +16,26 @@ class Loading extends Component {
   render() {
     return (
       <div style={{ marginTop: '150px' }}>
-        <div className='d-xl-none' style={{ height: '100%' }}>
+        <div
+          className='d-xl-none'
+          // style={{ height: '40%' }}
+        >
           <HeaderMobile />
-          <div className='col-12 offset-5'>
-            <span className='fa fa-spinner fa-pulse fa-3x fa-fw '></span>
-            <p>loading...</p>
+          <div className='row ' style={{ width: '100%' }}>
+            <div className='col-2 offset-5'>
+              <span className='fa fa-spinner fa-pulse fa-3x fa-fw '></span>
+              <p style={{ margin: '0' }}>loading...</p>
+            </div>
           </div>
           <FooterMobile />
         </div>
         <div className='d-none d-xl-block '>
           <Header />
-          <div className='col-12 offset-5' style={{ marginTop: '150px' }}>
-            <span className='fa fa-spinner fa-pulse fa-3x fa-fw '></span>
-            <p>loading...</p>
+          <div className='row' style={{ width: '100%' }}>
+            <div className='col-2 offset-5' style={{ marginTop: '150px' }}>
+              <span className='fa fa-spinner fa-pulse fa-3x fa-fw '></span>
+              <p style={{ margin: '0', width: 'fit-content' }}>loading...</p>
+            </div>
           </div>
         </div>
       </div>

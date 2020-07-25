@@ -59,6 +59,7 @@ class HeaderMobile extends Component {
           top: '0',
           width: '100%',
           marginBottom: '50px',
+          display: 'flex',
           zIndex: '1',
         }}
       >
@@ -77,7 +78,7 @@ class HeaderMobile extends Component {
             </Nav.Link>
           </Nav>
         </Navbar>
-        {this.showAlert()}
+        <div className='w-100'>{this.showAlert()}</div>
       </div>
     );
   }

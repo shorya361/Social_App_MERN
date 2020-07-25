@@ -205,7 +205,12 @@ class Comment extends Component {
                   }}
                 />
                 <Row style={{ width: '100%', marginTop: '3%' }}>
-                  <h6>{this.props.eachcomment.author.username} : </h6>
+                  <Nav.Link
+                    style={{ color: 'black', padding: '0' }}
+                    href={`/Userprofile/${this.props.eachcomment.author.id}`}
+                  >
+                    <h6>{this.props.eachcomment.author.username} : </h6>
+                  </Nav.Link>
                   <p style={{ color: '#878c88' }}>
                     {this.props.eachcomment.text}
                   </p>

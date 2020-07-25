@@ -69,7 +69,7 @@ class Home extends Component {
         </div>
         <div className='d-none d-xl-block '>
           <Header />
-          <div className='row'>
+          <div className='row' style={{ width: '100%' }}>
             <div className='col-2 pl-5 pt-5' style={{ height: '100%' }}>
               {this.showUser()}
             </div>
