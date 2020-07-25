@@ -46,7 +46,7 @@ class NewPost extends Component {
       image: '',
       description: '',
     });
-    this.props.history.push('/Home');
+    setTimeout(() => this.props.history.push('/Home'), 1000);
   };
   onChange = (e) => {
     this.setState({ ...this.state, [e.target.id]: e.target.value });

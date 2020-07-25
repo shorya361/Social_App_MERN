@@ -27,7 +27,7 @@ class Profile extends Component {
       editModal: false,
       Deactivate: false,
       image: '',
-      name: 'Shakaal',
+      name: '',
       description: '',
       city: '',
     };

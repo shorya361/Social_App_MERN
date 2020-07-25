@@ -6,6 +6,8 @@ import FooterMobile from './FooterMobile';
 import HeaderMobile from './HeaderMobile';
 import { Image, Button, Card } from 'react-bootstrap';
 import Posts from './Posts';
+import { Redirect } from 'react-router-dom';
+import ProfileAdminAccess from './ProfileAdminAccess';
 const mapStateToProps = (state) => {
   return {
     Auth: state.Auth,
@@ -17,24 +19,37 @@ class ProfileID extends Component {
     super(props);
     this.state = {
       user: null,
+      button: null,
     };
   }
   componentWillReceiveProps(nextProps) {
-    // console.log(this);
-    // console.log(nextProps.AllUsers.Users);
+    // console.log(nextProps);
+    // // console.log(nextProps.AllUsers.Users);
     if (nextProps.AllUsers.Users) {
-      console.log(nextProps);
       nextProps.AllUsers.Users.map((each) => {
         if (each._id === this.props.userID) {
           this.setState({
+            ...this.state,
             user: each,
+            button: (
+              <Button
+                className='m-0 p-0'
+                style={{
+                  backgroundColor: 'grey',
+                  width: '100%',
+                  height: '25px',
+                }}
+                onClick={this.redirect}
+              >
+                Follow
+              </Button>
+            ),
           });
         }
       });
-    } else {
-      console.log('nextProps:');
-      console.log(nextProps);
     }
+    //     console.log('hehe la lala');
+    //     console.log(this.props);
   }
 
   showData() {
@@ -68,19 +83,7 @@ class ProfileID extends Component {
               <i className='fas fa-info-circle'></i>{' '}
               {this.state.user.description}
             </p>
-            <div className='row'>
-              <Button
-                className='m-0 p-0'
-                style={{
-                  backgroundColor: 'grey',
-                  width: '100%',
-                  height: '25px',
-                }}
-                onClick={this.redirect}
-              >
-                Follow
-              </Button>
-            </div>
+            <div className='row'>{this.state.button}</div>
           </Card.Body>
           <Card.Footer>
             <div className='row pt-4'>
@@ -111,6 +114,15 @@ class ProfileID extends Component {
       this.state.user === null
     ) {
       return <Loading />;
+    }
+    if (this.props.Auth.user) {
+      if (this.props.userID === this.props.Auth.user._id) {
+        // this.props.history.push('/Profile');
+        return <Redirect to='/Profile' />;
+      }
+      if (this.props.Auth.user.isAdmin) {
+        return <ProfileAdminAccess user={this.state.user} />;
+      }
     }
     return (
       <div style={{ marginTop: '65px' }}>
@@ -144,17 +156,7 @@ class ProfileID extends Component {
                 {this.state.user.description}
               </p>
               <i className='fas fa-map-marker-alt'></i> {this.state.user.city}
-              <div className='row'>
-                <Button
-                  className='m-0 p-0'
-                  style={{
-                    width: '100%',
-                    height: '25px',
-                  }}
-                >
-                  Follow
-                </Button>
-              </div>
+              <div className='row'>{this.state.button}</div>
             </div>
           </div>
           <div style={{ marginBottom: '70px' }}>{this.showData()}</div>

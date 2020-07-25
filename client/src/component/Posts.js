@@ -179,7 +179,10 @@ class Posts extends Component {
   render = () => {
     var option = null;
 
-    if (this.props.postDetails.author.id === this.props.Auth.user._id) {
+    if (
+      this.props.postDetails.author.id === this.props.Auth.user._id ||
+      this.props.Auth.user.isAdmin
+    ) {
       option = (
         <Nav style={{ padding: '0' }}>
           <NavDropdown title='options' style={{ paddingLeft: 'auto' }}>

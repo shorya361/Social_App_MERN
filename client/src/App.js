@@ -18,11 +18,14 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 class App extends Component {
-  componentDidMount() {
-    console.log('App Component running');
+  constructor(props) {
+    super(props);
     store.dispatch(LoadUser());
     store.dispatch(LoadComments());
     store.dispatch(LoadAllUsers());
+  }
+  componentDidMount() {
+    console.log('App Component running');
   }
 
   // componentWillReceiveProps(nextProps) {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormControl, Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import { Logout } from '../redux/ActionCreater';
 import { connect } from 'react-redux';
 import Alert from './Alert';

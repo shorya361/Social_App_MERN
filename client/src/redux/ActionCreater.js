@@ -129,7 +129,7 @@ export const deactivate = (body) => async (dispatch) => {
       Body,
       config
     );
-    console.log(res);
+    dispatch(LoadAllUsers());
     dispatch(LoadUser());
     if (res.data.user.activated) {
       dispatch(setAlert('Account is Now Activated!!!', 'success'));
@@ -158,6 +158,7 @@ export const update = (body) => async (dispatch) => {
     );
     dispatch(LoadUser());
     dispatch(LoadComments());
+    dispatch(LoadAllUsers());
     dispatch(setAlert('Profile Updated!!', 'success'));
   } catch (error) {
     dispatch(setAlert('Server Error, Try Again', 'danger'));
@@ -294,6 +295,7 @@ export const addnewPost = (body) => async (dispatch) => {
     await axios.post('http://localhost:5000/api/Posts/addPost', Body, config);
     // console.log(res);
     dispatch(LoadUser());
+
     dispatch(setAlert('Post Added', 'success'));
   } catch (error) {
     dispatch(setAlert('Server Error, Plz try again', 'danger'));
@@ -315,6 +317,7 @@ export const updatePost = (body) => async (dispatch) => {
     await axios.put('http://localhost:5000/api/Posts/updatePost', Body, config);
     // console.log(res);
     dispatch(LoadUser());
+    dispatch(LoadAllUsers());
     dispatch(setAlert('Post Updated', 'success'));
   } catch (error) {
     dispatch(setAlert('Server Error, Plz try again', 'danger'));
@@ -334,6 +337,7 @@ export const deletePost = (body) => async (dispatch) => {
     // console.log(Body);
     await axios.put('http://localhost:5000/api/Posts/deletePost', body, config);
     dispatch(LoadUser());
+    dispatch(LoadAllUsers());
     dispatch(setAlert('Post Deleted', 'success'));
   } catch (error) {
     dispatch(setAlert('Server Error, Plz try again', 'danger'));

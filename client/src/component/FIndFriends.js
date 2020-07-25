@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import Loading from './Loading';
 import FooterMobile from './FooterMobile';
 import HeaderMobile from './HeaderMobile';
-import { Link } from 'react-router-dom';
 import { Card, Button, CardGroup, Nav } from 'react-bootstrap';
 const mapStateToProps = (state) => {
   return {
@@ -22,106 +21,83 @@ class FindFriends extends Component {
   ShowUsers() {
     if (this.props.AllUsers.Users) {
       var users = this.props.AllUsers.Users.map((each) => {
-        return (
-          <div className='col-4'>
-            <Card>
-              <Card.Img variant='top' src={each.image} />
-              <Card.Body style={{ textAlign: 'center' }}>
-                <Card.Title>{each.name}</Card.Title>
-                <Card.Text>{each.description}</Card.Text>
-              </Card.Body>
-              <Button variant='info' href={`/Userprofile/${each._id}`}>
-                View Profile
-              </Button>
-            </Card>
-          </div>
-        );
+        if (each._id !== this.props.Auth.user._id) {
+          if (this.props.Auth.user.isAdmin || each.activated === true) {
+            return (
+              <div key={each._id} className='col-4'>
+                <Card>
+                  <Card.Img variant='top' src={each.image} />
+                  <Card.Body style={{ textAlign: 'center' }}>
+                    <Card.Title>{each.name}</Card.Title>
+                    <Card.Text>{each.description}</Card.Text>
+                  </Card.Body>
+                  <Button variant='info' href={`/Userprofile/${each._id}`}>
+                    View Profile
+                  </Button>
+                </Card>
+              </div>
+            );
+          }
+        } else {
+          return null;
+        }
       });
-      return users;
     }
+    return users;
   }
+
   ShowUsersMobile() {
     if (this.props.AllUsers.Users) {
       var users = this.props.AllUsers.Users.map((each) => {
-        if (
-          each._id !== this.props.Auth.user._id &&
-          this.props.Auth.user.isAdmin
-        ) {
-          return (
-            <div className='col-12' style={{ marginBottom: '5px' }}>
-              <Card>
-                <Card.Body style={{ textAlign: 'center', padding: '0' }}>
-                  <div className='row w-100 m-0'>
-                    <div className='col-2'></div>
-                    <div className='col-6' style={{ paddingTop: '6px' }}>
-                      <Nav>
-                        <div className='row w-100'>
-                          <Card.Title style={{ margin: '0' }}>
-                            {each.name}
-                          </Card.Title>
-                        </div>
+        if (each._id !== this.props.Auth.user._id) {
+          if (this.props.Auth.user.isAdmin || each.activated === true) {
+            return (
+              <div
+                key={each._id}
+                className='col-12'
+                style={{ marginBottom: '5px' }}
+              >
+                <Card>
+                  <Card.Body style={{ textAlign: 'center', padding: '0' }}>
+                    <div className='row w-100 m-0'>
+                      <div className='col-2'></div>
+                      <div className='col-6' style={{ paddingTop: '6px' }}>
+                        <Nav>
+                          <div className='row w-100'>
+                            <Card.Title style={{ margin: '0' }}>
+                              {each.name}
+                            </Card.Title>
+                          </div>
 
-                        <div className='row w-100'>
-                          <Card.Text>{each.description}</Card.Text>
-                        </div>
-                      </Nav>
+                          <div className='row w-100'>
+                            <Card.Text>{each.description}</Card.Text>
+                          </div>
+                        </Nav>
+                      </div>
+                      <div className='col-3'>
+                        <Nav>
+                          <Button
+                            variant='info'
+                            size='sm'
+                            href={`/Userprofile/${each._id}`}
+                          >
+                            View Profile
+                          </Button>
+                        </Nav>
+                      </div>
                     </div>
-                    <div className='col-3'>
-                      <Nav>
-                        <Button
-                          variant='info'
-                          size='sm'
-                          href={`/Userprofile/${each._id}`}
-                        >
-                          View Profile
-                        </Button>
-                      </Nav>
-                    </div>
-                  </div>
-                </Card.Body>
-              </Card>
-            </div>
-          );
-        }
-        if (each._id !== this.props.Auth.user._id && each.activated === true) {
-          return (
-            <div className='col-12' style={{ marginBottom: '5px' }}>
-              <Card>
-                <Card.Body style={{ textAlign: 'center', padding: '0' }}>
-                  <div className='row w-100 m-0'>
-                    <div className='col-2'></div>
-                    <div className='col-6' style={{ paddingTop: '6px' }}>
-                      <Nav>
-                        <div className='row w-100'>
-                          <Card.Title style={{ margin: '0' }}>
-                            {each.name}
-                          </Card.Title>
-                        </div>
-
-                        <div className='row w-100'>
-                          <Card.Text>{each.description}</Card.Text>
-                        </div>
-                      </Nav>
-                    </div>
-                    <div className='col-3'>
-                      <Nav>
-                        <Button
-                          variant='info'
-                          size='sm'
-                          href={`/Userprofile/${each._id}`}
-                        >
-                          View Profile
-                        </Button>
-                      </Nav>
-                    </div>
-                  </div>
-                </Card.Body>
-              </Card>
-            </div>
-          );
+                  </Card.Body>
+                </Card>
+              </div>
+            );
+          } else {
+            return null;
+          }
         }
       });
       return users;
+    } else {
+      return null;
     }
   }
 
