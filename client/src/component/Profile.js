@@ -183,16 +183,22 @@ class Profile extends Component {
   }
 
   showData() {
-    const posts = this.props.Auth.user.Posts.map((eachPost) => {
-      return (
-        <Posts
-          key={eachPost._id}
-          user={this.props.Auth.user}
-          postDetails={eachPost}
-        />
-      );
-    });
-    return posts;
+    if (this.state.user) {
+      if (this.state.user.Posts.length > 0) {
+        const posts = this.state.user.Posts.map((eachPost) => {
+          return (
+            <Posts
+              key={eachPost._id}
+              user={this.state.user}
+              postDetails={eachPost}
+            />
+          );
+        });
+        return posts;
+      } else {
+        return <h3>No Posts yet</h3>;
+      }
+    }
   }
 
   ChangeStatus() {

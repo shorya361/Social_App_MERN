@@ -8,12 +8,17 @@ import { Image, Button, Card } from 'react-bootstrap';
 import Posts from './Posts';
 import { Redirect } from 'react-router-dom';
 import ProfileAdminAccess from './ProfileAdminAccess';
+import { FollowRequest } from '../redux/ActionCreater';
 const mapStateToProps = (state) => {
   return {
     Auth: state.Auth,
     AllUsers: state.AllUsers,
   };
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  FollowRequest: (body) => dispatch(FollowRequest(body)),
+});
 class ProfileID extends Component {
   constructor(props) {
     super(props);
@@ -21,36 +26,69 @@ class ProfileID extends Component {
       user: null,
       button: null,
     };
+    this.onSubmit = this.onSubmit.bind(this);
   }
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    const body = {
+      UserID: this.props.Auth.user._id,
+      follow: this.state.user._id,
+    };
+    this.props.FollowRequest(body);
+  };
   componentWillReceiveProps(nextProps) {
     // console.log(nextProps);
     // // console.log(nextProps.AllUsers.Users);
     if (nextProps.AllUsers.Users) {
-      nextProps.AllUsers.Users.map((each) => {
-        if (each._id === this.props.userID) {
-          this.setState({
-            ...this.state,
-            user: each,
-            button: (
-              <Button
-                className='m-0 p-0'
-                style={{
-                  backgroundColor: 'grey',
-                  width: '100%',
-                  height: '40px',
-                  borderRadius: '20px',
-                }}
-                onClick={this.redirect}
-              >
-                Follow
-              </Button>
-            ),
+      nextProps.AllUsers.Users.map((eachUser) => {
+        if (eachUser._id === this.props.userID) {
+          eachUser.Followers.map((each) => {
+            if (each.id === this.props.Auth.user._id) {
+              this.setState({
+                ...this.state,
+                user: eachUser,
+                button: (
+                  <Button
+                    className='m-0 p-0'
+                    variant='danger'
+                    style={{
+                      width: '100%',
+                      height: '40px',
+                      borderRadius: '20px',
+                    }}
+                    // onClick={this.onSubmit}
+                  >
+                    UnFollow
+                  </Button>
+                ),
+              });
+            } else {
+              this.setState({
+                ...this.state,
+                user: eachUser,
+                button: (
+                  <Button
+                    className='m-0 p-0'
+                    style={{
+                      backgroundColor: 'grey',
+                      width: '100%',
+                      height: '40px',
+                      borderRadius: '20px',
+                    }}
+                    onClick={this.onSubmit}
+                  >
+                    Follow
+                  </Button>
+                ),
+              });
+            }
           });
         }
       });
+      //     console.log('hehe la lala');
+      //     console.log(this.props);
     }
-    //     console.log('hehe la lala');
-    //     console.log(this.props);
   }
 
   showData() {
@@ -185,4 +223,4 @@ class ProfileID extends Component {
     );
   }
 }
-export default connect(mapStateToProps)(ProfileID);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileID);

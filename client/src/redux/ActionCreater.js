@@ -165,6 +165,32 @@ export const update = (body) => async (dispatch) => {
   }
 };
 
+export const FollowRequest = (body) => async (dispatch) => {
+  try {
+    let { UserID, follow } = body;
+    let Body = JSON.stringify({ UserID, follow });
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const res = await axios.post(
+      'http://localhost:5000/api/users/follow',
+      Body,
+      config
+    );
+    console.log(res);
+    dispatch(LoadUser());
+    dispatch(LoadComments());
+    dispatch(LoadAllUsers());
+    dispatch(
+      setAlert('You are now following ' + res.data.following.name, 'success')
+    );
+  } catch (error) {
+    dispatch(setAlert('Server Error, Try Again', 'danger'));
+  }
+};
+
 //==================================================================================
 //ALERT SECTION
 export const setAlert = (message, AlertType) => (dispatch) => {

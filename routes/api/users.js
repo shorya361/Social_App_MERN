@@ -118,4 +118,20 @@ router.get('/', async (req, res) => {
   }
 });
 
+// follow Request
+router.post('/follow', async (req, res) => {
+  try {
+    let { UserID, follow } = req.body;
+    let user = await User.findById(UserID);
+    let following = await User.findById(follow);
+    user.Followings.push({ id: follow, username: following.name });
+    following.Followers.push({ id: UserID, username: user.name });
+    await user.save();
+    await following.save();
+    res.json({ user, following });
+  } catch (error) {
+    console.log('error in updating :' + error.message);
+  }
+});
+
 module.exports = router;
