@@ -347,6 +347,7 @@ export const addnewPost = (body) => async (dispatch) => {
     await axios.post('http://localhost:5000/api/Posts/addPost', Body, config);
     // console.log(res);
     dispatch(LoadUser());
+    dispatch(LoadAllUsers());
 
     dispatch(setAlert('Post Added', 'success'));
   } catch (error) {

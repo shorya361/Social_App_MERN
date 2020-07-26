@@ -42,6 +42,7 @@ class Profile extends Component {
   }
   componentWillReceiveProps(nextProps) {
     // console.log(nextProps);
+    // console.log(this);
     if (nextProps.Auth.user) {
       this.setState({
         ...this.state,
@@ -70,7 +71,7 @@ class Profile extends Component {
       city: this.state.city,
     };
     this.props.update(body);
-    console.log(this.state);
+    // console.log(this.state);
   };
   toggleDeactivate() {
     this.setState({
@@ -183,9 +184,10 @@ class Profile extends Component {
   }
 
   showData() {
-    if (this.state.user) {
-      if (this.state.user.Posts.length > 0) {
-        const posts = this.state.user.Posts.map((eachPost) => {
+    if (this.props.Auth.user) {
+      // console.log(this.props.Auth.user.Posts);
+      if (this.props.Auth.user.Posts.length > 0) {
+        const posts = this.props.Auth.user.Posts.map((eachPost) => {
           return (
             <Posts
               key={eachPost._id}

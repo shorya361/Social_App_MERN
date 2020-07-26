@@ -16,13 +16,14 @@ import ProfileID from './component/ProfileID';
 const store = ConfigureStore();
 if (localStorage.token) {
   setAuthToken(localStorage.token);
+
+  store.dispatch(LoadUser());
+  store.dispatch(LoadComments());
+  store.dispatch(LoadAllUsers());
 }
 class App extends Component {
   constructor(props) {
     super(props);
-    store.dispatch(LoadUser());
-    store.dispatch(LoadComments());
-    store.dispatch(LoadAllUsers());
   }
   componentDidMount() {
     console.log('App Component running');

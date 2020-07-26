@@ -12,6 +12,7 @@ import { update } from '../redux/ActionCreater';
 const mapStateToProps = (state) => {
   return {
     Auth: state.Auth,
+    AllUsers: state.AllUsers,
   };
 };
 
@@ -42,7 +43,7 @@ class ProfileAdminAccess extends Component {
     this.ChangeStatus = this.ChangeStatus.bind(this);
   }
   componentDidMount() {
-    console.log(this);
+    // console.log(this);
     this.setState({
       ...this.state,
       user: this.props.user,

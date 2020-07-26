@@ -36,7 +36,23 @@ class ProfileID extends Component {
       UserID: this.props.Auth.user._id,
       follow: this.state.user._id,
     };
-    console.log(this);
+    this.setState({
+      ...this.state,
+      button: (
+        <Button
+          className='m-0 p-0'
+          style={{
+            backgroundColor: 'grey',
+            width: '100%',
+            height: '40px',
+            borderRadius: '20px',
+          }}
+          onClick={this.onSubmit}
+        >
+          Follow
+        </Button>
+      ),
+    });
     this.props.UnFollowRequest(body);
   }
 
@@ -46,6 +62,23 @@ class ProfileID extends Component {
       UserID: this.props.Auth.user._id,
       follow: this.state.user._id,
     };
+    this.setState({
+      ...this.state,
+      button: (
+        <Button
+          className='m-0 p-0'
+          variant='danger'
+          style={{
+            width: '100%',
+            height: '40px',
+            borderRadius: '20px',
+          }}
+          onClick={this.onSubmitUnfollow}
+        >
+          UnFollow
+        </Button>
+      ),
+    });
     this.props.FollowRequest(body);
   };
   componentWillReceiveProps(nextProps) {
@@ -75,27 +108,29 @@ class ProfileID extends Component {
           // console.log(nextProps);
           eachUser.Followers.map((each) => {
             // console.log(each, nextProps.Auth.user._id);
-            if (each == nextProps.Auth.user._id) {
-              // console.log('done');
-              return this.setState({
-                ...this.state,
-                user: eachUser,
+            if (this.props.Auth.user) {
+              if (each == this.props.Auth.user._id) {
+                // console.log('done');
+                return this.setState({
+                  ...this.state,
+                  user: eachUser,
 
-                button: (
-                  <Button
-                    className='m-0 p-0'
-                    variant='danger'
-                    style={{
-                      width: '100%',
-                      height: '40px',
-                      borderRadius: '20px',
-                    }}
-                    onClick={this.onSubmitUnfollow}
-                  >
-                    UnFollow
-                  </Button>
-                ),
-              });
+                  button: (
+                    <Button
+                      className='m-0 p-0'
+                      variant='danger'
+                      style={{
+                        width: '100%',
+                        height: '40px',
+                        borderRadius: '20px',
+                      }}
+                      onClick={this.onSubmitUnfollow}
+                    >
+                      UnFollow
+                    </Button>
+                  ),
+                });
+              }
             }
           });
         }
