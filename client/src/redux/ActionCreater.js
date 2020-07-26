@@ -174,7 +174,7 @@ export const FollowRequest = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    const res = await axios.post(
+    const res = await axios.put(
       'http://localhost:5000/api/users/follow',
       Body,
       config
@@ -185,6 +185,32 @@ export const FollowRequest = (body) => async (dispatch) => {
     dispatch(LoadAllUsers());
     dispatch(
       setAlert('You are now following ' + res.data.following.name, 'success')
+    );
+  } catch (error) {
+    dispatch(setAlert('Server Error, Try Again', 'danger'));
+  }
+};
+
+export const UnFollowRequest = (body) => async (dispatch) => {
+  try {
+    let { UserID, follow } = body;
+    let Body = JSON.stringify({ UserID, follow });
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const res = await axios.put(
+      'http://localhost:5000/api/users/unfollow',
+      Body,
+      config
+    );
+    // console.log(res);
+    dispatch(LoadUser());
+    dispatch(LoadComments());
+    dispatch(LoadAllUsers());
+    dispatch(
+      setAlert('You just unfollowed ' + res.data.following.name, 'success')
     );
   } catch (error) {
     dispatch(setAlert('Server Error, Try Again', 'danger'));

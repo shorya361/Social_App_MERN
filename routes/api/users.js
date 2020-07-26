@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const { check, validationResult } = require('express-validator');
 const User = require('../../models/User');
 const Posts = require('../../models/Posts');
 const Comment = require('../../models/comments');
@@ -119,18 +118,34 @@ router.get('/', async (req, res) => {
 });
 
 // follow Request
-router.post('/follow', async (req, res) => {
+router.put('/follow', async (req, res) => {
   try {
     let { UserID, follow } = req.body;
     let user = await User.findById(UserID);
     let following = await User.findById(follow);
-    user.Followings.push({ id: follow, username: following.name });
-    following.Followers.push({ id: UserID, username: user.name });
+    user.Followings.push(follow);
+    following.Followers.push(UserID);
     await user.save();
     await following.save();
     res.json({ user, following });
   } catch (error) {
-    console.log('error in updating :' + error.message);
+    console.log('error in Following route :' + error.message);
+  }
+});
+
+//Unfollow Request
+router.put('/unfollow', async (req, res) => {
+  try {
+    const { UserID, follow } = req.body;
+    let user = await User.findById(UserID);
+    let following = await User.findById(follow);
+    await user.Followings.splice(user.Followings.indexOf(follow), 1);
+    await following.Followers.splice(following.Followers.indexOf(UserID), 1);
+    await user.save();
+    await following.save();
+    res.json({ user, following });
+  } catch (error) {
+    console.log('error in Following route :' + error.message);
   }
 });
 

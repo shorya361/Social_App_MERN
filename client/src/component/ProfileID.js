@@ -8,7 +8,7 @@ import { Image, Button, Card } from 'react-bootstrap';
 import Posts from './Posts';
 import { Redirect } from 'react-router-dom';
 import ProfileAdminAccess from './ProfileAdminAccess';
-import { FollowRequest } from '../redux/ActionCreater';
+import { FollowRequest, UnFollowRequest } from '../redux/ActionCreater';
 const mapStateToProps = (state) => {
   return {
     Auth: state.Auth,
@@ -18,6 +18,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   FollowRequest: (body) => dispatch(FollowRequest(body)),
+  UnFollowRequest: (body) => dispatch(UnFollowRequest(body)),
 });
 class ProfileID extends Component {
   constructor(props) {
@@ -27,6 +28,16 @@ class ProfileID extends Component {
       button: null,
     };
     this.onSubmit = this.onSubmit.bind(this);
+    this.onSubmitUnfollow = this.onSubmitUnfollow.bind(this);
+  }
+  onSubmitUnfollow(e) {
+    e.preventDefault();
+    const body = {
+      UserID: this.props.Auth.user._id,
+      follow: this.state.user._id,
+    };
+    console.log(this);
+    this.props.UnFollowRequest(body);
   }
 
   onSubmit = (e) => {
@@ -39,15 +50,37 @@ class ProfileID extends Component {
   };
   componentWillReceiveProps(nextProps) {
     // console.log(nextProps);
-    // // console.log(nextProps.AllUsers.Users);
+    // console.log(this);
     if (nextProps.AllUsers.Users) {
       nextProps.AllUsers.Users.map((eachUser) => {
         if (eachUser._id === this.props.userID) {
+          this.setState({
+            ...this.state,
+            user: eachUser,
+            button: (
+              <Button
+                className='m-0 p-0'
+                style={{
+                  backgroundColor: 'grey',
+                  width: '100%',
+                  height: '40px',
+                  borderRadius: '20px',
+                }}
+                onClick={this.onSubmit}
+              >
+                Follow
+              </Button>
+            ),
+          });
+          // console.log(nextProps);
           eachUser.Followers.map((each) => {
-            if (each.id === this.props.Auth.user._id) {
-              this.setState({
+            // console.log(each, nextProps.Auth.user._id);
+            if (each == nextProps.Auth.user._id) {
+              // console.log('done');
+              return this.setState({
                 ...this.state,
                 user: eachUser,
+
                 button: (
                   <Button
                     className='m-0 p-0'
@@ -57,28 +90,9 @@ class ProfileID extends Component {
                       height: '40px',
                       borderRadius: '20px',
                     }}
-                    // onClick={this.onSubmit}
+                    onClick={this.onSubmitUnfollow}
                   >
                     UnFollow
-                  </Button>
-                ),
-              });
-            } else {
-              this.setState({
-                ...this.state,
-                user: eachUser,
-                button: (
-                  <Button
-                    className='m-0 p-0'
-                    style={{
-                      backgroundColor: 'grey',
-                      width: '100%',
-                      height: '40px',
-                      borderRadius: '20px',
-                    }}
-                    onClick={this.onSubmit}
-                  >
-                    Follow
                   </Button>
                 ),
               });
@@ -86,9 +100,9 @@ class ProfileID extends Component {
           });
         }
       });
-      //     console.log('hehe la lala');
-      //     console.log(this.props);
     }
+    //     console.log('hehe la lala');
+    // console.log(this.state);
   }
 
   showData() {
