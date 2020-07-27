@@ -13,7 +13,15 @@ import {
 import { Modal, ModalBody, ModalHeader, Label } from 'reactstrap';
 import { connect } from 'react-redux';
 import Comment from './Comment';
-import { addNewComment, updatePost, deletePost } from '../redux/ActionCreater';
+import {
+  addNewComment,
+  updatePost,
+  deletePost,
+  Like,
+  UnLike,
+  DownVote,
+  UnDownVote,
+} from '../redux/ActionCreater';
 const mapStateToProps = (state) => {
   return {
     Comments: state.Comments,
@@ -31,6 +39,19 @@ const mapDispatchToProps = (dispatch) => ({
   deletePost: (body) => {
     dispatch(deletePost(body));
   },
+  Like: (body) => {
+    dispatch(Like(body));
+  },
+  UnLike: (body) => {
+    dispatch(UnLike(body));
+  },
+  DownVote: (body) => {
+    dispatch(DownVote(body));
+  },
+
+  UnDownVote: (body) => {
+    dispatch(UnDownVote(body));
+  },
 });
 
 class Posts extends Component {
@@ -43,6 +64,31 @@ class Posts extends Component {
       UpdatePost: false,
       description: '',
       image: '',
+      buttons: (
+        <div
+          className='row'
+          style={{ width: '100%', margin: 'auto', paddingLeft: '1.25rem' }}
+        >
+          <Nav>
+            <Nav.Link
+              onClick={this.LikePost}
+              style={{ color: 'black', paddingLeft: '0' }}
+            >
+              <i className='fas fa-arrow-circle-up'></i>
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link style={{ color: 'black' }} onClick={this.DownVote}>
+              <i className='fas fa-arrow-circle-down'></i>
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link style={{ color: 'black' }} onClick={this.toggleShow}>
+              <i className='far fa-comment'></i>
+            </Nav.Link>
+          </Nav>
+        </div>
+      ),
     };
     this.toggleShow = this.toggleShow.bind(this);
     this.onCommentSubmit = this.onCommentSubmit.bind(this);
@@ -51,13 +97,327 @@ class Posts extends Component {
     this.toggleUpdatePost = this.toggleUpdatePost.bind(this);
     this.onEditSubmit = this.onEditSubmit.bind(this);
     this.onDeletePost = this.onDeletePost.bind(this);
+    this.LikePost = this.LikePost.bind(this);
+    this.DisLikePost = this.DisLikePost.bind(this);
+    this.DownVoteCall = this.DownVoteCall.bind(this);
+    this.UnDownVoteCall = this.UnDownVoteCall.bind(this);
   }
 
   componentDidMount() {
+    if (this.props.postDetails && this.props.Auth.user) {
+      this.setState({
+        ...this.state,
+        description: this.props.postDetails.description,
+        image: this.props.postDetails.image,
+      });
+    }
+    let isLiked = this.props.Auth.user.Likes.indexOf(
+      this.props.postDetails._id
+    );
+    if (isLiked !== -1) {
+      this.setState({
+        ...this.state,
+        buttons: (
+          <div
+            className='row'
+            style={{ width: '100%', margin: 'auto', paddingLeft: '1.25rem' }}
+          >
+            <Nav>
+              <Nav.Link
+                onClick={this.DisLikePost}
+                style={{ color: 'red', paddingLeft: '0' }}
+              >
+                <i className='fas fa-arrow-circle-up'></i>{' '}
+                {this.props.postDetails.Likes.length}
+              </Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link style={{ color: 'black' }} onClick={this.DownVoteCall}>
+                <i className='fas fa-arrow-circle-down'></i>
+              </Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link style={{ color: 'black' }} onClick={this.toggleShow}>
+                <i className='far fa-comment'></i>
+              </Nav.Link>
+            </Nav>
+          </div>
+        ),
+      });
+    }
+
+    let isDisLiked = this.props.Auth.user.Dislikes.indexOf(
+      this.props.postDetails._id
+    );
+    if (isDisLiked !== -1) {
+      this.setState({
+        ...this.state,
+        buttons: (
+          <div
+            className='row'
+            style={{ width: '100%', margin: 'auto', paddingLeft: '1.25rem' }}
+          >
+            <Nav>
+              <Nav.Link
+                onClick={this.LikePost}
+                style={{ color: 'black', paddingLeft: '0' }}
+              >
+                <i className='fas fa-arrow-circle-up'></i>{' '}
+              </Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link style={{ color: 'red' }} onClick={this.UnDownVoteCall}>
+                <i className='fas fa-arrow-circle-down'></i>
+                {this.props.postDetails.Dislikes.length}
+              </Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link style={{ color: 'black' }} onClick={this.toggleShow}>
+                <i className='far fa-comment'></i>
+              </Nav.Link>
+            </Nav>
+          </div>
+        ),
+      });
+    }
+  }
+  componentWillReceiveProps(props) {
+    // console.log(props);
+    let isLiked = props.Auth.user.Likes.indexOf(this.props.postDetails._id);
+    if (isLiked !== -1) {
+      this.setState({
+        ...this.state,
+        buttons: (
+          <div
+            className='row'
+            style={{ width: '100%', margin: 'auto', paddingLeft: '1.25rem' }}
+          >
+            <Nav>
+              <Nav.Link
+                onClick={this.DisLikePost}
+                style={{ color: 'red', paddingLeft: '0' }}
+              >
+                <i className='fas fa-arrow-circle-up'></i>{' '}
+                {props.postDetails.Likes.length}
+              </Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link style={{ color: 'black' }} onClick={this.DownVoteCall}>
+                <i className='fas fa-arrow-circle-down'></i>
+              </Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link style={{ color: 'black' }} onClick={this.toggleShow}>
+                <i className='far fa-comment'></i>
+              </Nav.Link>
+            </Nav>
+          </div>
+        ),
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        buttons: (
+          <div
+            className='row'
+            style={{ width: '100%', margin: 'auto', paddingLeft: '1.25rem' }}
+          >
+            <Nav>
+              <Nav.Link
+                onClick={this.LikePost}
+                style={{ color: 'black', paddingLeft: '0' }}
+              >
+                <i className='fas fa-arrow-circle-up'></i>{' '}
+              </Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link style={{ color: 'black' }} onClick={this.DownVoteCall}>
+                <i className='fas fa-arrow-circle-down'></i>
+              </Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link style={{ color: 'black' }} onClick={this.toggleShow}>
+                <i className='far fa-comment'></i>
+              </Nav.Link>
+            </Nav>
+          </div>
+        ),
+      });
+    }
+    let isDisLiked = props.Auth.user.Dislikes.indexOf(props.postDetails._id);
+    if (isDisLiked !== -1) {
+      this.setState({
+        ...this.state,
+        buttons: (
+          <div
+            className='row'
+            style={{ width: '100%', margin: 'auto', paddingLeft: '1.25rem' }}
+          >
+            <Nav>
+              <Nav.Link
+                onClick={this.LikePost}
+                style={{ color: 'black', paddingLeft: '0' }}
+              >
+                <i className='fas fa-arrow-circle-up'></i>{' '}
+              </Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link style={{ color: 'red' }} onClick={this.UnDownVoteCall}>
+                <i className='fas fa-arrow-circle-down'></i>
+                {props.postDetails.Dislikes.length}
+              </Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link style={{ color: 'black' }} onClick={this.toggleShow}>
+                <i className='far fa-comment'></i>
+              </Nav.Link>
+            </Nav>
+          </div>
+        ),
+      });
+    }
+  }
+
+  LikePost = () => {
+    const body = {
+      Post: this.props.postDetails._id,
+      UserID: this.props.Auth.user._id,
+    };
+    this.props.Like(body);
     this.setState({
       ...this.state,
-      description: this.props.postDetails.description,
-      image: this.props.postDetails.image,
+      buttons: (
+        <div
+          className='row'
+          style={{ width: '100%', margin: 'auto', paddingLeft: '1.25rem' }}
+        >
+          <Nav>
+            <Nav.Link
+              onClick={this.DisLikePost}
+              style={{ color: 'red', paddingLeft: '0' }}
+            >
+              <i className='fas fa-arrow-circle-up'></i>
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link style={{ color: 'black' }} onClick={this.DownVoteCall}>
+              <i className='fas fa-arrow-circle-down'></i>
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link style={{ color: 'black' }} onClick={this.toggleShow}>
+              <i className='far fa-comment'></i>
+            </Nav.Link>
+          </Nav>
+        </div>
+      ),
+    });
+  };
+  DisLikePost = () => {
+    const body = {
+      Post: this.props.postDetails._id,
+      UserID: this.props.Auth.user._id,
+    };
+    this.props.UnLike(body);
+    this.setState({
+      ...this.state,
+      buttons: (
+        <div
+          className='row'
+          style={{ width: '100%', margin: 'auto', paddingLeft: '1.25rem' }}
+        >
+          <Nav>
+            <Nav.Link
+              onClick={this.LikePost}
+              style={{ color: 'black', paddingLeft: '0' }}
+            >
+              <i className='fas fa-arrow-circle-up'></i>
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link style={{ color: 'black' }} onClick={this.DownVoteCall}>
+              <i className='fas fa-arrow-circle-down'></i>
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link style={{ color: 'black' }} onClick={this.toggleShow}>
+              <i className='far fa-comment'></i>
+            </Nav.Link>
+          </Nav>
+        </div>
+      ),
+    });
+  };
+
+  DownVoteCall() {
+    console.log(this);
+    const body = {
+      Post: this.props.postDetails._id,
+      UserID: this.props.Auth.user._id,
+    };
+    this.props.DownVote(body);
+    this.setState({
+      ...this.state,
+      buttons: (
+        <div
+          className='row'
+          style={{ width: '100%', margin: 'auto', paddingLeft: '1.25rem' }}
+        >
+          <Nav>
+            <Nav.Link
+              onClick={this.LikePost}
+              style={{ color: 'black', paddingLeft: '0' }}
+            >
+              <i className='fas fa-arrow-circle-up'></i>
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link style={{ color: 'red' }} onClick={this.UnDownVoteCall}>
+              <i className='fas fa-arrow-circle-down'></i>
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link style={{ color: 'black' }} onClick={this.toggleShow}>
+              <i className='far fa-comment'></i>
+            </Nav.Link>
+          </Nav>
+        </div>
+      ),
+    });
+  }
+  UnDownVoteCall() {
+    const body = {
+      Post: this.props.postDetails._id,
+      UserID: this.props.Auth.user._id,
+    };
+    this.props.UnDownVote(body);
+    this.setState({
+      ...this.state,
+      buttons: (
+        <div
+          className='row'
+          style={{ width: '100%', margin: 'auto', paddingLeft: '1.25rem' }}
+        >
+          <Nav>
+            <Nav.Link
+              onClick={this.LikePost}
+              style={{ color: 'black', paddingLeft: '0' }}
+            >
+              <i className='fas fa-arrow-circle-up'></i>
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link style={{ color: 'black' }} onClick={this.DownVoteCall}>
+              <i className='fas fa-arrow-circle-down'></i>
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link style={{ color: 'black' }} onClick={this.toggleShow}>
+              <i className='far fa-comment'></i>
+            </Nav.Link>
+          </Nav>
+        </div>
+      ),
     });
   }
   onChange = (e) => {
@@ -125,23 +485,25 @@ class Posts extends Component {
     if (this.props.postDetails.comments.length === 0)
       var coments = <p style={{ paddingLeft: '5%' }}>No comments..</p>;
     else {
-      coments = this.props.postDetails.comments.map((each) => {
-        // console.log(this);
-        var eachcomment = this.props.Comments.Comments.find(function (
-          post,
-          index
-        ) {
-          if (post._id === each) return post;
-          else {
+      if (this.props.postDetails && this.props.Comments.Comments) {
+        coments = this.props.postDetails.comments.map((each) => {
+          // console.log(this);
+          var eachcomment = this.props.Comments.Comments.find(function (
+            post,
+            index
+          ) {
+            if (post._id === each) return post;
+            else {
+              return null;
+            }
+          });
+          if (eachcomment) {
+            return <Comment key={eachcomment._id} eachcomment={eachcomment} />;
+          } else {
             return null;
           }
         });
-        if (eachcomment) {
-          return <Comment key={eachcomment._id} eachcomment={eachcomment} />;
-        } else {
-          return null;
-        }
-      });
+      }
     }
     if (this.state.show === true) {
       return (
@@ -298,28 +660,7 @@ class Posts extends Component {
               <Image src={this.props.postDetails.image} fluid />
             </Card.Body>
             <Card.Footer style={{ padding: '0' }}>
-              <Navbar
-                style={{
-                  padding: '0',
-                  backgroundColor: '#F5F5F6',
-                }}
-              >
-                <Nav className='m-auto'>
-                  <Nav.Link>
-                    <i className='fas fa-arrow-circle-up'></i>
-                  </Nav.Link>
-                </Nav>
-                <Nav className='m-auto'>
-                  <Nav.Link>
-                    <i className='fas fa-arrow-circle-down'></i>
-                  </Nav.Link>
-                </Nav>
-                <Nav className='m-auto'>
-                  <Nav.Link onClick={this.toggleShow}>
-                    <i className='far fa-comment'></i>
-                  </Nav.Link>
-                </Nav>
-              </Navbar>
+              {this.state.buttons}
             </Card.Footer>
 
             {this.ShowComment()}
@@ -401,23 +742,7 @@ class Posts extends Component {
                 </p>
               </Card.Body>
               <Card.Footer style={{ padding: '0' }}>
-                <Navbar style={{ backgroundColor: '#F5F5F6' }}>
-                  <Nav className='m-auto'>
-                    <Nav.Link>
-                      <i className='fas fa-arrow-circle-up'></i>upvotes
-                    </Nav.Link>
-                  </Nav>
-                  <Nav className='m-auto'>
-                    <Nav.Link>
-                      <i className='fas fa-arrow-circle-down'></i>downvotes
-                    </Nav.Link>
-                  </Nav>
-                  <Nav className='m-auto'>
-                    <Nav.Link onClick={this.toggleShow}>
-                      <i className='far fa-comment'>Comments</i>
-                    </Nav.Link>
-                  </Nav>
-                </Navbar>
+                {this.state.buttons}
               </Card.Footer>
               {this.ShowComment()}
             </Card>

@@ -234,7 +234,7 @@ export const setAlert = (message, AlertType) => (dispatch) => {
       type: Action_Types.RESET_ALERT,
       payload: [],
     });
-  }, 3000);
+  }, 2000);
 };
 
 //==================================================================================
@@ -392,6 +392,100 @@ export const deletePost = (body) => async (dispatch) => {
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
     dispatch(setAlert('Post Deleted', 'success'));
+  } catch (error) {
+    dispatch(setAlert('Server Error, Plz try again', 'danger'));
+  }
+};
+
+//Like A post
+export const Like = (body) => async (dispatch) => {
+  try {
+    const { Post, UserID } = body;
+    const Body = JSON.stringify({ Post, UserID });
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    let res = await axios.put(
+      'http://localhost:5000/api/Posts/Like',
+      Body,
+      config
+    );
+    dispatch(LoadUser());
+    dispatch(LoadAllUsers());
+    console.log(res);
+  } catch (error) {
+    dispatch(setAlert('Server Error, Plz try again', 'danger'));
+  }
+};
+
+//Unlike A post
+export const UnLike = (body) => async (dispatch) => {
+  try {
+    const { Post, UserID } = body;
+    const Body = JSON.stringify({ Post, UserID });
+    console.log(Body);
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    let res = await axios.put(
+      'http://localhost:5000/api/Posts/UnLike',
+      Body,
+      config
+    );
+    dispatch(LoadUser());
+    dispatch(LoadAllUsers());
+    console.log(res);
+  } catch (error) {
+    dispatch(setAlert('Server Error, Plz try again', 'danger'));
+  }
+};
+
+//DownVote A post
+export const DownVote = (body) => async (dispatch) => {
+  try {
+    const { Post, UserID } = body;
+    const Body = JSON.stringify({ Post, UserID });
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    let res = await axios.put(
+      'http://localhost:5000/api/Posts/DownVote',
+      Body,
+      config
+    );
+    dispatch(LoadUser());
+    dispatch(LoadAllUsers());
+    console.log(res);
+  } catch (error) {
+    dispatch(setAlert('Server Error, Plz try again', 'danger'));
+  }
+};
+
+//UnDownVote A post
+export const UnDownVote = (body) => async (dispatch) => {
+  try {
+    const { Post, UserID } = body;
+    const Body = JSON.stringify({ Post, UserID });
+    console.log(Body);
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    let res = await axios.put(
+      'http://localhost:5000/api/Posts/UnDisLike',
+      Body,
+      config
+    );
+    dispatch(LoadUser());
+    dispatch(LoadAllUsers());
+    console.log(res);
   } catch (error) {
     dispatch(setAlert('Server Error, Plz try again', 'danger'));
   }

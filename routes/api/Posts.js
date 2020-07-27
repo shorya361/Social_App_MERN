@@ -84,4 +84,80 @@ router.put('/deletePost', async (req, res) => {
   }
 });
 
+//Upvote a Post
+router.put('/Like', async (req, res) => {
+  try {
+    const { Post, UserID } = req.body;
+    let post = await Posts.findById(Post);
+    let user = await User.findById(UserID);
+    post.Likes.push(UserID);
+    user.Likes.push(Post);
+    let dislike = post.Dislikes.indexOf(UserID);
+    if (dislike !== -1) {
+      post.Dislikes.splice(dislike, 1);
+      user.Dislikes.splice(user.Dislikes.indexOf(Post), 1);
+    }
+    await user.save();
+    await post.save();
+    res.json({ user, post });
+  } catch (error) {
+    console.log('error in upvoting the art :' + error.message);
+  }
+});
+
+//Disable Upvote a Post
+router.put('/UnLike', async (req, res) => {
+  try {
+    const { Post, UserID } = req.body;
+    let post = await Posts.findById(Post);
+    let user = await User.findById(UserID);
+    post.Likes.splice(post.Likes.indexOf(UserID), 1);
+    user.Likes.splice(user.Likes.indexOf(Post), 1);
+
+    await user.save();
+    await post.save();
+    res.json({ user, post });
+  } catch (error) {
+    console.log('error in upvoting the art :' + error.message);
+  }
+});
+
+//Downvote A Post
+router.put('/DownVote', async (req, res) => {
+  try {
+    const { Post, UserID } = req.body;
+    let post = await Posts.findById(Post);
+    let user = await User.findById(UserID);
+    post.Dislikes.push(UserID);
+    user.Dislikes.push(Post);
+    let like = post.Likes.indexOf(UserID);
+    if (like !== -1) {
+      post.Likes.splice(like, 1);
+      user.Likes.splice(user.Likes.indexOf(Post), 1);
+    }
+    await user.save();
+    await post.save();
+    res.json({ user, post });
+  } catch (error) {
+    console.log('error in downvoting the art :' + error.message);
+  }
+});
+
+//Disable Upvote a Post
+router.put('/UnDisLike', async (req, res) => {
+  try {
+    const { Post, UserID } = req.body;
+    let post = await Posts.findById(Post);
+    let user = await User.findById(UserID);
+    post.Dislikes.splice(post.Dislikes.indexOf(UserID), 1);
+    user.Dislikes.splice(user.Dislikes.indexOf(Post), 1);
+
+    await user.save();
+    await post.save();
+    res.json({ user, post });
+  } catch (error) {
+    console.log('error in upvoting the art :' + error.message);
+  }
+});
+
 module.exports = router;
