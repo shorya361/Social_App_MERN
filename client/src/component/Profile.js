@@ -94,35 +94,43 @@ class Profile extends Component {
   StatusButton() {
     if (this.props.Auth.user.activated) {
       return (
-        <Button
+        <button
+          className='btn'
           className='m-0 p-0'
           variant='danger'
           style={{
+            color: 'white',
+            backgroundColor: '#248bc7',
             marginTop: '10px',
             width: '100%',
             height: '40px',
+            border: '0',
             borderRadius: '20px',
           }}
           onClick={this.toggleDeactivate}
         >
           DeActivate Account
-        </Button>
+        </button>
       );
     } else {
       return (
-        <Button
+        <button
+          className='btn'
           className='m-0 p-0'
           variant='success'
           style={{
+            color: 'white',
+            backgroundColor: '#248bc7',
             marginTop: '10px',
             width: '100%',
             height: '40px',
+            border: '0',
             borderRadius: '20px',
           }}
           onClick={this.toggleDeactivate}
         >
           Activate Account
-        </Button>
+        </button>
       );
     }
   }
@@ -144,18 +152,22 @@ class Profile extends Component {
                 {this.props.Auth.user.description}
               </p>
               <div className='row' style={{ width: '100%' }}>
-                <Button
+                <button
+                  className='btn'
                   className='m-0 p-0'
                   style={{
-                    backgroundColor: 'grey',
+                    color: 'white',
+                    backgroundColor: '#248bc7',
+
                     width: '100%',
                     height: '40px',
+                    border: '0',
                     borderRadius: '20px',
                   }}
                   onClick={this.redirect}
                 >
                   Edit Profile
-                </Button>
+                </button>
               </div>
               <div className='row' style={{ width: '100%', marginTop: '5px' }}>
                 {this.StatusButton()}
@@ -219,12 +231,32 @@ class Profile extends Component {
             friends' posts. And neither they can see yours.
           </ModalHeader>
           <ModalBody>
-            <Button variant='danger' onClick={this.onDeacivateSubmit}>
+            <button
+              className='btn'
+              style={{
+                color: 'white',
+                backgroundColor: '#248bc7',
+                border: '0',
+                borderRadius: '20px',
+              }}
+              variant='danger'
+              onClick={this.onDeacivateSubmit}
+            >
               YES
-            </Button>
-            <Button variant='success' onClick={this.toggleDeactivate}>
+            </button>
+            <button
+              className='btn'
+              style={{
+                color: 'white',
+                backgroundColor: '#248bc7',
+                border: '0',
+                borderRadius: '20px',
+              }}
+              variant='success'
+              onClick={this.toggleDeactivate}
+            >
               NO
-            </Button>
+            </button>
           </ModalBody>
         </Modal>
       );
@@ -240,12 +272,32 @@ class Profile extends Component {
             Activate Account
           </ModalHeader>
           <ModalBody>
-            <Button variant='success' onClick={this.onDeacivateSubmit}>
+            <button
+              className='btn'
+              style={{
+                color: 'white',
+                backgroundColor: '#248bc7',
+                border: '0',
+                borderRadius: '20px',
+              }}
+              variant='success'
+              onClick={this.onDeacivateSubmit}
+            >
               YES
-            </Button>
-            <Button variant='danger' onClick={this.toggleDeactivate}>
+            </button>
+            <button
+              className='btn'
+              style={{
+                color: 'white',
+                backgroundColor: '#248bc7',
+                border: '0',
+                borderRadius: '20px',
+              }}
+              variant='danger'
+              onClick={this.toggleDeactivate}
+            >
               NO
-            </Button>
+            </button>
           </ModalBody>
         </Modal>
       );
@@ -298,12 +350,19 @@ class Profile extends Component {
                   value={this.state.city}
                   onChange={this.onChange}
                 />
-                <Button variant='outline-success' type='submit'>
+                <button
+                  className='btn'
+                  style={{
+                    color: 'white',
+                    backgroundColor: '#248bc7',
+                    border: '0',
+                    borderRadius: '20px',
+                  }}
+                  variant='outline-success'
+                  type='submit'
+                >
                   Update
-                </Button>
-                <Button onClick={this.redirect} variant='outline-danger'>
-                  CANCEL
-                </Button>
+                </button>
               </Form>
             </ModalBody>
           </Modal>
@@ -344,18 +403,22 @@ class Profile extends Component {
                 <i className='fas fa-map-marker-alt'></i>{' '}
                 {this.props.Auth.user.city}
                 <div className='row' style={{ width: '90%', marginLeft: '5%' }}>
-                  <Button
+                  <button
+                    className='btn'
                     className='m-0 p-0'
                     style={{
-                      backgroundColor: 'grey',
+                      color: 'white',
+                      backgroundColor: '#248bc7',
                       width: '100%',
                       height: '40px',
+                      border: '0',
+                      border: '0',
                       borderRadius: '20px',
                     }}
                     onClick={this.redirect}
                   >
                     Edit Profile
-                  </Button>
+                  </button>
                 </div>
                 <div
                   className='row'

@@ -31,13 +31,20 @@ class FindFriends extends Component {
                     <Card.Title>{each.name}</Card.Title>
                     <Card.Text>{each.description}</Card.Text>
                   </Card.Body>
-                  <Button
-                    variant='info'
+                  <button
+                    className='btn'
+                    style={{
+                      height: '40px',
+                      border: '0',
+                      borderRadius: '20px',
+
+                      color: 'white',
+                      backgroundColor: '#248bc7',
+                    }}
                     href={`/Userprofile/${each._id}`}
-                    style={{ height: '40px', borderRadius: '24px' }}
                   >
                     View Profile
-                  </Button>
+                  </button>
                 </Card>
               </div>
             );

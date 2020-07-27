@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
 import Profile from './component/Profile';
 import Landing from './component/Landing';
@@ -14,6 +14,7 @@ import NewPost from './component/NewPost';
 import FindFriends from './component/FIndFriends';
 import ProfileID from './component/ProfileID';
 const store = ConfigureStore();
+
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 

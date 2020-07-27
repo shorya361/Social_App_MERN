@@ -436,7 +436,7 @@ class Posts extends Component {
       ...this.state,
       DeletePost: !this.state.DeletePost,
     });
-    console.log(this);
+    // console.log(this);
   }
   toggleUpdatePost() {
     this.setState({
@@ -507,11 +507,9 @@ class Posts extends Component {
     }
     if (this.state.show === true) {
       return (
-        <div style={{ paddingTop: '4px' }}>
+        <div style={{ paddingTop: '4px', backgroundColor: '#f5f5f6' }}>
           <div
             style={{
-              backgroundColor: '# 6c757d',
-              color: '#212E36',
               borderRadius: '8px',
             }}
           >
@@ -529,9 +527,20 @@ class Posts extends Component {
                 value={this.state.newcomment}
                 onChange={this.onChange}
               />
-              <Button variant='outline-success' type='submit' size='sm'>
+              <button
+                className='btn'
+                style={{
+                  color: 'white',
+                  backgroundColor: '#248bc7',
+                  border: '0',
+                  borderRadius: '20px',
+                }}
+                variant='outline-success'
+                type='submit'
+                size='sm'
+              >
                 Submit
-              </Button>
+              </button>
             </Form>
           </div>
         </div>
@@ -547,7 +556,10 @@ class Posts extends Component {
     ) {
       option = (
         <Nav style={{ padding: '0' }}>
-          <NavDropdown title='options' style={{ paddingLeft: 'auto' }}>
+          <NavDropdown
+            title='options'
+            style={{ paddingLeft: 'auto', color: '#0066cc' }}
+          >
             <NavDropdown.Item onClick={this.toggleUpdatePost}>
               <i className='far fa-edit'></i>Update
             </NavDropdown.Item>
@@ -572,12 +584,32 @@ class Posts extends Component {
             Are You Sure , you want to delete this post ?
           </ModalHeader>
           <ModalBody>
-            <Button variant='outline-danger' onClick={this.onDeletePost}>
+            <button
+              className='btn'
+              style={{
+                color: 'white',
+                backgroundColor: '#248bc7',
+                border: '0',
+                borderRadius: '20px',
+              }}
+              variant='outline-danger'
+              onClick={this.onDeletePost}
+            >
               YES
-            </Button>
-            <Button variant='outline-success' onClick={this.toggleDeletePost}>
+            </button>
+            <button
+              className='btn'
+              style={{
+                color: 'white',
+                backgroundColor: '#248bc7',
+                border: '0',
+                borderRadius: '20px',
+              }}
+              variant='outline-success'
+              onClick={this.toggleDeletePost}
+            >
               NO
-            </Button>
+            </button>
           </ModalBody>
         </Modal>
 
@@ -610,16 +642,20 @@ class Posts extends Component {
                 value={this.state.image}
                 onChange={this.onChange}
               />
-              <Button
+              <button
+                className='btn'
+                style={{
+                  color: 'white',
+                  backgroundColor: '#248bc7',
+                  border: '0',
+                  borderRadius: '20px',
+                }}
                 variant='outline-success'
                 type='submit'
                 onClick={this.toggleUpdatePost}
               >
                 Update
-              </Button>
-              <Button variant='outline-danger' onClick={this.toggleUpdatePost}>
-                CANCEL
-              </Button>
+              </button>
             </Form>
           </ModalBody>
         </Modal>

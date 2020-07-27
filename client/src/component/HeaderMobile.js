@@ -63,17 +63,17 @@ class HeaderMobile extends Component {
           zIndex: '1',
         }}
       >
-        <Navbar bg='dark' variant='dark' fixed='top'>
+        <Navbar fixed='top' style={{ backgroundColor: '#248bc7' }}>
           <Navbar.Brand href='/'>
             <img
-              src='https://lh3.googleusercontent.com/pw/ACtC-3dbz8yAfqdhnKiCqUsVJ6PaKVJtfcCftixF-BvEWgOyZpFJfBN36WJ_cN1god3MmpYVPMX3St4vgVKJIw9n-seTMhuFZuwCULd796bfQhB6vmKH3zj1zKElOUJT5vngjBc9fdSiDdICrcFpuuNMQbi-=w781-h672-no?authuser=0'
+              src='https://lh3.googleusercontent.com/pw/ACtC-3dlxShfWFc9Kn8BGyGTNZcWzLkfr87DiDB9QG85Unn10PwI-Vug3n5h6Iupu8JyHfrXR-7C9-BfPAWsdNOGtn8gyNyszFlU49_KHFrgYBlsqB55ZLHjdYNG_jNeSRmoB75bE6ulXHDfEzCG85UyUYLa=w932-h624-no?authuser=0'
               height='35'
-              width='41'
+              width='55'
               alt='Art-App'
             />
           </Navbar.Brand>
           <Nav className='ml-auto'>
-            <Nav.Link href='/' onClick={this.props.Logout}>
+            <Nav.Link href='/' onClick={this.props.Logout} active>
               Logout
             </Nav.Link>
           </Nav>

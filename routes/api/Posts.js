@@ -33,7 +33,7 @@ router.post('/addPost', async (req, res) => {
       },
     });
     await newPost.save();
-    await user.Posts.push(newPost.id);
+    await user.Posts.unshift(newPost.id);
     await user.save();
     res.json({ newPost, user });
   } catch (error) {

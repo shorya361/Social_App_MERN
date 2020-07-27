@@ -13,30 +13,30 @@ class FooterMobile extends Component {
           zIndex: '1',
         }}
       >
-        <Navbar variant='dark' bg='dark' fixed='bottom'>
+        <Navbar style={{ backgroundColor: '#248bc7' }} fixed='bottom'>
           <Nav className='m-auto'>
-            <Nav.Link href='/Home'>
+            <Nav.Link href='/Home' active>
               <span>
                 <i className='fas fa-home'></i>
               </span>
             </Nav.Link>
           </Nav>
           <Nav className='m-auto'>
-            <Nav.Link href='/findFriends'>
+            <Nav.Link href='/findFriends' active>
               <span>
                 <i className='fas fa-search'></i>
               </span>
             </Nav.Link>
           </Nav>
           <Nav className='m-auto'>
-            <Nav.Link href='/newPost'>
+            <Nav.Link href='/newPost' active>
               <span>
                 <i className='fas fa-plus-circle'></i>
               </span>
             </Nav.Link>
           </Nav>
           <Nav className='m-auto'>
-            <Nav.Link href='/profile'>
+            <Nav.Link href='/profile' active>
               <span>
                 <i className='far fa-user'></i>
               </span>

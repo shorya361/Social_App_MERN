@@ -32,17 +32,20 @@ class Home extends Component {
                 <i className='fas fa-info-circle'></i>{' '}
                 {this.props.Auth.user.description}
               </p>
-              <Button
-                className='m-0 p-0'
-                variant='outline-success'
-                style={{
-                  width: '100%',
-                  height: '25px',
-                }}
+              <button
                 href='/profile'
+                className='btn'
+                style={{
+                  color: 'white',
+                  backgroundColor: '#248bc7',
+                  border: '0',
+                  borderRadius: '20px',
+                }}
+                variant='outline-success'
+                type='submit'
               >
                 View Profile
-              </Button>
+              </button>
             </Card.Body>
             <Card.Footer>
               <i className='fas fa-map-marker-alt'></i>{' '}

@@ -39,18 +39,21 @@ class ProfileID extends Component {
     this.setState({
       ...this.state,
       button: (
-        <Button
+        <button
+          className='btn'
           className='m-0 p-0'
           style={{
-            backgroundColor: 'grey',
+            color: 'white',
+            backgroundColor: '#248bc7',
             width: '100%',
             height: '40px',
+            border: '0',
             borderRadius: '20px',
           }}
           onClick={this.onSubmit}
         >
           Follow
-        </Button>
+        </button>
       ),
     });
     this.props.UnFollowRequest(body);
@@ -65,18 +68,22 @@ class ProfileID extends Component {
     this.setState({
       ...this.state,
       button: (
-        <Button
+        <button
+          className='btn'
           className='m-0 p-0'
           variant='danger'
           style={{
+            color: 'white',
+            backgroundColor: '#248bc7',
             width: '100%',
             height: '40px',
+            border: '0',
             borderRadius: '20px',
           }}
           onClick={this.onSubmitUnfollow}
         >
           UnFollow
-        </Button>
+        </button>
       ),
     });
     this.props.FollowRequest(body);
@@ -91,18 +98,22 @@ class ProfileID extends Component {
             ...this.state,
             user: eachUser,
             button: (
-              <Button
+              <button
+                className='btn'
                 className='m-0 p-0'
                 style={{
-                  backgroundColor: 'grey',
+                  color: 'white',
+                  backgroundColor: '#248bc7',
+
                   width: '100%',
                   height: '40px',
+                  border: '0',
                   borderRadius: '20px',
                 }}
                 onClick={this.onSubmit}
               >
                 Follow
-              </Button>
+              </button>
             ),
           });
           // console.log(nextProps);
@@ -116,18 +127,22 @@ class ProfileID extends Component {
                   user: eachUser,
 
                   button: (
-                    <Button
+                    <button
+                      className='btn'
                       className='m-0 p-0'
                       variant='danger'
                       style={{
+                        color: 'white',
+                        backgroundColor: '#248bc7',
                         width: '100%',
                         height: '40px',
+                        border: '0',
                         borderRadius: '20px',
                       }}
                       onClick={this.onSubmitUnfollow}
                     >
                       UnFollow
-                    </Button>
+                    </button>
                   ),
                 });
               }

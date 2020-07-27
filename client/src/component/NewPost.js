@@ -59,37 +59,49 @@ class NewPost extends Component {
       <div style={{ marginTop: '150px' }}>
         <div className='d-xl-none' style={{ height: '100%' }}>
           <HeaderMobile />
-          <div className='container' style={{ border: '1px solid black' }}>
+          <div className='container'>
             <h1>New Post</h1>
             <Form onSubmit={this.onSubmit}>
-              <Label>Caption</Label>
-              <FormControl
-                type='text'
-                className='mr-sm-1'
-                id='description'
-                onChange={this.onChange}
-                value={this.state.description}
-              />
-
-              <Label>Image</Label>
-              <FormControl
-                type='text'
-                className='mr-sm-1'
-                id='image'
-                onChange={this.onChange}
-                value={this.state.image}
-              />
-              <Button variant='outline-success' type='submit'>
+              <Form.Row style={{ marginBottom: '3%' }}>
+                <Label>Caption</Label>
+                <FormControl
+                  type='text'
+                  className='mr-sm-1'
+                  id='description'
+                  onChange={this.onChange}
+                  value={this.state.description}
+                />
+              </Form.Row>
+              <Form.Row style={{ marginBottom: '3%' }}>
+                <Label>Image</Label>
+                <FormControl
+                  type='text'
+                  className='mr-sm-1'
+                  id='image'
+                  onChange={this.onChange}
+                  value={this.state.image}
+                />
+              </Form.Row>
+              <button
+                className='btn'
+                style={{
+                  color: 'white',
+                  backgroundColor: '#248bc7',
+                  border: '0',
+                  borderRadius: '20px',
+                }}
+                variant='outline-success'
+                type='submit'
+              >
                 Post
-              </Button>
-              <Button variant='outline-danger'>CANCEL</Button>
+              </button>
             </Form>
           </div>
           <FooterMobile />
         </div>
         <div className='d-none d-xl-block '>
           <Header />
-          <div className='container' style={{ border: '1px solid black' }}>
+          <div className='container'>
             <h1>New Post</h1>
             <Form onSubmit={this.onSubmit}>
               <Label>Caption</Label>
@@ -109,10 +121,19 @@ class NewPost extends Component {
                 onChange={this.onChange}
                 value={this.state.Image}
               />
-              <Button variant='outline-success' type='submit'>
+              <button
+                className='btn'
+                style={{
+                  color: 'white',
+                  backgroundColor: '#248bc7',
+                  border: '0',
+                  borderRadius: '20px',
+                }}
+                variant='outline-success'
+                type='submit'
+              >
                 Post
-              </Button>
-              <Button variant='outline-danger'>CANCEL</Button>
+              </button>
             </Form>
           </div>
         </div>

@@ -138,12 +138,32 @@ class Comment extends Component {
                 Are You Sure , you want to delete this Comment ?
               </ModalHeader>
               <ModalBody>
-                <Button variant='outline-danger' onClick={this.onDeleteSubmit}>
+                <button
+                  className='btn'
+                  style={{
+                    color: 'white',
+                    backgroundColor: '#248bc7',
+                    border: '0',
+                    borderRadius: '20px',
+                  }}
+                  variant='outline-danger'
+                  onClick={this.onDeleteSubmit}
+                >
                   YES
-                </Button>
-                <Button variant='outline-success' onClick={this.toggleDelete}>
+                </button>
+                <button
+                  className='btn'
+                  style={{
+                    color: 'white',
+                    backgroundColor: '#248bc7',
+                    border: '0',
+                    borderRadius: '20px',
+                  }}
+                  variant='outline-success'
+                  onClick={this.toggleDelete}
+                >
                   NO
-                </Button>
+                </button>
               </ModalBody>
             </Modal>
             <Modal
@@ -165,15 +185,19 @@ class Comment extends Component {
                     value={this.state.text}
                     onChange={this.onChange}
                   />
-                  <Button variant='outline-success' type='submit'>
-                    Update
-                  </Button>
-                  <Button
-                    onClick={this.toggleUpdateComment}
-                    variant='outline-danger'
+                  <button
+                    className='btn'
+                    style={{
+                      color: 'white',
+                      backgroundColor: '#248bc7',
+                      border: '0',
+                      borderRadius: '20px',
+                    }}
+                    variant='outline-success'
+                    type='submit'
                   >
-                    CANCEL
-                  </Button>
+                    Update
+                  </button>
                 </Form>
               </ModalBody>
             </Modal>
