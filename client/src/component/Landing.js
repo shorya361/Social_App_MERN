@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
 import Registration from './Registration';
 import LoginComponent from './LoginComponent';
-import { Form, Col } from 'react-bootstrap';
+import { Form, Col, Image } from 'react-bootstrap';
 import Alert from './Alert';
 import { Navbar, Nav, Carousel } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -39,27 +39,62 @@ class Landing extends Component {
   ShowForm() {
     if (this.state.Form === true)
       return (
-        <div>
+        <div className='container'>
           <LoginComponent />
           <p
             style={{ color: '#0066cc', textAlign: 'right' }}
             onClick={this.Register}
           >
             {' '}
-            Create Account.
-          </p>
+            <a href='#'>Create Account.</a>
+          </p>{' '}
+          <div
+            className='row'
+            style={{ textAlign: 'center', justifyContent: 'center' }}
+          >
+            <div
+              className='row w-100'
+              style={{ textAlign: 'center', justifyContent: 'center' }}
+            >
+              <p>Follow me</p>
+            </div>
+            <div
+              className='row w-100'
+              style={{ textAlign: 'center', justifyContent: 'center' }}
+            >
+              {' '}
+              <a
+                className='btn btn-social-icon btn-github'
+                href='https://github.com/shorya361'
+              >
+                <i className='fa fa-github'></i>
+              </a>
+              <a
+                className='btn btn-social-icon btn-linkedin'
+                href='https://www.linkedin.com/in/shorya-upadhayay-b5827b188/'
+              >
+                <i className='fa fa-linkedin'></i>
+              </a>
+              <a
+                className='btn btn-social-icon btn-instagram'
+                href='https://www.instagram.com/punk_gts_434/?hl=en'
+              >
+                <i className='fa fa-instagram'></i>
+              </a>
+            </div>
+          </div>
         </div>
       );
     else
       return (
-        <div>
+        <div className='container'>
           <Registration />
           <p
             style={{ color: '#0066cc', textAlign: 'right' }}
             onClick={this.Register}
           >
             {' '}
-            Login
+            <a href='#'>Login</a>
           </p>
         </div>
       );
@@ -142,104 +177,52 @@ class Landing extends Component {
       return <Redirect to='/Home' />;
     }
     return (
-      <div className='full-width'>
-        <div className='d-xl-none' style={{ height: '100%' }}>
-          <div style={{ height: '130px', zIndex: '1' }}>{this.AA('0')}</div>
+      <div className='full-width' style={{ height: '100%' }}>
+        <div
+          className='d-xl-none'
+          style={{ height: '100%', backgroundColor: '#f5f5f6' }}
+        >
+          <Navbar style={{ backgroundColor: '#248bc7' }} />
+          <div style={{ height: '100px', zIndex: '1' }}>{this.AA('100%')}</div>
           <div className='container'>{this.ShowForm()}</div>
         </div>
-        <div className='d-none d-xl-block '>
-          <Navbar>
-            <div className='container'>
-              <Navbar.Brand>
-                <h3>
-                  <strong>
-                    <img
-                      src='https://lh3.googleusercontent.com/pw/ACtC-3dbz8yAfqdhnKiCqUsVJ6PaKVJtfcCftixF-BvEWgOyZpFJfBN36WJ_cN1god3MmpYVPMX3St4vgVKJIw9n-seTMhuFZuwCULd796bfQhB6vmKH3zj1zKElOUJT5vngjBc9fdSiDdICrcFpuuNMQbi-=w781-h672-no?authuser=0'
-                      height='35'
-                      width='41'
-                      alt='Art-App'
-                    />{' '}
-                    Art-App
-                  </strong>
-                </h3>
-              </Navbar.Brand>
-              <Nav className='justify-content-end'>
-                <Form onSubmit={this.onSubmit}>
-                  <Form.Row>
-                    <Col>
-                      <Form.Control
-                        placeholder='Email'
-                        required
-                        id='email'
-                        value={this.state.email}
-                        onChange={this.onChange}
-                      />
-                    </Col>
-                    <Col>
-                      <Form.Control
-                        type='password'
-                        placeholder='Password'
-                        required
-                        id='password'
-                        value={this.state.password}
-                        onChange={this.onChange}
-                      />
-                    </Col>
-                    <Col>
-                      <button
-                        className='btn-xm'
-                        style={{
-                          backgroundColor: '#248bc7',
-                          color: 'white',
-                          border: '0',
-                          borderRadius: '20px',
-                        }}
-                        type='submit'
-                      >
-                        Login
-                      </button>
-                    </Col>
-                  </Form.Row>
-                </Form>
-              </Nav>
-            </div>
-          </Navbar>
-          <div className='row w-100'>
-            <div
-              style={{ height: '130px', justifyContent: 'center' }}
-              className='col-12'
-            >
-              {' '}
-              {this.AA('42%')}
-            </div>
 
-            <div className='col-6 ' style={{ marginLeft: '5%' }}>
-              <Carousel>
-                <Carousel.Item style={{ height: '100%' }}>
-                  <img
-                    className='d-block h-100 w-100'
-                    src='https://images2.minutemediacdn.com/image/upload/c_crop,h_1914,w_2835,x_0,y_372/v1556647489/shape/mentalfloss/62280-mona_lisa-wiki.jpg?itok=Mo85fMQD'
-                    alt='First slide'
-                  />
-                </Carousel.Item>
-                <Carousel.Item>
-                  <img
-                    className='d-block w-100 h-100'
-                    src='https://pnptc-media.s3.amazonaws.com/images/future-millennial-banking.2e16d0ba.fill-1200x800.jpg'
-                    alt='Third slide'
-                  />
-                </Carousel.Item>
-                <Carousel.Item>
-                  <img
-                    className='d-block w-100 h-100'
-                    src='https://gaadiwaadi.com/wp-content/uploads/2017/02/Customised-Royal-Enfield-Himalayan-9-1200x800.jpg'
-                    alt='Third slide'
-                  />
-                </Carousel.Item>
-              </Carousel>
-            </div>
-            <div className='col-4' style={{ marginLeft: '3%' }}>
-              <Registration />
+        <div
+          className='d-none d-xl-block h-100 '
+          style={{ padding: '5% 7%', backgroundColor: '#93BEDF' }}
+        >
+          <div
+            style={{
+              // borderRadius: '20px',
+              height: '100%',
+              backgroundColor: '#f5f5f6',
+            }}
+          >
+            <div
+              className='row w-100 h-100'
+              style={{
+                alignContent: 'center',
+                justifyContent: 'center',
+                margin: '0',
+              }}
+            >
+              <div className='col-8 h-100 p-0'>
+                <Image
+                  src='https://images.pexels.com/photos/583846/pexels-photo-583846.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+                  style={{ height: '100%', width: '100%' }}
+                />
+              </div>
+              <div className='col-4 h-100 p-0'>
+                <div
+                  className='row'
+                  style={{ height: '170px', paddingLeft: '20%' }}
+                >
+                  {this.AA('73%')}
+                </div>
+                <div className='container' style={{ padding: '0% 8%' }}>
+                  {this.ShowForm()}
+                </div>
+              </div>
             </div>
           </div>
         </div>

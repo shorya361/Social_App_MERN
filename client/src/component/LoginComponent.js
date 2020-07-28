@@ -41,55 +41,52 @@ class LoginComponent extends Component {
   render() {
     return (
       <div>
-        <div className='card'>
-          <div className='card-body'>
-            <Form onSubmit={this.onSubmit}>
-              <div style={{ textAlign: 'center' }}>
-                <Image
-                  src='https://lh3.googleusercontent.com/JnlxHFL3JALhh93JTTl0pqBoAuqc4tZBsAe8s02L-or5wtF8DFEKiSj72f5_rdUNMShPi4NTz13vRHyXElCrBqlrOA80Gw-QWekYyRDCcvQ2lmOq25ZbwTZsu1OzeYYvoPXiXzYJEhbRzGLVzaF8zzXBaRv5-bazBOCQJrvgERu-DQ9T_tAGK7uei3tGSZgZgmhvFePOM79ZSDcVHXgNQpdBWhPNdbzgIyh1YabUDVvtCJoKLgIPU7adkwTrcezAEd77KuGrtA-iEpiBr-QdbZO06Vu5zPFFi0vSGsTc06KwLJ7sLjzfrbrS6vz5f9ALGoux566w1IXDYpDFXBOEMXJtcq8Ywvx0X69MiaFQUkUsLUvm_6tyZoQStHW8XNPAUTkSiLfJZlbzp7NYun6BgIYCMkMEOx-ZAK4mPHBle-shrrKSIrDm6wtH8nxLCXI0XLzWhubBKLS9n3uqDDmdsDla7PK8akH4BgIvZewIe225sQXoIlKBTORhlV4mv7OQiMqkGvv9YTYcHuvx1Off8pk8jJ5S7PFTGcHLVduSlYxCNFbb3vuawmoPpeRs7pjYVnH9a7G5WVZvh8zzMf5tOw9NRiLg4j2JUB9O6NiLUXXGPrvwRFrjDU16s-6NEluOBTPpJfswntvo0FcHqq6P5dryO_jCSf8z_r3xNg8FULTkSb9KY5Uvb6J4wFwF=w958-h645-no?authuser=0'
-                  alt=''
-                  width='100'
-                  height='70'
-                />
-                <h2>Login</h2>
-              </div>
-              <Form.Row style={{ marginBottom: '2%' }}>
-                <Label htmlFor='email'>Email</Label>
-                <Form.Control
-                  required
-                  id='email'
-                  value={this.state.email}
-                  onChange={this.onChange}
-                />
-              </Form.Row>
-              <Form.Row style={{ marginBottom: '2%' }}>
-                <Label htmlFor='password'>Password</Label>
-
-                <Form.Control
-                  type='password'
-                  required
-                  id='password'
-                  value={this.state.password}
-                  onChange={this.onChange}
-                />
-              </Form.Row>
-              <Form.Row style={{ marginBottom: '2%' }}>
-                <button
-                  className='btn'
-                  style={{
-                    color: 'white',
-                    backgroundColor: '#248bc7',
-                    border: '0',
-                    borderRadius: '20px',
-                  }}
-                  type='submit'
-                >
-                  Login
-                </button>
-              </Form.Row>
-            </Form>
+        <Form onSubmit={this.onSubmit}>
+          <div style={{ textAlign: 'center' }}>
+            <Image
+              src='https://lh3.googleusercontent.com/oGbtZslNXIIOLSZssJpFURphI7xk5GEZTv2bz2k_7xFWHoO8RgKHvBZiLUEhtcghR0TCvvhANCR1uz4EWYLJzMWzNPVkVly4iOFL_AieoDI_YKOoVsw-vqOEHRMto7fzDmzQMN_qDToNu1eebGLePJU7ah08scJ57OqAeaH3ogGacgk9FO-6TTnJZIVZHf8hG-QtZfpx3S1TNfi5sxv8_jBYh5Z2cWgSfXA9N2MgQuRc6BDatpRZP7kHO4gB1lKmtZ0yh9fo1hWeRQhjayORrduIaE0on3nl1yoqfvGJ3cqP2l77f1Ain59Q6nv7PUjrxPqqDsFe5TRxxmkrr2iSSjTMETLoqtJj_afvZ7YC-0_YqTM-oUAzrR02NHAXRpoeWJcpwpcvSu-Z4gFCUCE8Yy_LYMFT6XQOwyJQsAZWunfx8BmvQHfzMCUQ0fah9diFKAXGwPZx8uoEzhrHyRvFjNePfM-5NPT0v5whnmOfatfIcd7rJOz8_bMD3WuRzlZSh7dFMeS2kaZJ3uoyMu4-qwFfTu6m0g_9TeGbTIvjpZXfI5Klz5yeONUPTq4ssqNo6eUJWbJhZV3Sv0OTD04sryn9rvJe05_6ozcD6Z7b4DDXQgU_Bzx59FpeBbU0emIZD9wMQ1_kE8CSW1oX4xCeAZ1CsWRQ4Z1sCkwuUEqmDG5DRSylZv0c3BuHLpZL=w327-h220-no?authuser=0'
+              alt=''
+              width='100'
+              height='70'
+              style={{ marginBottom: '4px' }}
+            />
+            <h2>Login</h2>
           </div>
-        </div>
+          <Form.Row style={{ marginBottom: '2%' }}>
+            <Label htmlFor='email'>Email</Label>
+            <Form.Control
+              required
+              id='email'
+              value={this.state.email}
+              onChange={this.onChange}
+            />
+          </Form.Row>
+          <Form.Row style={{ marginBottom: '2%' }}>
+            <Label htmlFor='password'>Password</Label>
+
+            <Form.Control
+              type='password'
+              required
+              id='password'
+              value={this.state.password}
+              onChange={this.onChange}
+            />
+          </Form.Row>
+          <Form.Row style={{ marginBottom: '2%' }}>
+            <button
+              className='btn'
+              style={{
+                color: 'white',
+                backgroundColor: '#248bc7',
+                border: '0',
+                borderRadius: '20px',
+              }}
+              type='submit'
+            >
+              Login
+            </button>
+          </Form.Row>
+        </Form>
       </div>
     );
   }

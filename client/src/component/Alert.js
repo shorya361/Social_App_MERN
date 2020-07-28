@@ -19,7 +19,14 @@ class Alert extends Component {
     return (
       <Toast
         className={this.props.cls}
-        style={{ marginLeft: this.props.ml, zIndex: '1', marginTop: '55px' }}
+        style={{
+          margin: '0',
+          zIndex: '1',
+          marginTop: '55px',
+          marginRight: '0',
+          width: this.props.ml,
+          maxWidth: '100%',
+        }}
         show={this.state.show}
         onClose={this.toggleShow}
       >
