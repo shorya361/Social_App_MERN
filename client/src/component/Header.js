@@ -57,7 +57,7 @@ class Header extends Component {
   }
   render() {
     return (
-      <div style={{ marginBottom: '50px', zIndex: '1' }} className='fixed-top'>
+      <div style={{ marginBottom: '50px', zIndex: '1' }}>
         <Navbar variant='light' bd='light' expand='md'>
           <Navbar.Brand href='/'>
             <img

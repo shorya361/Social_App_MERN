@@ -310,12 +310,7 @@ class Profile extends Component {
     }
     if (this.props.Auth.user) {
       return (
-        <div
-          style={{
-            // height: '100%', width: '100%',
-            marginTop: '50px',
-          }}
-        >
+        <div style={{ height: '100%' }}>
           <Modal
             isOpen={this.state.editModal}
             toggle={this.redirect}
@@ -431,19 +426,35 @@ class Profile extends Component {
             <div style={{ marginBottom: '70px' }}>{this.showData()}</div>
             <FooterMobile />
           </div>
-          <div className='d-none d-xl-block '>
-            <Header />
-            <div className='row' style={{ width: '100%' }}>
-              <div className='col-2 pl-5 pt-5' style={{ height: '100%' }}>
-                {this.showUser()}
-              </div>
-              <div
-                className='col-8 pt-5'
-                style={{
-                  height: '100%',
-                }}
-              >
-                {this.showData()}
+          <div
+            className='d-none d-xl-block  '
+            style={{
+              padding: '5% 7%',
+              backgroundColor: '#93BEDF',
+              height: '100%',
+              width: '100%',
+            }}
+          >
+            <div
+              style={{
+                // borderRadius: '20px',
+                height: '100%',
+                backgroundColor: '#f5f5f6',
+              }}
+            >
+              <Header />
+              <div className='row' style={{ width: '100%' }}>
+                <div className='col-2 pl-5 pt-5' style={{ height: '100%' }}>
+                  {this.showUser()}
+                </div>
+                <div
+                  className='col-8 pt-5'
+                  style={{
+                    height: '100%',
+                  }}
+                >
+                  {this.showData()}
+                </div>
               </div>
             </div>
           </div>

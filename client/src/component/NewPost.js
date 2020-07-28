@@ -56,10 +56,10 @@ class NewPost extends Component {
       return <Loading />;
     }
     return (
-      <div style={{ marginTop: '150px' }}>
+      <div style={{ height: '100%' }}>
         <div className='d-xl-none' style={{ height: '100%' }}>
           <HeaderMobile />
-          <div className='container'>
+          <div className='container' style={{ marginTop: '75px' }}>
             <h1>New Post</h1>
             <Form onSubmit={this.onSubmit}>
               <Form.Row style={{ marginBottom: '3%' }}>
@@ -99,42 +99,58 @@ class NewPost extends Component {
           </div>
           <FooterMobile />
         </div>
-        <div className='d-none d-xl-block '>
-          <Header />
-          <div className='container'>
-            <h1>New Post</h1>
-            <Form onSubmit={this.onSubmit}>
-              <Label>Caption</Label>
-              <FormControl
-                type='text'
-                className='mr-sm-1'
-                id='description'
-                onChange={this.onChange}
-                value={this.state.description}
-              />
+        <div
+          className='d-none d-xl-block h-100 '
+          style={{
+            padding: '5% 7%',
+            backgroundColor: '#93BEDF',
+            height: '100%',
+            width: '100%',
+          }}
+        >
+          <div
+            style={{
+              // borderRadius: '20px',
+              height: '100%',
+              backgroundColor: '#f5f5f6',
+            }}
+          >
+            <Header />
+            <div className='container'>
+              <h1>New Post</h1>
+              <Form onSubmit={this.onSubmit}>
+                <Label>Caption</Label>
+                <FormControl
+                  type='text'
+                  className='mr-sm-1'
+                  id='description'
+                  onChange={this.onChange}
+                  value={this.state.description}
+                />
 
-              <Label>Image</Label>
-              <FormControl
-                type='text'
-                className='mr-sm-1'
-                id='image'
-                onChange={this.onChange}
-                value={this.state.Image}
-              />
-              <button
-                className='btn'
-                style={{
-                  color: 'white',
-                  backgroundColor: '#248bc7',
-                  border: '0',
-                  borderRadius: '20px',
-                }}
-                variant='outline-success'
-                type='submit'
-              >
-                Post
-              </button>
-            </Form>
+                <Label>Image</Label>
+                <FormControl
+                  type='text'
+                  className='mr-sm-1'
+                  id='image'
+                  onChange={this.onChange}
+                  value={this.state.Image}
+                />
+                <button
+                  className='btn'
+                  style={{
+                    color: 'white',
+                    backgroundColor: '#248bc7',
+                    border: '0',
+                    borderRadius: '20px',
+                  }}
+                  variant='outline-success'
+                  type='submit'
+                >
+                  Post
+                </button>
+              </Form>
+            </div>
           </div>
         </div>
       </div>

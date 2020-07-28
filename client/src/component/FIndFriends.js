@@ -31,20 +31,28 @@ class FindFriends extends Component {
                     <Card.Title>{each.name}</Card.Title>
                     <Card.Text>{each.description}</Card.Text>
                   </Card.Body>
-                  <button
-                    className='btn'
-                    style={{
-                      height: '40px',
-                      border: '0',
-                      borderRadius: '20px',
-
-                      color: 'white',
-                      backgroundColor: '#248bc7',
-                    }}
+                  <a
                     href={`/Userprofile/${each._id}`}
+                    style={{
+                      color: 'white',
+                      alignSelf: 'center',
+                    }}
                   >
-                    View Profile
-                  </button>
+                    <button
+                      className='btn'
+                      style={{
+                        height: '40px',
+                        border: '0',
+                        borderRadius: '20px',
+
+                        color: 'white',
+                        backgroundColor: '#248bc7',
+                      }}
+                      // href={`/Userprofile/${each._id}`}
+                    >
+                      View Profile
+                    </button>
+                  </a>
                 </Card>
               </div>
             );
@@ -120,25 +128,43 @@ class FindFriends extends Component {
       return <Loading />;
     }
     return (
-      <div style={{ marginTop: '70px' }}>
+      <div style={{ height: '100%' }}>
         <div className='d-xl-none' style={{ height: '100%' }}>
           <HeaderMobile />
-          <h4 style={{ textAlign: 'center' }}>Add Friends</h4>
-          {this.ShowUsersMobile()}
+          <div style={{ marginTop: '75px' }}>
+            <h4 style={{ textAlign: 'center' }}>Add Friends</h4>
+            {this.ShowUsersMobile()}
+          </div>
           <FooterMobile />
         </div>
-        <div className='d-none d-xl-block '>
-          <Header />
-          <CardGroup>
-            <div className='container'>
-              <h2 style={{ textAlign: 'center' }}>Add Friends</h2>
-              <div className='row' style={{ width: '100%' }}>
-                {' '}
-                {this.ShowUsers()}
+        <div
+          className='d-none d-xl-block h-100 '
+          style={{
+            padding: '5% 7%',
+            backgroundColor: '#93BEDF',
+            height: '100%',
+            width: '100%',
+          }}
+        >
+          <div
+            style={{
+              // borderRadius: '20px',
+              height: '100%',
+              backgroundColor: '#f5f5f6',
+            }}
+          >
+            <Header />
+            <CardGroup>
+              <div className='container'>
+                <h2 style={{ textAlign: 'center' }}>Add Friends</h2>
+                <div className='row' style={{ width: '100%' }}>
+                  {' '}
+                  {this.ShowUsers()}
+                </div>
               </div>
-            </div>
-          </CardGroup>
-        </div>
+            </CardGroup>
+          </div>
+        </div>{' '}
       </div>
     );
   }

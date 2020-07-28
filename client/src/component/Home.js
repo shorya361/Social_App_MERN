@@ -32,20 +32,21 @@ class Home extends Component {
                 <i className='fas fa-info-circle'></i>{' '}
                 {this.props.Auth.user.description}
               </p>
-              <button
-                href='/profile'
-                className='btn'
-                style={{
-                  color: 'white',
-                  backgroundColor: '#248bc7',
-                  border: '0',
-                  borderRadius: '20px',
-                }}
-                variant='outline-success'
-                type='submit'
-              >
-                View Profile
-              </button>
+              <a href='/profile'>
+                <button
+                  className='btn'
+                  style={{
+                    color: 'white',
+                    backgroundColor: '#248bc7',
+                    border: '0',
+                    borderRadius: '20px',
+                  }}
+                  variant='outline-success'
+                  type='submit'
+                >
+                  View Profile
+                </button>
+              </a>
             </Card.Body>
             <Card.Footer>
               <i className='fas fa-map-marker-alt'></i>{' '}
@@ -61,8 +62,8 @@ class Home extends Component {
       return <Loading />;
     }
     return (
-      <div style={{ height: '100%', marginTop: '40px' }}>
-        <div className='d-xl-none' style={{ height: '100%' }}>
+      <div style={{ height: '100%' }}>
+        <div className='d-xl-none'>
           <HeaderMobile />
           <div style={{ marginTop: '75px' }}>
             <h1>Home Page</h1>
@@ -70,19 +71,35 @@ class Home extends Component {
           </div>
           <FooterMobile />
         </div>
-        <div className='d-none d-xl-block '>
-          <Header />
-          <div className='row' style={{ width: '100%' }}>
-            <div className='col-2 pl-5 pt-5' style={{ height: '100%' }}>
-              {this.showUser()}
-            </div>
-            <div
-              className='col-8 pt-5'
-              style={{
-                height: '100%',
-              }}
-            >
-              <h1> POSTS FEED</h1>
+        <div
+          className='d-none d-xl-block h-100 '
+          style={{
+            padding: '5% 7%',
+            backgroundColor: '#93BEDF',
+            height: '100%',
+            width: '100%',
+          }}
+        >
+          <div
+            style={{
+              // borderRadius: '20px',
+              height: '100%',
+              backgroundColor: '#f5f5f6',
+            }}
+          >
+            <Header />
+            <div className='row' style={{ width: '100%' }}>
+              <div className='col-2 pl-5 pt-5' style={{ height: '100%' }}>
+                {this.showUser()}
+              </div>
+              <div
+                className='col-8 pt-5'
+                style={{
+                  height: '100%',
+                }}
+              >
+                <h1> POSTS FEED</h1>
+              </div>
             </div>
           </div>
         </div>

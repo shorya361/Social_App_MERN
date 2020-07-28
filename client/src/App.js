@@ -44,23 +44,22 @@ class App extends Component {
         <Router>
           <Route exact path='/' component={Landing} />
 
-          <section>
-            {/* <TransitionGroup>
+          {/* <TransitionGroup>
               <CSSTransition
                 key={this.props.location.key}
                 classNames='page'
                 timeout={300}
               > */}
-            <Switch>
-              <Route exact path='/Home' component={Home} />
-              <Route exact path='/profile' component={Profile} />
-              <Route exact path='/newPost' component={NewPost} />
-              <Route exact path='/findFriends' component={FindFriends} />
-              <Route path='/Userprofile/:profileID' component={ProfileUser} />
-            </Switch>
-            {/* </CSSTransition>
+          <Switch>
+            <Route exact path='/Home' component={Home} />
+            <Route exact path='/profile' component={Profile} />
+            <Route exact path='/newPost' component={NewPost} />
+
+            <Route exact path='/findFriends' component={FindFriends} />
+            <Route path='/Userprofile/:profileID' component={ProfileUser} />
+          </Switch>
+          {/* </CSSTransition>
             </TransitionGroup> */}
-          </section>
         </Router>
       </Provider>
     );
