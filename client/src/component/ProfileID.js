@@ -197,7 +197,17 @@ class ProfileID extends Component {
       });
       return posts;
     } else {
-      return <h3>No Posts yet</h3>;
+      return (
+        <h3
+          style={{
+            textAlign: 'center',
+            paddingLeft: 'auto',
+            paddingTop: 'auto',
+          }}
+        >
+          No Posts yet
+        </h3>
+      );
     }
   }
   showUser() {
@@ -267,7 +277,7 @@ class ProfileID extends Component {
       <div style={{ height: '100%' }}>
         <div className='d-xl-none' style={{ height: '100%' }}>
           <HeaderMobile />
-          <div style={{ width: '100%' }}>
+          <div style={{ width: '100%', marginTop: '70px' }}>
             <div className='row' style={{ width: '100%' }}>
               <div className='col-5'>
                 <Image
@@ -332,19 +342,44 @@ class ProfileID extends Component {
                   className='row'
                   style={{ width: '100%', height: '100%', margin: '0px' }}
                 >
-                  <div className='col-9'>Posts section</div>
-                  <div className='col-3' style={{ height: '100%' }}>
+                  <div
+                    className='col-9'
+                    style={{
+                      paddingLeft: '0px',
+                      paddingRight: '5%',
+                    }}
+                  >
+                    <div
+                      className='scrollbar'
+                      style={{
+                        height: '710px',
+                        marginTop: '2%',
+                        overflowY: 'auto',
+                        paddingLeft: '0px',
+                      }}
+                    >
+                      {this.showData()}
+                    </div>
+                  </div>
+                  <div
+                    className='col-3'
+                    style={{
+                      height: '100%',
+                      width: '100%',
+                      paddingLeft: '0px',
+                      paddingRight: '60px',
+                    }}
+                  >
                     <div
                       style={{
-                        height: '130px',
+                        height: '110px',
                         width: '100%',
                         paddingTop: '5%',
-                        marginBottom: '10%',
                       }}
                     >
                       {this.showAlert()}
                     </div>
-                    {this.showUser()}
+                    <div>{this.showUser()}</div>
                   </div>
                 </div>
               </div>

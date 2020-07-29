@@ -451,14 +451,19 @@ class ProfileAdminAccess extends Component {
                   {this.state.user.description}
                 </p>
                 <i className='fas fa-map-marker-alt'></i> {this.state.user.city}
-                <div className='row' style={{ width: '90%', marginLeft: '5%' }}>
+                <div
+                  className='row'
+                  style={{ width: '80%', marginLeft: '14%' }}
+                >
                   <button
                     className='btn'
                     className='m-0 p-0'
                     style={{
                       color: 'white',
                       backgroundColor: '#248bc7',
-                      width: '100%',
+
+                      width: '90%',
+                      marginLeft: '10%',
                       height: '40px',
                       border: '0',
                       borderRadius: '20px',
@@ -503,24 +508,49 @@ class ProfileAdminAccess extends Component {
                 <div className='col-1 p-0' style={{ height: '100%' }}>
                   <Header />
                 </div>
-                <div className='col-11' style={{ width: '100%' }}>
-                  {/* <h1>Jai hind</h1> */}
+                <div className='col-11 p-0' style={{ height: '100%' }}>
                   <div
                     className='row'
                     style={{ width: '100%', height: '100%', margin: '0px' }}
                   >
-                    <div className='col-9'>Posts section</div>
-                    <div className='col-3' style={{ height: '100%' }}>
+                    <div
+                      className='col-9'
+                      style={{
+                        paddingLeft: '0px',
+                        paddingRight: '5%',
+                      }}
+                    >
+                      <div
+                        className='scrollbar'
+                        style={{
+                          height: '710px',
+                          marginTop: '2%',
+                          overflowY: 'auto',
+                          paddingLeft: '0px',
+                        }}
+                      >
+                        {this.showData()}
+                      </div>
+                    </div>
+                    <div
+                      className='col-3'
+                      style={{
+                        height: '100%',
+                        width: '100%',
+                        paddingLeft: '0px',
+                        paddingRight: '60px',
+                      }}
+                    >
                       <div
                         style={{
-                          height: '130px',
+                          height: '100px',
                           width: '100%',
                           paddingTop: '5%',
                         }}
                       >
                         {this.showAlert()}
                       </div>
-                      {this.showUser()}
+                      <div>{this.showUser()}</div>
                     </div>
                   </div>
                 </div>

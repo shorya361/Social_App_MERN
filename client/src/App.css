@@ -1,12 +1,12 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.scrollbar {
+  border: 1px solid beige;
 }
-html {
-  height: 100%;
-  width: 100%;
+
+.scrollbar::-webkit-scrollbar {
+  width: 3px;
+  background-color: cornflowerblue;
 }
-body {
-  min-height: 100vp;
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: crimson;
 }

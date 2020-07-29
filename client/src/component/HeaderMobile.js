@@ -42,7 +42,7 @@ class HeaderMobile extends Component {
       }
       return (
         <Alert
-          ml={'0'}
+          ml={'100%'}
           message={this.props.Alert[0].message}
           cls={'alert alert-'.concat(this.props.Alert[0].AlertType)}
           heading={heading}
@@ -78,7 +78,10 @@ class HeaderMobile extends Component {
             </Nav.Link>
           </Nav>
         </Navbar>
-        <div className='w-100'>{this.showAlert()}</div>
+        <div className='w-100' style={{ marginTop: '70px' }}>
+          {' '}
+          {this.showAlert()}
+        </div>
       </div>
     );
   }

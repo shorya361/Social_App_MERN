@@ -555,10 +555,10 @@ class Posts extends Component {
       this.props.Auth.user.isAdmin
     ) {
       option = (
-        <Nav style={{ padding: '0' }}>
+        <Nav style={{ padding: '0', color: 'black' }}>
           <NavDropdown
             title='options'
-            style={{ paddingLeft: 'auto', color: '#0066cc' }}
+            style={{ paddingLeft: 'auto', color: 'black' }}
           >
             <NavDropdown.Item onClick={this.toggleUpdatePost}>
               <i className='far fa-edit'></i>Update
@@ -705,20 +705,18 @@ class Posts extends Component {
           <div
             style={{
               paddingBottom: '2px',
-              // marginBottom: '70px',
-              marginTop: '10px',
               paddingLeft: '14px',
             }}
           >
             <Card
               style={{
-                padding: '14px',
+                // padding: '14px',
                 color: '#212e36',
               }}
             >
               <Card.Body>
                 <div className='row' style={{ width: '100%' }}>
-                  <div className='col-2 p-0'>
+                  <div className='col-1 p-0'>
                     <img
                       width={64}
                       height={64}
@@ -728,9 +726,10 @@ class Posts extends Component {
                     />
                   </div>
                   <div className='col-9 p-0'>
-                    <h3 style={{ marginBottom: '0' }}>
+                    <h3 style={{ marginBottom: '0', color: 'black' }}>
                       <Nav.Link
-                        href={`/Userprofile/${this.props.postDetails.author.username._id}`}
+                        style={{ color: 'black' }}
+                        href={`/Userprofile/${this.props.postDetails.author.id}`}
                       >
                         {this.props.postDetails.author.username}
                       </Nav.Link>
@@ -750,7 +749,7 @@ class Posts extends Component {
                 >
                   <Card.Img src={this.props.postDetails.image} />
                 </Card>
-                <p>
+                <p style={{ margin: '0', marginTop: '5px' }}>
                   Created on :{' '}
                   {new Intl.DateTimeFormat('en-US', {
                     year: 'numeric',

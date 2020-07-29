@@ -3,11 +3,14 @@ import Header from './Header';
 import HeaderMobile from './HeaderMobile';
 import FooterMobile from './FooterMobile';
 import { Button, Card } from 'react-bootstrap';
+import Alert from './Alert';
 import { connect } from 'react-redux';
 import Loading from './Loading';
 const mapStateToProps = (state) => {
   return {
     Auth: state.Auth,
+
+    Alert: state.Alert,
   };
 };
 
@@ -15,6 +18,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.showUser = this.showUser.bind(this);
+    this.showAlert = this.showAlert.bind(this);
   }
   showUser() {
     if (this.props.Auth.user) {
@@ -57,6 +61,26 @@ class Home extends Component {
       );
     }
   }
+  showAlert() {
+    if (this.props.Alert.length > 0) {
+      let heading = '';
+
+      if (this.props.Alert[0].AlertType === 'danger') {
+        heading = 'Sorry..';
+      } else {
+        heading = 'Congrats';
+      }
+      return (
+        <Alert
+          ml={'100%'}
+          message={this.props.Alert[0].message}
+          cls={'alert alert-'.concat(this.props.Alert[0].AlertType)}
+          heading={heading}
+        />
+      );
+    }
+  }
+
   render() {
     if (this.props.Auth.loading === true || !this.props.Auth.token) {
       return <Loading />;
@@ -95,11 +119,53 @@ class Home extends Component {
                 <Header />
               </div>
               <div className='col-11' style={{ width: '100%' }}>
-                <div style={{ width: '20%' }}>{this.showUser()}</div>
-                <h1> POSTS FEED</h1>
-              </div>
-            </div>{' '}
-          </div>
+                <div
+                  className='row'
+                  style={{ width: '100%', height: '100%', margin: '0px' }}
+                >
+                  <div
+                    className='col-9'
+                    style={{
+                      paddingLeft: '0px',
+                      paddingRight: '5%',
+                    }}
+                  >
+                    <div
+                      className='scrollbar'
+                      style={{
+                        height: '710px',
+                        marginTop: '2%',
+                        overflowY: 'auto',
+                        paddingLeft: '0px',
+                      }}
+                    >
+                      <h1>Posts coming Soon</h1>
+                    </div>
+                  </div>
+                  <div
+                    className='col-3'
+                    style={{
+                      height: '100%',
+                      width: '100%',
+                      paddingLeft: '0px',
+                      paddingRight: '60px',
+                    }}
+                  >
+                    <div
+                      style={{
+                        height: '100px',
+                        width: '100%',
+                        paddingTop: '5%',
+                      }}
+                    >
+                      {this.showAlert()}
+                    </div>
+                    <div>{this.showUser()}</div>
+                  </div>
+                </div>
+              </div>{' '}
+            </div>
+          </div>{' '}
         </div>
       </div>
     );

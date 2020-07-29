@@ -222,15 +222,18 @@ class Profile extends Component {
     if (this.props.Auth.user) {
       // console.log(this.props.Auth.user.Posts);
       if (this.props.Auth.user.Posts.length > 0) {
-        const posts = this.props.Auth.user.Posts.map((eachPost) => {
-          return (
-            <Posts
-              key={eachPost._id}
-              user={this.state.user}
-              postDetails={eachPost}
-            />
-          );
-        });
+        const posts = [];
+        posts.push(
+          this.props.Auth.user.Posts.map((eachPost) => {
+            return (
+              <Posts
+                key={eachPost._id}
+                user={this.state.user}
+                postDetails={eachPost}
+              />
+            );
+          })
+        );
         return posts;
       } else {
         return <h3>No Posts yet</h3>;
@@ -495,18 +498,44 @@ class Profile extends Component {
                     className='row'
                     style={{ width: '100%', height: '100%', margin: '0px' }}
                   >
-                    <div className='col-9'>Posts section</div>
-                    <div className='col-3' style={{ height: '100%' }}>
+                    <div
+                      className='col-9'
+                      style={{
+                        paddingLeft: '0px',
+                        paddingRight: '5%',
+                      }}
+                    >
+                      <div
+                        className='scrollbar'
+                        style={{
+                          height: '710px',
+                          marginTop: '2%',
+                          overflowY: 'auto',
+                          paddingLeft: '0px',
+                        }}
+                      >
+                        {this.showData()}
+                      </div>
+                    </div>
+                    <div
+                      className='col-3'
+                      style={{
+                        height: '100%',
+                        width: '100%',
+                        paddingLeft: '0px',
+                        paddingRight: '60px',
+                      }}
+                    >
                       <div
                         style={{
-                          height: '130px',
+                          height: '100px',
                           width: '100%',
                           paddingTop: '5%',
                         }}
                       >
                         {this.showAlert()}
                       </div>
-                      {this.showUser()}
+                      <div>{this.showUser()}</div>
                     </div>
                   </div>
                 </div>
