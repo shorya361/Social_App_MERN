@@ -33,7 +33,22 @@ class Header extends Component {
   }
   AuthUser() {
     if (this.props.Auth.user) {
-      return <Nav.Link href='/profile'>{this.props.Auth.user.name}</Nav.Link>;
+      return (
+        <div
+          className='row'
+          style={{
+            width: '100%',
+            margin: '0',
+            marginTop: '70px',
+            paddingLeft: '5px',
+          }}
+        >
+          <a href='/profile' style={{ color: 'black' }}>
+            <i className='far fa-user fa-3x'></i>{' '}
+          </a>
+        </div>
+      );
+      // <Nav.Link href='/profile'>{this.props.Auth.user.name}</Nav.Link>;
     }
   }
   showAlert() {
@@ -57,38 +72,82 @@ class Header extends Component {
   }
   render() {
     return (
-      <div style={{ marginBottom: '50px', zIndex: '1' }}>
-        <Navbar variant='light' bd='light' expand='md'>
-          <Navbar.Brand href='/'>
-            <img
-              src='https://lh3.googleusercontent.com/pw/ACtC-3dbz8yAfqdhnKiCqUsVJ6PaKVJtfcCftixF-BvEWgOyZpFJfBN36WJ_cN1god3MmpYVPMX3St4vgVKJIw9n-seTMhuFZuwCULd796bfQhB6vmKH3zj1zKElOUJT5vngjBc9fdSiDdICrcFpuuNMQbi-=w781-h672-no?authuser=0'
-              height='30'
-              width='41'
-              alt='Art-App'
-            />
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls='basic-navbar-nav' />
-          <Navbar.Collapse id='basic-navbar-nav'>
-            <Nav style={{ border: '1px solid black' }}>
-              <Nav.Link href='/Home'>Dashboard</Nav.Link>
-            </Nav>
-            <Nav style={{ border: '1px solid black' }}>
-              <Nav.Link href='/newPost'>Create Post</Nav.Link>
-            </Nav>
-            <Nav style={{ border: '1px solid black' }}>
-              <Nav.Link href='/findFriends'>Find Friends</Nav.Link>
-            </Nav>
-
-            <Nav className=' ml-auto mr-auto '></Nav>
-            <Nav>
-              {this.AuthUser()}
-              <Nav.Link href='/' onClick={this.props.Logout}>
-                Logout
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-        {this.showAlert()}
+      <div
+        style={{
+          height: '100%',
+          width: '70px',
+          backgroundColor: '#248bc7',
+          margin: '0px',
+          padding: '0px 8px 0px 9px',
+        }}
+      >
+        <div
+          className='row'
+          style={{
+            width: '100%',
+            margin: '0',
+            padding: '40px 0px 20px 0px',
+          }}
+        >
+          <img
+            src='https://lh3.googleusercontent.com/pw/ACtC-3dlxShfWFc9Kn8BGyGTNZcWzLkfr87DiDB9QG85Unn10PwI-Vug3n5h6Iupu8JyHfrXR-7C9-BfPAWsdNOGtn8gyNyszFlU49_KHFrgYBlsqB55ZLHjdYNG_jNeSRmoB75bE6ulXHDfEzCG85UyUYLa=w932-h624-no?authuser=0'
+            height='40'
+            width='100%'
+            alt='Art-App'
+          />
+        </div>
+        <div
+          className='row'
+          style={{
+            width: '100%',
+            margin: '0',
+            marginTop: '50px',
+          }}
+        >
+          <a href='/Home' style={{ color: 'black' }}>
+            <i className='fas fa-home fa-3x'></i>
+          </a>
+        </div>
+        <div
+          className='row '
+          style={{
+            width: '100%',
+            margin: '0',
+            marginTop: '70px',
+            paddingLeft: '2px',
+          }}
+        >
+          <a href='/findFriends' style={{ color: 'black' }}>
+            <i className='fas fa-search fa-3x'></i>
+          </a>
+        </div>
+        <div
+          className='row'
+          style={{
+            width: '100%',
+            margin: '0',
+            marginTop: '70px',
+            paddingLeft: '2px',
+          }}
+        >
+          <a href='/newPost' style={{ color: 'black' }}>
+            <i className='fas fa-plus-circle fa-3x'></i>
+          </a>
+        </div>
+        {this.AuthUser()}
+        <div
+          className='row'
+          style={{
+            width: '100%',
+            margin: '0',
+            marginTop: '70px',
+            paddingLeft: '4px',
+          }}
+        >
+          <a href='/' onClick={this.props.Logout} style={{ color: 'black' }}>
+            <i class='fas fa-sign-out-alt fa-3x'></i>{' '}
+          </a>
+        </div>
       </div>
     );
   }

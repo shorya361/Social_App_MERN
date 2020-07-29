@@ -153,18 +153,28 @@ class FindFriends extends Component {
               backgroundColor: '#f5f5f6',
             }}
           >
-            <Header />
-            <CardGroup>
-              <div className='container'>
-                <h2 style={{ textAlign: 'center' }}>Add Friends</h2>
-                <div className='row' style={{ width: '100%' }}>
-                  {' '}
-                  {this.ShowUsers()}
-                </div>
+            {' '}
+            <div
+              className='row'
+              style={{ width: '100%', height: '100%', margin: '0px' }}
+            >
+              <div className='col-1 p-0' style={{ height: '100%' }}>
+                <Header />
               </div>
-            </CardGroup>
-          </div>
-        </div>{' '}
+              <div className='col-11' style={{ width: '100%' }}>
+                <CardGroup>
+                  <div className='container' style={{ paddingTop: '3%' }}>
+                    <h2 style={{ textAlign: 'center' }}>Add Friends</h2>
+                    <div className='row' style={{ width: '100%' }}>
+                      {' '}
+                      {this.ShowUsers()}
+                    </div>
+                  </div>
+                </CardGroup>
+              </div>
+            </div>{' '}
+          </div>{' '}
+        </div>
       </div>
     );
   }

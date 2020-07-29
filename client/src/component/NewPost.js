@@ -115,41 +115,51 @@ class NewPost extends Component {
               backgroundColor: '#f5f5f6',
             }}
           >
-            <Header />
-            <div className='container'>
-              <h1>New Post</h1>
-              <Form onSubmit={this.onSubmit}>
-                <Label>Caption</Label>
-                <FormControl
-                  type='text'
-                  className='mr-sm-1'
-                  id='description'
-                  onChange={this.onChange}
-                  value={this.state.description}
-                />
+            {' '}
+            <div
+              className='row'
+              style={{ width: '100%', height: '100%', margin: '0px' }}
+            >
+              <div className='col-1 p-0' style={{ height: '100%' }}>
+                <Header />
+              </div>
+              <div className='col-11' style={{ width: '100%' }}>
+                <div className='container' style={{ paddingTop: '15%' }}>
+                  <h1>New Post</h1>
+                  <Form onSubmit={this.onSubmit}>
+                    <Label>Caption</Label>
+                    <FormControl
+                      type='text'
+                      className='mr-sm-1'
+                      id='description'
+                      onChange={this.onChange}
+                      value={this.state.description}
+                    />
 
-                <Label>Image</Label>
-                <FormControl
-                  type='text'
-                  className='mr-sm-1'
-                  id='image'
-                  onChange={this.onChange}
-                  value={this.state.Image}
-                />
-                <button
-                  className='btn'
-                  style={{
-                    color: 'white',
-                    backgroundColor: '#248bc7',
-                    border: '0',
-                    borderRadius: '20px',
-                  }}
-                  variant='outline-success'
-                  type='submit'
-                >
-                  Post
-                </button>
-              </Form>
+                    <Label>Image</Label>
+                    <FormControl
+                      type='text'
+                      className='mr-sm-1'
+                      id='image'
+                      onChange={this.onChange}
+                      value={this.state.Image}
+                    />
+                    <button
+                      className='btn'
+                      style={{
+                        color: 'white',
+                        backgroundColor: '#248bc7',
+                        border: '0',
+                        borderRadius: '20px',
+                      }}
+                      variant='outline-success'
+                      type='submit'
+                    >
+                      Post
+                    </button>
+                  </Form>
+                </div>
+              </div>
             </div>
           </div>
         </div>

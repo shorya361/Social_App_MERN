@@ -87,20 +87,18 @@ class Home extends Component {
               backgroundColor: '#f5f5f6',
             }}
           >
-            <Header />
-            <div className='row' style={{ width: '100%' }}>
-              <div className='col-2 pl-5 pt-5' style={{ height: '100%' }}>
-                {this.showUser()}
+            <div
+              className='row'
+              style={{ width: '100%', height: '100%', margin: '0px' }}
+            >
+              <div className='col-1 p-0' style={{ height: '100%' }}>
+                <Header />
               </div>
-              <div
-                className='col-8 pt-5'
-                style={{
-                  height: '100%',
-                }}
-              >
+              <div className='col-11' style={{ width: '100%' }}>
+                <div style={{ width: '20%' }}>{this.showUser()}</div>
                 <h1> POSTS FEED</h1>
               </div>
-            </div>
+            </div>{' '}
           </div>
         </div>
       </div>

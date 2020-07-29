@@ -22,7 +22,7 @@ class Alert extends Component {
         style={{
           margin: '0',
           zIndex: '1',
-          marginTop: '55px',
+          // marginTop: '55px',
           marginRight: '0',
           width: this.props.ml,
           maxWidth: '100%',
