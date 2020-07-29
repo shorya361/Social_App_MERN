@@ -13,6 +13,11 @@ const UserSchema = new mongoose.Schema({
     match: [/\S+@\S+\.\S+/, 'is invalid'],
     index: true,
   },
+  image: {
+    type: String,
+    default:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT8TeQ5iojLROQXom0AApSQbIamNDJRFDYgjw&usqp=CAU',
+  },
   password: {
     type: String,
     required: true,

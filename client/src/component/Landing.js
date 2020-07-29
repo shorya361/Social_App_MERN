@@ -215,7 +215,12 @@ class Landing extends Component {
               <div className='col-4 h-100 p-0'>
                 <div
                   className='row'
-                  style={{ height: '170px', paddingLeft: '20%' }}
+                  style={{
+                    height: '170px',
+                    paddingLeft: '20%',
+                    paddingBottom: '20px',
+                    paddingTop: '20px',
+                  }}
                 >
                   {this.AA('73%')}
                 </div>

@@ -49,8 +49,8 @@ class Registration extends Component {
       name: '',
       email: '',
       password: '',
-      city: '',
-      description: '',
+      city: 'unavailable',
+      description: 'unavailable',
     });
     console.log(this);
   };

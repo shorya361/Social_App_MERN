@@ -144,8 +144,8 @@ export const deactivate = (body) => async (dispatch) => {
 //UPDATE PROFILE
 export const update = (body) => async (dispatch) => {
   try {
-    const { userId, name, description, city } = body;
-    const Body = JSON.stringify({ userId, name, description, city });
+    const { userId, name, description, city, Image } = body;
+    const Body = JSON.stringify({ userId, name, description, city, Image });
     const config = {
       headers: {
         'Content-Type': 'application/json',
