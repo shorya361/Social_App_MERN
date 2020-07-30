@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Navbar, Nav } from 'react-bootstrap';
 import { Logout } from '../redux/ActionCreater';
 import { connect } from 'react-redux';
 import Alert from './Alert';
@@ -39,7 +38,7 @@ class Header extends Component {
           style={{
             width: '100%',
             margin: '0',
-            marginTop: '70px',
+            marginTop: '115%',
             paddingLeft: '5px',
           }}
         >
@@ -86,7 +85,7 @@ class Header extends Component {
           style={{
             width: '100%',
             margin: '0',
-            padding: '40px 0px 20px 0px',
+            padding: '125% 0px 0px 0px',
           }}
         >
           <img
@@ -101,7 +100,7 @@ class Header extends Component {
           style={{
             width: '100%',
             margin: '0',
-            marginTop: '50px',
+            marginTop: '115%',
           }}
         >
           <a href='/Home' style={{ color: 'black' }}>
@@ -113,7 +112,7 @@ class Header extends Component {
           style={{
             width: '100%',
             margin: '0',
-            marginTop: '70px',
+            marginTop: '115%',
             paddingLeft: '2px',
           }}
         >
@@ -126,7 +125,7 @@ class Header extends Component {
           style={{
             width: '100%',
             margin: '0',
-            marginTop: '70px',
+            marginTop: '115%',
             paddingLeft: '2px',
           }}
         >
@@ -140,7 +139,7 @@ class Header extends Component {
           style={{
             width: '100%',
             margin: '0',
-            marginTop: '70px',
+            marginTop: '115%',
             paddingLeft: '4px',
           }}
         >

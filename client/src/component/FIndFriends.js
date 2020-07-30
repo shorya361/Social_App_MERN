@@ -24,7 +24,11 @@ class FindFriends extends Component {
         if (each._id !== this.props.Auth.user._id) {
           if (this.props.Auth.user.isAdmin || each.activated === true) {
             return (
-              <div key={each._id} className='col-3 p-0'>
+              <div
+                key={each._id}
+                className='col-3 p-0'
+                style={{ margin: '0 2%' }}
+              >
                 <Card style={{ height: '100%', width: '250px' }}>
                   <Image
                     variant='top'
@@ -66,6 +70,8 @@ class FindFriends extends Component {
                 </Card>
               </div>
             );
+          } else {
+            return null;
           }
         } else {
           return null;
@@ -134,6 +140,8 @@ class FindFriends extends Component {
           } else {
             return null;
           }
+        } else {
+          return null;
         }
       });
       return users;

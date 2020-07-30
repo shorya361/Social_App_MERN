@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  Row,
-  Button,
   ListGroup,
-  Navbar,
   Nav,
   Form,
   FormControl,
@@ -230,7 +227,12 @@ class Comment extends Component {
                     <Nav style={{ padding: '5%' }}>
                       <div className='row w-100'>
                         <Card.Title style={{ margin: '0', textAlign: 'left' }}>
-                          {this.props.eachcomment.author.username}
+                          <a
+                            href={`/Userprofile/${this.props.eachcomment.author.id}`}
+                            style={{ color: 'black' }}
+                          >
+                            {this.props.eachcomment.author.username}
+                          </a>
                         </Card.Title>
                       </div>
 

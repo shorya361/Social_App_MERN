@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Form, Button, Image } from 'react-bootstrap';
+import { Form, Image } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Register } from '../redux/ActionCreater';
 import { Label } from 'reactstrap';

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from './Header';
 import HeaderMobile from './HeaderMobile';
 import FooterMobile from './FooterMobile';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import Alert from './Alert';
 import { connect } from 'react-redux';
 import Loading from './Loading';

@@ -3,7 +3,7 @@ import Header from './Header';
 import HeaderMobile from './HeaderMobile';
 import FooterMobile from './FooterMobile';
 import Loading from './Loading';
-import { Image, Button, Card, Form, FormControl } from 'react-bootstrap';
+import { Image, Card, Form, FormControl } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Posts from './Posts';
 import { Modal, ModalHeader, ModalBody, Label } from 'reactstrap';
@@ -134,8 +134,7 @@ class Profile extends Component {
     if (this.props.Auth.user.activated) {
       return (
         <button
-          className='btn'
-          className='m-0 p-0'
+          className='btn m-0 p-0'
           variant='danger'
           style={{
             color: 'white',
@@ -154,8 +153,7 @@ class Profile extends Component {
     } else {
       return (
         <button
-          className='btn'
-          className='m-0 p-0'
+          className='btn m-0 p-0'
           variant='success'
           style={{
             color: 'white',
@@ -177,7 +175,7 @@ class Profile extends Component {
   showUser() {
     if (this.props.Auth.user) {
       return (
-        <div>
+        <div style={{}}>
           <Card style={{ color: '#212E36' }}>
             <Card.Img
               variant='top'
@@ -203,8 +201,7 @@ class Profile extends Component {
                 }}
               >
                 <button
-                  className='btn'
-                  className='m-0 p-0'
+                  className='btn m-0 p-0'
                   style={{
                     color: 'white',
                     backgroundColor: '#248bc7',
@@ -505,14 +502,12 @@ class Profile extends Component {
                 {this.props.Auth.user.city}
                 <div className='row' style={{ width: '90%', marginLeft: '5%' }}>
                   <button
-                    className='btn'
-                    className='m-0 p-0'
+                    className='btn m-0 p-0'
                     style={{
                       color: 'white',
                       backgroundColor: '#248bc7',
                       width: '100%',
                       height: '40px',
-                      border: '0',
                       border: '0',
                       borderRadius: '20px',
                     }}
@@ -590,15 +585,20 @@ class Profile extends Component {
                       }}
                     >
                       <div
-                        style={{
-                          height: '60px',
-                          width: '100%',
-                          paddingTop: '5%',
-                        }}
+                        className='row'
+                        style={{ width: '100%', height: '100%' }}
                       >
-                        {this.showAlert()}
+                        <div
+                          style={{
+                            height: '2%',
+                            width: '100%',
+                            paddingTop: '5%',
+                          }}
+                        >
+                          {this.showAlert()}
+                        </div>
+                        <div>{this.showUser()}</div>
                       </div>
-                      <div>{this.showUser()}</div>
                     </div>
                   </div>
                 </div>

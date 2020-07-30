@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
 import Profile from './component/Profile';
 import Landing from './component/Landing';
@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import { ConfigureStore } from './redux/configureStore';
 import { LoadUser, LoadComments, LoadAllUsers } from './redux/ActionCreater';
 import setAuthToken from './utils/setAuthToken';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+// import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import NewPost from './component/NewPost';
 import FindFriends from './component/FIndFriends';
 import ProfileID from './component/ProfileID';
@@ -23,9 +23,6 @@ if (localStorage.token) {
   store.dispatch(LoadAllUsers());
 }
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     console.log('App Component running');
   }

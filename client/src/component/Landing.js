@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Tabs, Tab } from 'react-bootstrap';
 import Registration from './Registration';
 import LoginComponent from './LoginComponent';
-import { Form, Col, Image } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 import Alert from './Alert';
-import { Navbar, Nav, Carousel } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Login } from '../redux/ActionCreater';
@@ -46,7 +45,7 @@ class Landing extends Component {
             onClick={this.Register}
           >
             {' '}
-            <a href='#'>Create Account.</a>
+            <a href='/#'>Create Account.</a>
           </p>{' '}
           <div
             className='row'
@@ -94,7 +93,7 @@ class Landing extends Component {
             onClick={this.Register}
           >
             {' '}
-            <a href='#'>Login</a>
+            <a href='/#'>Login</a>
           </p>
         </div>
       );

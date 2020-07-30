@@ -4,7 +4,7 @@ import Loading from './Loading';
 import Header from './Header';
 import FooterMobile from './FooterMobile';
 import HeaderMobile from './HeaderMobile';
-import { Image, Button, Card } from 'react-bootstrap';
+import { Image, Card } from 'react-bootstrap';
 import Posts from './Posts';
 import { Redirect } from 'react-router-dom';
 import ProfileAdminAccess from './ProfileAdminAccess';
@@ -43,8 +43,7 @@ class ProfileID extends Component {
       ...this.state,
       button: (
         <button
-          className='btn'
-          className='p-0'
+          className='btn p-0'
           style={{
             color: 'white',
             backgroundColor: '#248bc7',
@@ -74,8 +73,7 @@ class ProfileID extends Component {
       ...this.state,
       button: (
         <button
-          className='btn'
-          className='p-0'
+          className='btn p-0'
           variant='danger'
           style={{
             color: 'white',
@@ -99,15 +97,14 @@ class ProfileID extends Component {
     // console.log(nextProps);
     // console.log(this);
     if (nextProps.AllUsers.Users) {
-      nextProps.AllUsers.Users.map((eachUser) => {
+      nextProps.AllUsers.Users.forEach((eachUser) => {
         if (eachUser._id === this.props.userID) {
           this.setState({
             ...this.state,
             user: eachUser,
             button: (
               <button
-                className='btn'
-                className=' p-0'
+                className='btn p-0'
                 style={{
                   color: 'white',
                   backgroundColor: '#248bc7',
@@ -125,10 +122,10 @@ class ProfileID extends Component {
             ),
           });
           // console.log(nextProps);
-          eachUser.Followers.map((each) => {
+          eachUser.Followers.forEach((each) => {
             // console.log(each, nextProps.Auth.user._id);
             if (this.props.Auth.user) {
-              if (each == this.props.Auth.user._id) {
+              if (each === this.props.Auth.user._id) {
                 // console.log('done');
                 return this.setState({
                   ...this.state,
@@ -136,8 +133,7 @@ class ProfileID extends Component {
 
                   button: (
                     <button
-                      className='btn'
-                      className=' p-0'
+                      className='btn p-0'
                       variant='danger'
                       style={{
                         color: 'white',
@@ -156,8 +152,12 @@ class ProfileID extends Component {
                   ),
                 });
               }
+            } else {
+              return null;
             }
           });
+        } else {
+          return null;
         }
       });
     }
@@ -369,7 +369,7 @@ class ProfileID extends Component {
                   >
                     <div
                       style={{
-                        height: '60px',
+                        height: '2%',
                         width: '100%',
                         paddingTop: '5%',
                       }}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Login } from '../redux/ActionCreater';
-import { Form, Button, Image } from 'react-bootstrap';
+import { Form, Image } from 'react-bootstrap';
 import { Label } from 'reactstrap';
 
 const mapDispatchToProps = (dispatch) => ({
