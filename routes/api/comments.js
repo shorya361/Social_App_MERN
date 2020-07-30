@@ -21,7 +21,7 @@ router.post('/addComment', async (req, res) => {
     let founduser = await User.findById(UserId);
     let newComment = new comments({
       text: comment,
-      author: { id: UserId, username: founduser.name },
+      author: { id: UserId, username: founduser.name, image: founduser.image },
       Post: Post,
     });
     founduser.comments.push(newComment.id);

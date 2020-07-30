@@ -10,6 +10,7 @@ import { Modal, ModalHeader, ModalBody, Label } from 'reactstrap';
 import { deactivate } from '../redux/ActionCreater';
 import Alert from './Alert';
 import { update } from '../redux/ActionCreater';
+import axios from 'axios';
 const mapStateToProps = (state) => {
   return {
     Auth: state.Auth,
@@ -32,7 +33,10 @@ class Profile extends Component {
       name: '',
       description: '',
       city: '',
+      uploadedImage: '',
+      loading: null,
     };
+    this.onClick = this.onClick.bind(this);
     this.showUser = this.showUser.bind(this);
     this.showData = this.showData.bind(this);
     this.redirect = this.redirect.bind(this);
@@ -43,6 +47,34 @@ class Profile extends Component {
     this.ChangeStatus = this.ChangeStatus.bind(this);
     this.showAlert = this.showAlert.bind(this);
   }
+  onClick = async (e) => {
+    this.setState({
+      loading: (
+        <span
+          class='spinner-border spinner-border-sm mr-2'
+          role='status'
+          aria-hidden='true'
+        ></span>
+      ),
+    });
+    const files = e.target.files;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset', 'Images');
+    // data.append('cloud_name', 'shorya361');
+    const res = await axios.post(
+      'https://cors-anywhere.herokuapp.com/https://api.cloudinary.com/v1_1/shorya361/image/upload',
+      data
+    );
+    // console.log(res.data.secure_url);
+    this.setState({
+      ...this.state,
+      uploadedImage: res.data.secure_url,
+      loading: null,
+    });
+    // console.log('done');
+    // const file = await res.json();
+  };
   componentWillReceiveProps(nextProps) {
     // console.log(nextProps);
     // console.log(nextProps.Auth.user.image.toString());
@@ -53,6 +85,7 @@ class Profile extends Component {
         name: nextProps.Auth.user.name,
         description: nextProps.Auth.user.description,
         city: nextProps.Auth.user.city,
+        uploadedImage: nextProps.Auth.user.image,
       });
     }
   }
@@ -60,6 +93,7 @@ class Profile extends Component {
     this.setState({
       ...this.state,
       editModal: !this.state.editModal,
+      loading: null,
     });
     // console.log(this.state);
   }
@@ -71,8 +105,10 @@ class Profile extends Component {
       name: this.state.name,
       description: this.state.description,
       city: this.state.city,
-      Image: this.state.image,
+      Image: this.state.uploadedImage,
+      loading: null,
     };
+    // console.log(body);
     this.props.update(body);
     // console.log(this.state);
   };
@@ -143,9 +179,13 @@ class Profile extends Component {
       return (
         <div>
           <Card style={{ color: '#212E36' }}>
-            <Card.Img variant='top' src={this.state.image} />
+            <Card.Img
+              variant='top'
+              src={this.state.image}
+              style={{ height: '350px' }}
+            />
             <Card.Body style={{ margin: '0', padding: '0' }}>
-              <Card.Title style={{ marginLeft: '9%' }}>
+              <Card.Title style={{ marginLeft: '9%', marginBottom: '0px' }}>
                 {this.props.Auth.user.name}
               </Card.Title>
               <p style={{ marginLeft: '9%' }}>
@@ -400,7 +440,17 @@ class Profile extends Component {
                 >
                   Image
                 </Label>
-                <FormControl type='file' className='mr-sm-1' id='Image' />
+                <div className='row w-100' style={{ paddingLeft: '18px' }}>
+                  <div className='col-11 p-0'>
+                    <FormControl
+                      type='file'
+                      className='mr-sm-1'
+                      id='Image'
+                      onChange={this.onClick}
+                    />
+                  </div>
+                  <div className='col-1'>{this.state.loading}</div>
+                </div>
                 <button
                   className='btn'
                   style={{
@@ -541,7 +591,7 @@ class Profile extends Component {
                     >
                       <div
                         style={{
-                          height: '100px',
+                          height: '60px',
                           width: '100%',
                           paddingTop: '5%',
                         }}

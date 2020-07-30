@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Loading from './Loading';
 import FooterMobile from './FooterMobile';
 import HeaderMobile from './HeaderMobile';
-import { Card, Button, CardGroup, Nav } from 'react-bootstrap';
+import { Card, Image, CardGroup, Nav } from 'react-bootstrap';
 const mapStateToProps = (state) => {
   return {
     Auth: state.Auth,
@@ -24,10 +24,20 @@ class FindFriends extends Component {
         if (each._id !== this.props.Auth.user._id) {
           if (this.props.Auth.user.isAdmin || each.activated === true) {
             return (
-              <div key={each._id} className='col-4'>
-                <Card>
-                  <Card.Img variant='top' src={each.image} />
-                  <Card.Body style={{ textAlign: 'center' }}>
+              <div key={each._id} className='col-3 p-0'>
+                <Card style={{ height: '100%', width: '250px' }}>
+                  <Image
+                    variant='top'
+                    src={each.image}
+                    roundedCircle
+                    style={{
+                      height: '200px',
+                      width: '200px',
+                      margin: 'auto',
+                      marginTop: '5%',
+                    }}
+                  />
+                  <Card.Body style={{ textAlign: 'center', padding: '10px' }}>
                     <Card.Title>{each.name}</Card.Title>
                     <Card.Text>{each.description}</Card.Text>
                   </Card.Body>
@@ -79,10 +89,23 @@ class FindFriends extends Component {
                 <Card>
                   <Card.Body style={{ padding: '0' }}>
                     <div className='row w-100 m-0'>
-                      <div className='col-2'></div>
+                      <div className='col-2' style={{ padding: '2%' }}>
+                        {' '}
+                        <Image
+                          src={each.image}
+                          height='96%'
+                          width='96%'
+                          roundedCircle
+                          // style={{ marginTop: '15px' }}
+                        />
+                      </div>
                       <div
                         className='col-10'
-                        style={{ padding: '0', paddingTop: '6px' }}
+                        style={{
+                          padding: '0',
+                          // paddingTop: '4%',
+                          alignSelf: 'center',
+                        }}
                       >
                         <Nav>
                           <Nav.Link
@@ -162,15 +185,23 @@ class FindFriends extends Component {
                 <Header />
               </div>
               <div className='col-11' style={{ width: '100%' }}>
-                <CardGroup>
-                  <div className='container' style={{ paddingTop: '3%' }}>
-                    <h2 style={{ textAlign: 'center' }}>Add Friends</h2>
-                    <div className='row' style={{ width: '100%' }}>
-                      {' '}
-                      {this.ShowUsers()}
+                <h2 style={{ textAlign: 'center' }}>Add Friends</h2>
+                <div
+                  className='scrollbar'
+                  style={{ height: '680px', width: '100%', overflowX: 'auto' }}
+                >
+                  <CardGroup>
+                    <div
+                      className='container '
+                      style={{ margin: '0', paddingTop: '3%' }}
+                    >
+                      <div className='row' style={{ width: '100%' }}>
+                        {' '}
+                        {this.ShowUsers()}
+                      </div>
                     </div>
-                  </div>
-                </CardGroup>
+                  </CardGroup>
+                </div>
               </div>
             </div>{' '}
           </div>{' '}

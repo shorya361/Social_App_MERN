@@ -28,14 +28,17 @@ router.post(
       if (AdminCode == 'cloberine_time') {
         isAdmin = true;
       }
-      user = new User({
-        name,
-        email,
-        password,
-        city,
-        description,
-        isAdmin,
-      });
+      (image =
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT8TeQ5iojLROQXom0AApSQbIamNDJRFDYgjw&usqp=CAU'),
+        (user = new User({
+          name,
+          email,
+          password,
+          city,
+          description,
+          isAdmin,
+          image,
+        }));
       // Encrypt User
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, salt);
@@ -83,10 +86,12 @@ router.post('/changeStatus', async (req, res) => {
 //update Profile
 router.put('/updateProfile', async (req, res) => {
   try {
-    const { userId, name, description, city } = req.body;
+    const { userId, name, description, city, Image } = req.body;
+    // console.log(Image);
     let user = await User.findById(userId);
     user.name = name;
     (user.description = description), (user.city = city);
+    user.image = Image;
     user.Posts.map(async (eachPost) => {
       let post = await Posts.findById(eachPost);
       post.author.username = name;
@@ -95,11 +100,13 @@ router.put('/updateProfile', async (req, res) => {
     user.comments.map(async (eachComment) => {
       let comment = await Comment.findById(eachComment);
       comment.author.username = name;
+      comment.author.image = Image;
       await comment.save();
       // console.log(comment);
     });
 
     await user.save();
+    // console.log(user);
     res.json({ user });
   } catch (error) {
     console.log('error in updating :' + error.message);

@@ -4,6 +4,7 @@ import HeaderMobile from './HeaderMobile';
 import FooterMobile from './FooterMobile';
 import { Form, Button, FormControl } from 'react-bootstrap';
 import { Label } from 'reactstrap';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import Loading from './Loading';
 import { addnewPost } from '../redux/ActionCreater';
@@ -25,18 +26,50 @@ class NewPost extends Component {
     super(props);
     this.state = {
       name: '',
-      image: '',
       description: '',
+      uploadedImage: null,
+      loading: null,
     };
+    this.onClick = this.onClick.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+
+  onClick = async (e) => {
+    this.setState({
+      loading: (
+        <span
+          class='spinner-border spinner-border-sm mr-2'
+          role='status'
+          aria-hidden='true'
+        ></span>
+      ),
+    });
+    const files = e.target.files;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset', 'Images');
+    // data.append('cloud_name', 'shorya361');
+    const res = await axios.post(
+      'https://cors-anywhere.herokuapp.com/https://api.cloudinary.com/v1_1/shorya361/image/upload',
+      data
+    );
+    // console.log(res.data.secure_url);
+    this.setState({
+      ...this.state,
+      uploadedImage: res.data.secure_url,
+      loading: null,
+    });
+    // console.log('done');
+    // const file = await res.json();
+  };
+
   onSubmit = (e) => {
     e.preventDefault();
-    console.log(this);
+    // console.log(this);
     const body = {
       name: '',
-      image: this.state.image,
+      image: this.state.uploadedImage,
       description: this.state.description,
       userID: this.props.Auth.user._id,
     };
@@ -45,6 +78,8 @@ class NewPost extends Component {
       name: '',
       image: '',
       description: '',
+      uploadedImage: null,
+      loading: null,
     });
     setTimeout(() => this.props.history.push('/Home'), 1000);
   };
@@ -59,11 +94,11 @@ class NewPost extends Component {
       <div style={{ height: '100%' }}>
         <div className='d-xl-none' style={{ height: '100%' }}>
           <HeaderMobile />
-          <div className='container' style={{ marginTop: '75px' }}>
+          <div className='container' style={{ marginTop: '150px' }}>
             <h1>New Post</h1>
             <Form onSubmit={this.onSubmit}>
               <Form.Row style={{ marginBottom: '3%' }}>
-                <Label>Caption</Label>
+                <Label style={{ margin: '0' }}>Caption</Label>
                 <FormControl
                   type='text'
                   className='mr-sm-1'
@@ -73,14 +108,18 @@ class NewPost extends Component {
                 />
               </Form.Row>
               <Form.Row style={{ marginBottom: '3%' }}>
-                <Label>Image</Label>
-                <FormControl
-                  type='text'
-                  className='mr-sm-1'
-                  id='image'
-                  onChange={this.onChange}
-                  value={this.state.image}
-                />
+                <Label style={{ margin: '0' }}>Image</Label>
+                <div className='row w-100' style={{ paddingLeft: '18px' }}>
+                  <div className='col-11 p-0'>
+                    <FormControl
+                      type='file'
+                      className='mr-sm-1'
+                      id='Image'
+                      onChange={this.onClick}
+                    />
+                  </div>
+                  <div className='col-1'>{this.state.loading}</div>
+                </div>
               </Form.Row>
               <button
                 className='btn'
@@ -124,10 +163,10 @@ class NewPost extends Component {
                 <Header />
               </div>
               <div className='col-11' style={{ width: '100%' }}>
-                <div className='container' style={{ paddingTop: '15%' }}>
+                <div className='container' style={{ padding: '15% 20%' }}>
                   <h1>New Post</h1>
                   <Form onSubmit={this.onSubmit}>
-                    <Label>Caption</Label>
+                    <Label style={{ margin: '0' }}>Caption</Label>
                     <FormControl
                       type='text'
                       className='mr-sm-1'
@@ -136,14 +175,18 @@ class NewPost extends Component {
                       value={this.state.description}
                     />
 
-                    <Label>Image</Label>
-                    <FormControl
-                      type='text'
-                      className='mr-sm-1'
-                      id='image'
-                      onChange={this.onChange}
-                      value={this.state.Image}
-                    />
+                    <Label style={{ margin: '0' }}>Image</Label>
+                    <div className='row w-100' style={{ paddingLeft: '18px' }}>
+                      <div className='col-11 p-0'>
+                        <FormControl
+                          type='file'
+                          className='mr-sm-1'
+                          id='Image'
+                          onChange={this.onClick}
+                        />
+                      </div>
+                      <div className='col-1'>{this.state.loading}</div>
+                    </div>
                     <button
                       className='btn'
                       style={{

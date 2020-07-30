@@ -217,7 +217,7 @@ class ProfileID extends Component {
           <Card style={{ color: '#212E36' }}>
             <Card.Img variant='top' src={this.state.user.image} />
             <Card.Body style={{ margin: '0', padding: '0' }}>
-              <Card.Title style={{ marginLeft: '9%' }}>
+              <Card.Title style={{ marginLeft: '9%', marginBottom: '0px' }}>
                 {this.state.user.name}
               </Card.Title>
               <p style={{ marginLeft: '9%' }}>
@@ -369,7 +369,7 @@ class ProfileID extends Component {
                   >
                     <div
                       style={{
-                        height: '110px',
+                        height: '60px',
                         width: '100%',
                         paddingTop: '5%',
                       }}

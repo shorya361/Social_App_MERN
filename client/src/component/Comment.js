@@ -8,6 +8,8 @@ import {
   Nav,
   Form,
   FormControl,
+  Card,
+  Image,
 } from 'react-bootstrap';
 import { Modal, ModalHeader, ModalBody, Label } from 'reactstrap';
 import { updateComment, deleteComment } from '../redux/ActionCreater';
@@ -15,6 +17,7 @@ const mapStateToProps = (state) => {
   return {
     Comments: state.Comments,
     Auth: state.Auth,
+    AllUsers: state.AllUsers,
   };
 };
 const mapDispatchToProps = (dispatch) => ({
@@ -39,11 +42,13 @@ class Comment extends Component {
   }
 
   componentDidMount() {
-    if (this.props.eachcomment) {
+    if (this.props.AllUsers.Users && this.props.eachcomment) {
       this.setState({
         ...this.state,
         text: this.props.eachcomment.text,
       });
+      // console.log(user);
+      // console.log(this.state);
     }
   }
   onChange = (e) => {
@@ -201,7 +206,50 @@ class Comment extends Component {
                 </Form>
               </ModalBody>
             </Modal>
-            <Navbar
+            <Card>
+              <Card.Body style={{ padding: '0' }}>
+                <div className='row w-100 m-0'>
+                  <div className='col-2' style={{ padding: '2%' }}>
+                    {' '}
+                    <Image
+                      src={this.props.eachcomment.author.image}
+                      height='96%'
+                      width='96%'
+                      roundedCircle
+                      // style={{ marginTop: '15px' }}
+                    />
+                  </div>
+                  <div
+                    className='col-10'
+                    style={{
+                      padding: '0',
+                      // paddingTop: '4%',
+                      alignSelf: 'center',
+                    }}
+                  >
+                    <Nav style={{ padding: '5%' }}>
+                      <div className='row w-100'>
+                        <Card.Title style={{ margin: '0', textAlign: 'left' }}>
+                          {this.props.eachcomment.author.username}
+                        </Card.Title>
+                      </div>
+
+                      <div className='row w-100'>
+                        <Card.Text> {this.props.eachcomment.text}</Card.Text>
+                      </div>
+                      <span
+                        onClick={this.onClic}
+                        style={{ justifyContent: 'end' }}
+                      >
+                        {option}
+                      </span>
+                    </Nav>
+                  </div>
+                </div>
+              </Card.Body>
+            </Card>
+
+            {/* <Navbar
               style={{
                 marginBottom: '3px',
                 padding: '0',
@@ -282,8 +330,8 @@ class Comment extends Component {
                 <Nav className='justify-content-end'>
                   <Nav.Link onClick={this.onClic}>{option}</Nav.Link>
                 </Nav>
-              </Navbar>
-            </div>
+              </Navbar> */}
+            {/* </div> */}
           </div>
         </div>
       );

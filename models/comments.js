@@ -9,6 +9,7 @@ var CommentSchema = mongoose.Schema({
       ref: 'User',
     },
     username: String,
+    image: String,
   },
   Post: {
     type: mongoose.Schema.Types.ObjectId,

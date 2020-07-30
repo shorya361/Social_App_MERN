@@ -26,11 +26,13 @@ class Home extends Component {
         <div>
           <Card style={{ color: '#212E36' }}>
             <Card.Img
-              variant='top'
-              src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT8TeQ5iojLROQXom0AApSQbIamNDJRFDYgjw&usqp=CAU'
+              src={this.props.Auth.user.image}
+              style={{ height: '350px' }}
             />
             <Card.Body>
-              <Card.Title>{this.props.Auth.user.name}</Card.Title>
+              <Card.Title style={{ marginBottom: '0px' }}>
+                {this.props.Auth.user.name}
+              </Card.Title>
               <p>
                 {' '}
                 <i className='fas fa-info-circle'></i>{' '}
@@ -153,7 +155,7 @@ class Home extends Component {
                   >
                     <div
                       style={{
-                        height: '100px',
+                        height: '90px',
                         width: '100%',
                         paddingTop: '5%',
                       }}
