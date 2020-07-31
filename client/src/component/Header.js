@@ -144,7 +144,7 @@ class Header extends Component {
           }}
         >
           <a href='/' onClick={this.props.Logout} style={{ color: 'black' }}>
-            <i class='fas fa-sign-out-alt fa-3x'></i>{' '}
+            <i className='fas fa-sign-out-alt fa-3x'></i>{' '}
           </a>
         </div>
       </div>

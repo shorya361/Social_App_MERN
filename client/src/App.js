@@ -13,6 +13,8 @@ import setAuthToken from './utils/setAuthToken';
 import NewPost from './component/NewPost';
 import FindFriends from './component/FIndFriends';
 import ProfileID from './component/ProfileID';
+import PrivateRoute from './component/PrivateRoute';
+
 const store = ConfigureStore();
 
 if (localStorage.token) {
@@ -48,12 +50,15 @@ class App extends Component {
                 timeout={300}
               > */}
           <Switch>
-            <Route exact path='/Home' component={Home} />
-            <Route exact path='/profile' component={Profile} />
-            <Route exact path='/newPost' component={NewPost} />
+            <PrivateRoute exact path='/Home' component={Home} />
+            <PrivateRoute exact path='/profile' component={Profile} />
+            <PrivateRoute exact path='/newPost' component={NewPost} />
 
-            <Route exact path='/findFriends' component={FindFriends} />
-            <Route path='/Userprofile/:profileID' component={ProfileUser} />
+            <PrivateRoute exact path='/findFriends' component={FindFriends} />
+            <PrivateRoute
+              path='/Userprofile/:profileID'
+              component={ProfileUser}
+            />
           </Switch>
           {/* </CSSTransition>
             </TransitionGroup> */}

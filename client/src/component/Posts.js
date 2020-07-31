@@ -132,11 +132,11 @@ class Posts extends Component {
   };
   componentDidMount() {
     if (this.props.postDetails && this.props.Auth.user) {
-      console.log(this.props.postDetails.description);
+      // console.log(this.props.postDetails.description);
       this.setState({
         ...this.state,
         description: this.props.postDetails.description,
-        image: this.props.postDetails.image,
+        uploadedImage: this.props.postDetails.image,
       });
       // console.log(this.state);
     }
@@ -491,9 +491,15 @@ class Posts extends Component {
   onEditSubmit(e) {
     e.preventDefault();
     // console.log(this.state);
+    var img = null;
+    if (this.state.uploadedImage === null) {
+      img = this.props.postDetails.image;
+    } else {
+      img = this.state.uploadedImage;
+    }
     const body = {
       name: '',
-      image: this.state.uploadedImage,
+      image: img,
       description: this.state.description,
       PostID: this.props.postDetails._id,
     };

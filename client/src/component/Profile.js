@@ -469,10 +469,10 @@ class Profile extends Component {
             <HeaderMobile />
             <div style={{ marginTop: '75px' }}>
               <div className='row' style={{ width: '100%' }}>
-                <div className='col-5'>
+                <div className='col-5' style={{ paddingLeft: '10%' }}>
                   <Image
-                    width='65%'
-                    height='70%'
+                    width='70px'
+                    height='70px'
                     style={{
                       minWidth: '20%',
                       marginTop: '8%',

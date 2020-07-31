@@ -99,8 +99,8 @@ class FindFriends extends Component {
                         {' '}
                         <Image
                           src={each.image}
-                          height='96%'
-                          width='96%'
+                          height='70px'
+                          width='70px'
                           roundedCircle
                           // style={{ marginTop: '15px' }}
                         />
