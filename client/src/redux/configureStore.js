@@ -5,6 +5,7 @@ import { Alert } from './Alert';
 import { Auth } from './Auth';
 import { Comments } from './Comments';
 import { AllUsers } from './AllUsers';
+import { timeline } from './timeline';
 export const ConfigureStore = () => {
   const store = createStore(
     combineReducers({
@@ -12,6 +13,7 @@ export const ConfigureStore = () => {
       Auth: Auth,
       Comments: Comments,
       AllUsers: AllUsers,
+      timeline: timeline,
     }),
     applyMiddleware(thunk, logger)
   );
