@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import Loading from './Loading';
 import Posts from './Posts';
 import { getTimeline } from '../redux/ActionCreater';
+import { Fade, Stagger } from 'react-animation-components';
 const mapStateToProps = (state) => {
   return {
     Auth: state.Auth,
@@ -108,11 +109,15 @@ class Home extends Component {
         posts.push(
           this.props.Timeline.Post.map((eachPost) => {
             return (
-              <Posts
-                key={eachPost._id}
-                user={this.props.Auth.user}
-                postDetails={eachPost}
-              />
+              <Stagger in>
+                <Fade in>
+                  <Posts
+                    key={eachPost._id}
+                    user={this.props.Auth.user}
+                    postDetails={eachPost}
+                  />
+                </Fade>
+              </Stagger>
             );
           })
         );

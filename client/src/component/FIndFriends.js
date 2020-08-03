@@ -5,6 +5,7 @@ import Loading from './Loading';
 import FooterMobile from './FooterMobile';
 import HeaderMobile from './HeaderMobile';
 import { Card, Image, CardGroup, Nav } from 'react-bootstrap';
+import { FadeTransform } from 'react-animation-components';
 const mapStateToProps = (state) => {
   return {
     Auth: state.Auth,
@@ -29,45 +30,52 @@ class FindFriends extends Component {
                 className='col-2 p-0'
                 style={{ margin: '1% 4%' }}
               >
-                <Card style={{ height: '100%', width: '250px' }}>
-                  <Image
-                    variant='top'
-                    src={each.image}
-                    roundedCircle
-                    style={{
-                      height: '200px',
-                      width: '200px',
-                      margin: 'auto',
-                      marginTop: '5%',
-                    }}
-                  />
-                  <Card.Body style={{ textAlign: 'center', padding: '10px' }}>
-                    <Card.Title>{each.name}</Card.Title>
-                    <Card.Text>{each.description}</Card.Text>
-                  </Card.Body>
-                  <a
-                    href={`/Userprofile/${each._id}`}
-                    style={{
-                      color: 'white',
-                      alignSelf: 'center',
-                    }}
-                  >
-                    <button
-                      className='btn'
+                <FadeTransform
+                  in
+                  transformProps={{
+                    exitTransform: 'scale(0.5) translatey(-50%)',
+                  }}
+                >
+                  <Card style={{ height: '100%', width: '250px' }}>
+                    <Image
+                      variant='top'
+                      src={each.image}
+                      roundedCircle
                       style={{
-                        height: '40px',
-                        border: '0',
-                        borderRadius: '20px',
-
-                        color: 'white',
-                        backgroundColor: '#248bc7',
+                        height: '200px',
+                        width: '200px',
+                        margin: 'auto',
+                        marginTop: '5%',
                       }}
-                      // href={`/Userprofile/${each._id}`}
+                    />
+                    <Card.Body style={{ textAlign: 'center', padding: '10px' }}>
+                      <Card.Title>{each.name}</Card.Title>
+                      <Card.Text>{each.description}</Card.Text>
+                    </Card.Body>
+                    <a
+                      href={`/Userprofile/${each._id}`}
+                      style={{
+                        color: 'white',
+                        alignSelf: 'center',
+                      }}
                     >
-                      View Profile
-                    </button>
-                  </a>
-                </Card>
+                      <button
+                        className='btn'
+                        style={{
+                          height: '40px',
+                          border: '0',
+                          borderRadius: '20px',
+
+                          color: 'white',
+                          backgroundColor: '#248bc7',
+                        }}
+                        // href={`/Userprofile/${each._id}`}
+                      >
+                        View Profile
+                      </button>
+                    </a>
+                  </Card>
+                </FadeTransform>
               </div>
             );
           } else {
@@ -92,55 +100,62 @@ class FindFriends extends Component {
                 className='col-12'
                 style={{ marginBottom: '5px' }}
               >
-                <Card>
-                  <Card.Body style={{ padding: '0' }}>
-                    <div className='row w-100 m-0'>
-                      <div className='col-2' style={{ padding: '2%' }}>
-                        {' '}
-                        <Image
-                          src={each.image}
-                          height='70px'
-                          width='70px'
-                          roundedCircle
-                          // style={{ marginTop: '15px' }}
-                        />
-                      </div>
-                      <div
-                        className='col-10'
-                        style={{
-                          padding: '0',
-                          // paddingTop: '4%',
-                          alignSelf: 'center',
-                        }}
-                      >
-                        <Nav>
-                          <Nav.Link
-                            href={`/Userprofile/${each._id}`}
-                            style={{ width: '100%', color: 'black' }}
-                          >
-                            <div className='row w-100'>
-                              <Card.Title
-                                style={{
-                                  margin: '0',
-                                  textAlign: 'left',
-                                  paddingLeft: '15%',
-                                }}
-                              >
-                                {each.name}
-                              </Card.Title>
-                            </div>
+                <FadeTransform
+                  in
+                  transformProps={{
+                    exitTransform: 'scale(0.5) translatey(-50%)',
+                  }}
+                >
+                  <Card>
+                    <Card.Body style={{ padding: '0' }}>
+                      <div className='row w-100 m-0'>
+                        <div className='col-2' style={{ padding: '2%' }}>
+                          {' '}
+                          <Image
+                            src={each.image}
+                            height='70px'
+                            width='70px'
+                            roundedCircle
+                            // style={{ marginTop: '15px' }}
+                          />
+                        </div>
+                        <div
+                          className='col-10'
+                          style={{
+                            padding: '0',
+                            // paddingTop: '4%',
+                            alignSelf: 'center',
+                          }}
+                        >
+                          <Nav>
+                            <Nav.Link
+                              href={`/Userprofile/${each._id}`}
+                              style={{ width: '100%', color: 'black' }}
+                            >
+                              <div className='row w-100'>
+                                <Card.Title
+                                  style={{
+                                    margin: '0',
+                                    textAlign: 'left',
+                                    paddingLeft: '15%',
+                                  }}
+                                >
+                                  {each.name}
+                                </Card.Title>
+                              </div>
 
-                            <div className='row w-100'>
-                              <Card.Text style={{ paddingLeft: '15%' }}>
-                                {each.description}
-                              </Card.Text>
-                            </div>
-                          </Nav.Link>
-                        </Nav>
+                              <div className='row w-100'>
+                                <Card.Text style={{ paddingLeft: '15%' }}>
+                                  {each.description}
+                                </Card.Text>
+                              </div>
+                            </Nav.Link>
+                          </Nav>
+                        </div>
                       </div>
-                    </div>
-                  </Card.Body>
-                </Card>
+                    </Card.Body>
+                  </Card>
+                </FadeTransform>
               </div>
             );
           } else {

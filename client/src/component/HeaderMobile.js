@@ -3,6 +3,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 import { Logout } from '../redux/ActionCreater';
 import { connect } from 'react-redux';
 import Alert from './Alert';
+import { FadeTransform } from 'react-animation-components';
 const mapStateToProps = (state) => {
   return {
     Auth: state.Auth,
@@ -41,12 +42,19 @@ class HeaderMobile extends Component {
         heading = 'Congrats';
       }
       return (
-        <Alert
-          ml={'100%'}
-          message={this.props.Alert[0].message}
-          cls={'alert alert-'.concat(this.props.Alert[0].AlertType)}
-          heading={heading}
-        />
+        <FadeTransform
+          in
+          transformProps={{
+            exitTransform: 'scale(0.5) translatey(-50%)',
+          }}
+        >
+          <Alert
+            ml={'100%'}
+            message={this.props.Alert[0].message}
+            cls={'alert alert-'.concat(this.props.Alert[0].AlertType)}
+            heading={heading}
+          />
+        </FadeTransform>
       );
     }
   }

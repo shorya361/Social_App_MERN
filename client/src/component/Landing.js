@@ -7,6 +7,7 @@ import { Navbar } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Login } from '../redux/ActionCreater';
+import { FadeTransform } from 'react-animation-components';
 
 const mapDispatchToProps = (dispatch) => ({
   LoginUser: (body) => {
@@ -183,52 +184,66 @@ class Landing extends Component {
         >
           <Navbar style={{ backgroundColor: '#248bc7' }} />
           <div style={{ height: '100px', zIndex: '1' }}>{this.AA('100%')}</div>
-          <div className='container'>{this.ShowForm()}</div>
+          <FadeTransform
+            in
+            transformProps={{
+              exitTransform: 'scale(0.5) translatey(-50%)',
+            }}
+          >
+            <div className='container'>{this.ShowForm()}</div>
+          </FadeTransform>
         </div>
 
         <div
           className='d-none d-xl-block h-100 '
           style={{ padding: '5% 7%', backgroundColor: '#93BEDF' }}
         >
-          <div
-            style={{
-              // borderRadius: '20px',
-              height: '100%',
-              backgroundColor: '#f5f5f6',
+          <FadeTransform
+            in
+            transformProps={{
+              exitTransform: 'scale(0.5) translatey(-50%)',
             }}
           >
             <div
-              className='row w-100 h-100'
               style={{
-                alignContent: 'center',
-                justifyContent: 'center',
-                margin: '0',
+                // borderRadius: '20px',
+                height: '100%',
+                backgroundColor: '#f5f5f6',
               }}
             >
-              <div className='col-8 h-100 p-0'>
-                <Image
-                  src='https://images.pexels.com/photos/583846/pexels-photo-583846.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-                  style={{ height: '100%', width: '100%' }}
-                />
-              </div>
-              <div className='col-4 h-100 p-0'>
-                <div
-                  className='row'
-                  style={{
-                    height: '170px',
-                    paddingLeft: '20%',
-                    paddingBottom: '20px',
-                    paddingTop: '20px',
-                  }}
-                >
-                  {this.AA('73%')}
+              <div
+                className='row w-100 h-100'
+                style={{
+                  alignContent: 'center',
+                  justifyContent: 'center',
+                  margin: '0',
+                }}
+              >
+                <div className='col-8 h-100 p-0'>
+                  <Image
+                    src='https://images.pexels.com/photos/583846/pexels-photo-583846.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+                    style={{ height: '100%', width: '100%' }}
+                  />
                 </div>
-                <div className='container' style={{ padding: '0% 8%' }}>
-                  {this.ShowForm()}
+                <div className='col-4 h-100 p-0'>
+                  <div
+                    className='row'
+                    style={{
+                      height: '170px',
+                      paddingLeft: '20%',
+                      paddingBottom: '20px',
+                      paddingTop: '20px',
+                    }}
+                  >
+                    {this.AA('73%')}
+                  </div>
+                  <div className='container' style={{ padding: '0% 8%' }}>
+                    {this.ShowForm()}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </FadeTransform>
         </div>
       </div>
     );

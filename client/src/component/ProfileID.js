@@ -10,6 +10,8 @@ import { Redirect } from 'react-router-dom';
 import ProfileAdminAccess from './ProfileAdminAccess';
 import { FollowRequest, UnFollowRequest } from '../redux/ActionCreater';
 import Alert from './Alert';
+
+import { Fade, Stagger } from 'react-animation-components';
 const mapStateToProps = (state) => {
   return {
     Auth: state.Auth,
@@ -188,11 +190,15 @@ class ProfileID extends Component {
     if (this.state.user && this.state.user.Posts.length > 0) {
       const posts = this.state.user.Posts.map((eachPost) => {
         return (
-          <Posts
-            key={eachPost._id}
-            user={this.state.user}
-            postDetails={eachPost}
-          />
+          <Stagger in>
+            <Fade in>
+              <Posts
+                key={eachPost._id}
+                user={this.state.user}
+                postDetails={eachPost}
+              />
+            </Fade>
+          </Stagger>
         );
       });
       return posts;

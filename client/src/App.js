@@ -9,7 +9,6 @@ import { Provider } from 'react-redux';
 import { ConfigureStore } from './redux/configureStore';
 import { LoadUser, LoadComments, LoadAllUsers } from './redux/ActionCreater';
 import setAuthToken from './utils/setAuthToken';
-// import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import NewPost from './component/NewPost';
 import FindFriends from './component/FIndFriends';
 import ProfileID from './component/ProfileID';
@@ -43,12 +42,6 @@ class App extends Component {
         <Router>
           <Route exact path='/' component={Landing} />
 
-          {/* <TransitionGroup>
-              <CSSTransition
-                key={this.props.location.key}
-                classNames='page'
-                timeout={300}
-              > */}
           <Switch>
             <PrivateRoute exact path='/Home' component={Home} />
             <PrivateRoute exact path='/profile' component={Profile} />
@@ -60,8 +53,6 @@ class App extends Component {
               component={ProfileUser}
             />
           </Switch>
-          {/* </CSSTransition>
-            </TransitionGroup> */}
         </Router>
       </Provider>
     );

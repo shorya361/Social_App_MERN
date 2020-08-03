@@ -11,6 +11,7 @@ import { deactivate } from '../redux/ActionCreater';
 import Alert from './Alert';
 import { update } from '../redux/ActionCreater';
 import axios from 'axios';
+import { Fade, Stagger } from 'react-animation-components';
 const mapStateToProps = (state) => {
   return {
     Auth: state.Auth,
@@ -260,11 +261,15 @@ class Profile extends Component {
         posts.push(
           this.props.Auth.user.Posts.map((eachPost) => {
             return (
-              <Posts
-                key={eachPost._id}
-                user={this.state.user}
-                postDetails={eachPost}
-              />
+              <Stagger in>
+                <Fade in>
+                  <Posts
+                    key={eachPost._id}
+                    user={this.state.user}
+                    postDetails={eachPost}
+                  />
+                </Fade>
+              </Stagger>
             );
           })
         );

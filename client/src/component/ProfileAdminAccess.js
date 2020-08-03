@@ -11,6 +11,8 @@ import { deactivate } from '../redux/ActionCreater';
 import Alert from './Alert';
 import { update } from '../redux/ActionCreater';
 import axios from 'axios';
+
+import { Fade, Stagger } from 'react-animation-components';
 const mapStateToProps = (state) => {
   return {
     Auth: state.Auth,
@@ -205,67 +207,74 @@ class ProfileAdminAccess extends Component {
   showUser() {
     if (this.state.user) {
       return (
-        <div>
-          <Card style={{ color: '#212E36' }}>
-            <Card.Img
-              variant='top'
-              src={this.state.user.image}
-              style={{ height: '350px' }}
-            />
-            <Card.Body style={{ margin: '0', padding: '0' }}>
-              <Card.Title style={{ marginLeft: '9%', marginBottom: '0px' }}>
-                {this.state.user.name}
-              </Card.Title>
-              <p style={{ marginLeft: '9%' }}>
-                {' '}
-                <i className='fas fa-info-circle'></i>{' '}
-                {this.state.user.description}
-              </p>
-              <div className='row' style={{ width: '90%', marginLeft: '5%' }}>
-                <button
-                  className='btn p-0'
-                  style={{
-                    color: 'white',
-                    backgroundColor: '#248bc7',
-                    width: '80%',
-                    marginLeft: '10%',
+        <Stagger in>
+          <Fade in>
+            <div>
+              <Card style={{ color: '#212E36' }}>
+                <Card.Img
+                  variant='top'
+                  src={this.state.user.image}
+                  style={{ height: '350px' }}
+                />
+                <Card.Body style={{ margin: '0', padding: '0' }}>
+                  <Card.Title style={{ marginLeft: '9%', marginBottom: '0px' }}>
+                    {this.state.user.name}
+                  </Card.Title>
+                  <p style={{ marginLeft: '9%' }}>
+                    {' '}
+                    <i className='fas fa-info-circle'></i>{' '}
+                    {this.state.user.description}
+                  </p>
+                  <div
+                    className='row'
+                    style={{ width: '90%', marginLeft: '5%' }}
+                  >
+                    <button
+                      className='btn p-0'
+                      style={{
+                        color: 'white',
+                        backgroundColor: '#248bc7',
+                        width: '80%',
+                        marginLeft: '10%',
 
-                    height: '40px',
-                    border: '0',
-                    borderRadius: '20px',
-                  }}
-                  onClick={this.redirect}
-                >
-                  Edit Profile
-                </button>
-              </div>
-              <div
-                className='row'
-                style={{ marginTop: '5px', width: '90%', marginLeft: '5%' }}
-              >
-                {this.StatusButton()}
-              </div>
-            </Card.Body>
-            <Card.Footer style={{ padding: '0' }}>
-              <div className='row pt-4' style={{ marginLeft: '9%' }}>
-                <div className='col-10 '>
-                  <i className='fas fa-map-marker-alt'></i>{' '}
-                  {this.state.user.city}
-                </div>
-                <div className='row pt-4'>
-                  <div className='col-5 offset-1'>
-                    <i className='fas fa-users'></i>{' '}
-                    {this.state.user.Followers.length} Followers
+                        height: '40px',
+                        border: '0',
+                        borderRadius: '20px',
+                      }}
+                      onClick={this.redirect}
+                    >
+                      Edit Profile
+                    </button>
                   </div>
-                  <div className='col-5'>
-                    <i className='fas fa-users'></i>{' '}
-                    {this.state.user.Followings.length} Followings
+                  <div
+                    className='row'
+                    style={{ marginTop: '5px', width: '90%', marginLeft: '5%' }}
+                  >
+                    {this.StatusButton()}
                   </div>
-                </div>
-              </div>
-            </Card.Footer>
-          </Card>
-        </div>
+                </Card.Body>
+                <Card.Footer style={{ padding: '0' }}>
+                  <div className='row pt-4' style={{ marginLeft: '9%' }}>
+                    <div className='col-10 '>
+                      <i className='fas fa-map-marker-alt'></i>{' '}
+                      {this.state.user.city}
+                    </div>
+                    <div className='row pt-4'>
+                      <div className='col-5 offset-1'>
+                        <i className='fas fa-users'></i>{' '}
+                        {this.state.user.Followers.length} Followers
+                      </div>
+                      <div className='col-5'>
+                        <i className='fas fa-users'></i>{' '}
+                        {this.state.user.Followings.length} Followings
+                      </div>
+                    </div>
+                  </div>
+                </Card.Footer>
+              </Card>
+            </div>
+          </Fade>
+        </Stagger>
       );
     }
   }
