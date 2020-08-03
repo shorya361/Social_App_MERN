@@ -165,6 +165,7 @@ export const update = (body) => async (dispatch) => {
   }
 };
 
+//FOLLOW A USER
 export const FollowRequest = (body) => async (dispatch) => {
   try {
     let { UserID, follow } = body;
@@ -191,6 +192,7 @@ export const FollowRequest = (body) => async (dispatch) => {
   }
 };
 
+//UNFOLLOW A USER
 export const UnFollowRequest = (body) => async (dispatch) => {
   try {
     let { UserID, follow } = body;
@@ -217,6 +219,33 @@ export const UnFollowRequest = (body) => async (dispatch) => {
   }
 };
 
+//GET TIMELINE FOR CURRENT USER
+export const getTimeline = (body) => async (dispatch) => {
+  try {
+    const { UserID } = body;
+    let Body = JSON.stringify({ UserID });
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const res = await axios.post(
+      'http://localhost:5000/api/Posts/getTimeline',
+      Body,
+      config
+    );
+    // console.log(res.data);
+    const sortedtimeline = res.data.sort((a, b) => a.date - b.date);
+    sortedtimeline.reverse();
+
+    dispatch({
+      type: Action_Types.GETTIMELINE,
+      payload: sortedtimeline,
+    });
+  } catch (error) {
+    dispatch(setAlert('Server Error, Reload the page', 'danger'));
+  }
+};
 //==================================================================================
 //ALERT SECTION
 export const setAlert = (message, AlertType) => (dispatch) => {
@@ -274,6 +303,7 @@ export const addNewComment = (body) => async (dispatch) => {
     dispatch(LoadUser());
     dispatch(setAlert('Comment Added', 'success'));
     dispatch(LoadAllUsers());
+    dispatch(getTimeline({ UserID: UserId }));
   } catch (error) {
     dispatch(setAlert('Cannot add new comment, Plz try again', 'danger'));
   }
@@ -308,8 +338,9 @@ export const updateComment = (body) => async (dispatch) => {
 //DELETE A COMMENT
 export const deleteComment = (body) => async (dispatch) => {
   try {
-    const { comment } = body;
+    const { comment, UserID } = body;
     const Body = JSON.stringify({ comment });
+    // const update = JSON.stringify({ UserID });
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -321,11 +352,11 @@ export const deleteComment = (body) => async (dispatch) => {
       Body,
       config
     );
-    console.log(res.data);
     dispatch(LoadComments());
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
     dispatch(setAlert('Comment Deleted', 'success'));
+    // dispatch(getTimeline(update));
   } catch (error) {
     dispatch(setAlert('Server Error, Plz try again', 'danger'));
   }
@@ -414,7 +445,7 @@ export const Like = (body) => async (dispatch) => {
     );
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
-    console.log(res);
+    dispatch(getTimeline({ UserID: UserID }));
   } catch (error) {
     dispatch(setAlert('Server Error, Plz try again', 'danger'));
   }
@@ -438,7 +469,7 @@ export const UnLike = (body) => async (dispatch) => {
     );
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
-    console.log(res);
+    dispatch(getTimeline({ UserID: UserID }));
   } catch (error) {
     dispatch(setAlert('Server Error, Plz try again', 'danger'));
   }
@@ -461,7 +492,7 @@ export const DownVote = (body) => async (dispatch) => {
     );
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
-    console.log(res);
+    dispatch(getTimeline({ UserID: UserID }));
   } catch (error) {
     dispatch(setAlert('Server Error, Plz try again', 'danger'));
   }
@@ -485,7 +516,7 @@ export const UnDownVote = (body) => async (dispatch) => {
     );
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
-    console.log(res);
+    dispatch(getTimeline({ UserID: UserID }));
   } catch (error) {
     dispatch(setAlert('Server Error, Plz try again', 'danger'));
   }

@@ -13,7 +13,7 @@ export const ConfigureStore = () => {
       Auth: Auth,
       Comments: Comments,
       AllUsers: AllUsers,
-      timeline: timeline,
+      Timeline: timeline,
     }),
     applyMiddleware(thunk, logger)
   );

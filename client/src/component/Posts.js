@@ -19,6 +19,7 @@ import {
   UnLike,
   DownVote,
   UnDownVote,
+  getTimeline,
 } from '../redux/ActionCreater';
 const mapStateToProps = (state) => {
   return {
@@ -50,6 +51,7 @@ const mapDispatchToProps = (dispatch) => ({
   UnDownVote: (body) => {
     dispatch(UnDownVote(body));
   },
+  getTimeline: (body) => dispatch(getTimeline(body)),
 });
 
 class Posts extends Component {
@@ -156,8 +158,7 @@ class Posts extends Component {
                 onClick={this.DisLikePost}
                 style={{ color: 'red', paddingLeft: '0' }}
               >
-                <i className='fas fa-arrow-circle-up'></i>{' '}
-                {this.props.postDetails.Likes.length}
+                <i className='fas fa-arrow-circle-up'></i> {this.state.likes}
               </Nav.Link>
             </Nav>
             <Nav>
@@ -197,7 +198,7 @@ class Posts extends Component {
             <Nav>
               <Nav.Link style={{ color: 'red' }} onClick={this.UnDownVoteCall}>
                 <i className='fas fa-arrow-circle-down'></i>
-                {this.props.postDetails.Dislikes.length}
+                {this.state.dislikes}
               </Nav.Link>
             </Nav>
             <Nav>
@@ -213,6 +214,7 @@ class Posts extends Component {
   }
   componentWillReceiveProps(props) {
     // console.log('hi');
+
     let isLiked = props.Auth.user.Likes.indexOf(this.props.postDetails._id);
     if (isLiked !== -1) {
       this.setState({
@@ -309,13 +311,18 @@ class Posts extends Component {
   }
 
   LikePost = () => {
-    const body = {
+    let body = {
       Post: this.props.postDetails._id,
       UserID: this.props.Auth.user._id,
     };
     this.props.Like(body);
+    // body = {
+    //   UserID: this.props.Auth.user._id,
+    // };
+    // this.props.getTimeline(body);
     this.setState({
       ...this.state,
+      likes: this.state.likes + 1,
       buttons: (
         <div
           className='row'
@@ -344,11 +351,15 @@ class Posts extends Component {
     });
   };
   DisLikePost = () => {
-    const body = {
+    let body = {
       Post: this.props.postDetails._id,
       UserID: this.props.Auth.user._id,
     };
     this.props.UnLike(body);
+    // body = {
+    //   UserID: this.props.Auth.user._id,
+    // };
+    // this.props.getTimeline(body);
     this.setState({
       ...this.state,
       buttons: (
@@ -381,13 +392,18 @@ class Posts extends Component {
 
   DownVoteCall() {
     console.log(this);
-    const body = {
+    let body = {
       Post: this.props.postDetails._id,
       UserID: this.props.Auth.user._id,
     };
     this.props.DownVote(body);
+    // body = {
+    //   UserID: this.props.Auth.user._id,
+    // };
+    // this.props.getTimeline(body);
     this.setState({
       ...this.state,
+      dislikes: this.state.dislikes + 1,
       buttons: (
         <div
           className='row'
@@ -416,11 +432,15 @@ class Posts extends Component {
     });
   }
   UnDownVoteCall() {
-    const body = {
+    let body = {
       Post: this.props.postDetails._id,
       UserID: this.props.Auth.user._id,
     };
     this.props.UnDownVote(body);
+    // body = {
+    //   UserID: this.props.Auth.user._id,
+    // };
+    // this.props.getTimeline(body);
     this.setState({
       ...this.state,
       buttons: (
@@ -476,12 +496,17 @@ class Posts extends Component {
   }
   onCommentSubmit = (e) => {
     e.preventDefault();
-    const body = {
+    let body = {
       Post: this.props.postDetails._id,
       UserId: this.props.Auth.user._id,
       comment: this.state.newcomment,
     };
     this.props.addNewComment(body);
+    // body = {
+    //   UserID: this.props.Auth.user._id,
+    // };
+    // this.props.getTimeline(body);
+
     this.setState({
       ...this.state,
       newcomment: '',
@@ -497,13 +522,17 @@ class Posts extends Component {
     } else {
       img = this.state.uploadedImage;
     }
-    const body = {
+    let body = {
       name: '',
       image: img,
       description: this.state.description,
       PostID: this.props.postDetails._id,
     };
     this.props.updatePost(body);
+    // body = {
+    //   UserID: this.props.Auth.user._id,
+    // };
+    // this.props.getTimeline(body);
     this.setState({
       ...this.state,
       description: this.props.postDetails.description,
@@ -513,8 +542,15 @@ class Posts extends Component {
 
   onDeletePost() {
     this.toggleDeletePost();
-    const body = { Post: this.props.postDetails._id };
+    let body = {
+      Post: this.props.postDetails._id,
+      UserID: this.props.Auth.user._id,
+    };
     this.props.deletePost(body);
+    //   body = {
+    //     UserID: this.props.Auth.user._id,
+    //   };
+    //   this.props.getTimeline(body);
   }
 
   ShowComment = () => {
@@ -809,11 +845,7 @@ class Posts extends Component {
                   }).format(
                     new Date(Date.parse(this.props.postDetails.created))
                   )}{' '}
-                  <i
-                    className='fas fa-grip-lines-vertical'
-                    style={{ marginLeft: '4px' }}
-                  ></i>{' '}
-                  {this.props.postDetails.Likes.length} Upvotes{' '}
+                  {/* {this.props.postDetails.Likes.length} Upvotes{' '}
                   <i
                     className='fas fa-grip-lines-vertical'
                     style={{ marginLeft: '4px' }}
@@ -823,7 +855,7 @@ class Posts extends Component {
                     className='fas fa-grip-lines-vertical'
                     style={{ marginLeft: '4px' }}
                   ></i>{' '}
-                  {this.props.postDetails.comments.length} Comments
+                  {this.props.postDetails.comments.length} Comments */}
                 </p>
               </Card.Body>
               <Card.Footer style={{ padding: '0' }}>

@@ -6,19 +6,37 @@ import { Card } from 'react-bootstrap';
 import Alert from './Alert';
 import { connect } from 'react-redux';
 import Loading from './Loading';
+import Posts from './Posts';
+import { getTimeline } from '../redux/ActionCreater';
 const mapStateToProps = (state) => {
   return {
     Auth: state.Auth,
-
+    Timeline: state.Timeline,
     Alert: state.Alert,
+    Comments: state.Comments,
   };
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  getTimeline: (body) => dispatch(getTimeline(body)),
+});
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.showUser = this.showUser.bind(this);
     this.showAlert = this.showAlert.bind(this);
+    this.showData = this.showData.bind(this);
+  }
+  componentWillReceiveProps(Props) {
+    if (Props.Auth.user) {
+      console.log(Props);
+      if (Props.Timeline.Post === null) {
+        this.props.getTimeline({
+          UserID: Props.Auth.user._id,
+        });
+      }
+    }
   }
   showUser() {
     if (this.props.Auth.user) {
@@ -82,19 +100,42 @@ class Home extends Component {
       );
     }
   }
+  showData() {
+    if (this.props.Auth.user && this.props.Timeline.Post) {
+      // console.log(this.props.Auth.user.Posts);
+      if (this.props.Timeline.Post.length > 0) {
+        const posts = [];
+        posts.push(
+          this.props.Timeline.Post.map((eachPost) => {
+            return (
+              <Posts
+                key={eachPost._id}
+                user={this.props.Auth.user}
+                postDetails={eachPost}
+              />
+            );
+          })
+        );
+        return posts;
+      } else {
+        return <h3>No Posts yet</h3>;
+      }
+    }
+  }
 
   render() {
-    if (this.props.Auth.loading === true || !this.props.Auth.token) {
+    if (
+      this.props.Auth.loading === true ||
+      !this.props.Auth.token
+      // || !this.props.timeline.Post
+    ) {
       return <Loading />;
     }
     return (
       <div style={{ height: '100%' }}>
         <div className='d-xl-none'>
           <HeaderMobile />
-          <div style={{ marginTop: '75px' }}>
-            <h1>Home Page</h1>
-            <p>Coming Soon</p>
-          </div>
+          <div style={{ marginTop: '75px' }}>{this.showData()}</div>
           <FooterMobile />
         </div>
         <div
@@ -141,7 +182,7 @@ class Home extends Component {
                         paddingLeft: '0px',
                       }}
                     >
-                      <h1>Posts coming Soon</h1>
+                      {this.showData()}
                     </div>
                   </div>
                   <div
@@ -174,4 +215,4 @@ class Home extends Component {
   }
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

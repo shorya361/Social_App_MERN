@@ -8,8 +8,6 @@ const User = require('../../models/User'),
 router.get('/', async (req, res) => {
   try {
     const Posts = await Posts.find({});
-    console.log('inside get Arts Route');
-    console.log(Posts);
     res.json({ Posts });
   } catch (error) {
     console.log('error in getting posts :' + error.message);
@@ -157,6 +155,31 @@ router.put('/UnDisLike', async (req, res) => {
     res.json({ user, post });
   } catch (error) {
     console.log('error in upvoting the art :' + error.message);
+  }
+});
+
+// Get Timeline of a user
+router.post('/getTimeline', async (req, res) => {
+  try {
+    const { UserID } = req.body;
+    // console.log(UserID);
+    let user = await User.findById(UserID).populate('Posts');
+    var timeline = [];
+    if (user.Posts.length > 0) {
+      user.Posts.map((eachPost) => {
+        timeline.push(eachPost);
+      });
+    }
+    var post = await Posts.find({});
+    post.map((each) => {
+      if (user.Followings.indexOf(each.author.id) !== -1) {
+        timeline.push(each);
+      }
+    });
+    const sortedtimeline = timeline.sort((a, b) => a.date - b.date);
+    res.json(sortedtimeline.reverse());
+  } catch (error) {
+    console.log('error in getting timeline :' + error.message);
   }
 });
 

@@ -215,7 +215,11 @@ class ProfileID extends Component {
       return (
         <div>
           <Card style={{ color: '#212E36' }}>
-            <Card.Img variant='top' src={this.state.user.image} />
+            <Card.Img
+              variant='top'
+              src={this.state.user.image}
+              style={{ height: '350px' }}
+            />
             <Card.Body style={{ margin: '0', padding: '0' }}>
               <Card.Title style={{ marginLeft: '9%', marginBottom: '0px' }}>
                 {this.state.user.name}
@@ -368,15 +372,20 @@ class ProfileID extends Component {
                     }}
                   >
                     <div
-                      style={{
-                        height: '2%',
-                        width: '100%',
-                        paddingTop: '5%',
-                      }}
+                      className='row'
+                      style={{ width: '100%', height: '100%' }}
                     >
-                      {this.showAlert()}
+                      <div
+                        style={{
+                          height: '2%',
+                          width: '100%',
+                          paddingTop: '5%',
+                        }}
+                      >
+                        {this.showAlert()}
+                      </div>
+                      <div>{this.showUser()}</div>
                     </div>
-                    <div>{this.showUser()}</div>
                   </div>
                 </div>
               </div>

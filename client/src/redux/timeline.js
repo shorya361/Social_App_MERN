@@ -7,6 +7,10 @@ export const timeline = (
   action
 ) => {
   switch (action.type) {
+    case ActionTypes.GETTIMELINE:
+      return {
+        Post: action.payload,
+      };
     default:
       return state;
   }

@@ -26,8 +26,8 @@ class FindFriends extends Component {
             return (
               <div
                 key={each._id}
-                className='col-3 p-0'
-                style={{ margin: '0 2%' }}
+                className='col-2 p-0'
+                style={{ margin: '1% 4%' }}
               >
                 <Card style={{ height: '100%', width: '250px' }}>
                   <Image
@@ -120,14 +120,20 @@ class FindFriends extends Component {
                           >
                             <div className='row w-100'>
                               <Card.Title
-                                style={{ margin: '0', textAlign: 'left' }}
+                                style={{
+                                  margin: '0',
+                                  textAlign: 'left',
+                                  paddingLeft: '15%',
+                                }}
                               >
                                 {each.name}
                               </Card.Title>
                             </div>
 
                             <div className='row w-100'>
-                              <Card.Text>{each.description}</Card.Text>
+                              <Card.Text style={{ paddingLeft: '15%' }}>
+                                {each.description}
+                              </Card.Text>
                             </div>
                           </Nav.Link>
                         </Nav>
@@ -200,8 +206,7 @@ class FindFriends extends Component {
                 >
                   <CardGroup>
                     <div
-                      className='container '
-                      style={{ margin: '0', paddingTop: '3%' }}
+                      style={{ margin: '0', width: '100%', paddingTop: '3%' }}
                     >
                       <div className='row' style={{ width: '100%' }}>
                         {' '}
