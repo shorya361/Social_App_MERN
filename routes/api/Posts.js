@@ -28,6 +28,7 @@ router.post('/addPost', async (req, res) => {
       author: {
         id: userID,
         username: user.name,
+        image: user.image,
       },
     });
     await newPost.save();
@@ -176,7 +177,10 @@ router.post('/getTimeline', async (req, res) => {
         timeline.push(each);
       }
     });
-    const sortedtimeline = timeline.sort((a, b) => a.date - b.date);
+    const sortedtimeline = timeline.sort(function (a, b) {
+      return new Date(a.created) - new Date(b.created);
+    });
+    sortedtimeline.reverse();
     res.json(sortedtimeline.reverse());
   } catch (error) {
     console.log('error in getting timeline :' + error.message);

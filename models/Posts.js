@@ -12,6 +12,7 @@ var ArtSchema = new mongoose.Schema({
       ref: 'User',
     },
     username: String,
+    image: String,
   },
   comments: [
     {
