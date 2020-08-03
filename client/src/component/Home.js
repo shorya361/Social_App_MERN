@@ -135,7 +135,9 @@ class Home extends Component {
       <div style={{ height: '100%' }}>
         <div className='d-xl-none'>
           <HeaderMobile />
-          <div style={{ marginTop: '75px' }}>{this.showData()}</div>
+          <div style={{ marginTop: '75px', marginBottom: '75px' }}>
+            {this.showData()}
+          </div>
           <FooterMobile />
         </div>
         <div

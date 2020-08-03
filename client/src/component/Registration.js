@@ -22,8 +22,8 @@ class Registration extends Component {
       name: '',
       email: '',
       password: '',
-      city: '',
-      description: '',
+      city: 'unavailable',
+      description: 'unavailable',
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);

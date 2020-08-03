@@ -10,6 +10,7 @@ import {
 } from 'react-bootstrap';
 import { Modal, ModalBody, ModalHeader, Label } from 'reactstrap';
 import { connect } from 'react-redux';
+import Moment from 'react-moment';
 import Comment from './Comment';
 import {
   addNewComment,
@@ -760,7 +761,10 @@ class Posts extends Component {
                     src={this.props.Auth.user.image}
                   />
                 </div>
-                <div className='col-9' style={{ padding: '0' }}>
+                <div
+                  className='col-9'
+                  style={{ padding: '0', paddingTop: '3%' }}
+                >
                   <Nav.Link
                     style={{ color: 'black', padding: '0' }}
                     href={`/Userprofile/${this.props.postDetails.author.id}`}
@@ -773,7 +777,11 @@ class Posts extends Component {
               <h4 style={{ marginLeft: '2%' }}>
                 {this.props.postDetails.description}
               </h4>
+
               <Image src={this.props.postDetails.image} fluid />
+              <p style={{ margin: '0' }}>
+                <Moment fromNow>{this.props.postDetails.created}</Moment>
+              </p>
             </Card.Body>
             <Card.Footer style={{ padding: '0' }}>
               {this.state.buttons}
@@ -815,7 +823,7 @@ class Posts extends Component {
                   <div className='col-9 p-0'>
                     <h3 style={{ marginBottom: '0', color: 'black' }}>
                       <Nav.Link
-                        style={{ color: 'black' }}
+                        style={{ color: 'black', paddingTop: '3%' }}
                         href={`/Userprofile/${this.props.postDetails.author.id}`}
                       >
                         {this.props.postDetails.author.username}
@@ -837,14 +845,8 @@ class Posts extends Component {
                   <Card.Img src={this.props.postDetails.image} />
                 </Card>
                 <p style={{ margin: '0', marginTop: '5px' }}>
-                  Created on :{' '}
-                  {new Intl.DateTimeFormat('en-US', {
-                    year: 'numeric',
-                    month: 'short',
-                    day: '2-digit',
-                  }).format(
-                    new Date(Date.parse(this.props.postDetails.created))
-                  )}{' '}
+                  <Moment fromNow>{this.props.postDetails.created}</Moment>
+
                   {/* {this.props.postDetails.Likes.length} Upvotes{' '}
                   <i
                     className='fas fa-grip-lines-vertical'
