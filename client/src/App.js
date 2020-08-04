@@ -13,7 +13,7 @@ import NewPost from './component/NewPost';
 import FindFriends from './component/FIndFriends';
 import ProfileID from './component/ProfileID';
 import PrivateRoute from './component/PrivateRoute';
-
+import UpdatePassword from './component/UpdatePassword';
 const store = ConfigureStore();
 
 if (localStorage.token) {
@@ -41,7 +41,15 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <Route exact path='/' component={Landing} />
-
+          <Route
+            path='/password/reset/:userId/:token'
+            render={({ match }) => (
+              <UpdatePassword
+                userId={match.params.userId}
+                token={match.params.token}
+              />
+            )}
+          />
           <Switch>
             <PrivateRoute exact path='/Home' component={Home} />
             <PrivateRoute exact path='/profile' component={Profile} />

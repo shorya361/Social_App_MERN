@@ -67,19 +67,19 @@ class Landing extends Component {
                 className='btn btn-social-icon btn-github'
                 href='https://github.com/shorya361'
               >
-                <i className='fa fa-github'></i>
+                <i className='fa fa-github' style={{ color: 'white' }}></i>
               </a>
               <a
                 className='btn btn-social-icon btn-linkedin'
                 href='https://www.linkedin.com/in/shorya-upadhayay-b5827b188/'
               >
-                <i className='fa fa-linkedin'></i>
+                <i className='fa fa-linkedin' style={{ color: 'white' }}></i>
               </a>
               <a
                 className='btn btn-social-icon btn-instagram'
                 href='https://www.instagram.com/punk_gts_434/?hl=en'
               >
-                <i className='fa fa-instagram'></i>
+                <i className='fa fa-instagram' style={{ color: 'white' }}></i>
               </a>
             </div>
           </div>

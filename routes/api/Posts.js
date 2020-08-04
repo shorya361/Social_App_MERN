@@ -163,8 +163,9 @@ router.put('/UnDisLike', async (req, res) => {
 router.post('/getTimeline', async (req, res) => {
   try {
     const { UserID } = req.body;
-    // console.log(UserID);
     let user = await User.findById(UserID).populate('Posts');
+    // console.log(user);
+
     var timeline = [];
     if (user.Posts.length > 0) {
       user.Posts.map((eachPost) => {

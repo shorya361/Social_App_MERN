@@ -19,6 +19,7 @@
     "express-validator": "^6.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.22",
+    "nodemailer": "^6.4.11",
     "react-redux-form": "^1.16.14",
     "request": "^2.88.2"
   },

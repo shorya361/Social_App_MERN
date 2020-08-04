@@ -245,6 +245,30 @@ export const getTimeline = (body) => async (dispatch) => {
     dispatch(setAlert('Server Error, Reload the page', 'danger'));
   }
 };
+
+//Reset password
+export const resetPassword = (body) => async (dispatch) => {
+  try {
+    const { email } = body;
+    var url = 'http://localhost:5000/api/users/resetPassword/' + email;
+    // console.log(url);
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const res = await axios.post(url, {}, config);
+    // console.log(res);
+    if (res.data.errors) {
+      dispatch(setAlert(res.data.errors.msg, 'danger'));
+    } else {
+      dispatch(setAlert(res.data, 'success'));
+    }
+  } catch (error) {
+    dispatch(setAlert('Server Error, try again', 'danger'));
+    console.log('error in reset Password request :' + error.message);
+  }
+};
 //==================================================================================
 //ALERT SECTION
 export const setAlert = (message, AlertType) => (dispatch) => {
@@ -318,13 +342,11 @@ export const updateComment = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-
-    const res = await axios.put(
+    await axios.put(
       'http://localhost:5000/api/comment/updateComment',
       Body,
       config
     );
-    console.log(res.data);
     dispatch(LoadComments());
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
@@ -337,7 +359,7 @@ export const updateComment = (body) => async (dispatch) => {
 //DELETE A COMMENT
 export const deleteComment = (body) => async (dispatch) => {
   try {
-    const { comment, UserID } = body;
+    const { comment } = body;
     const Body = JSON.stringify({ comment });
     // const update = JSON.stringify({ UserID });
     const config = {
@@ -345,8 +367,7 @@ export const deleteComment = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-
-    const res = await axios.put(
+    await axios.put(
       'http://localhost:5000/api/comment/deleteComment',
       Body,
       config
@@ -442,11 +463,7 @@ export const Like = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    let res = await axios.put(
-      'http://localhost:5000/api/Posts/Like',
-      Body,
-      config
-    );
+    await axios.put('http://localhost:5000/api/Posts/Like', Body, config);
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
     dispatch(getTimeline({ UserID: UserID }));
@@ -466,11 +483,7 @@ export const UnLike = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    let res = await axios.put(
-      'http://localhost:5000/api/Posts/UnLike',
-      Body,
-      config
-    );
+    await axios.put('http://localhost:5000/api/Posts/UnLike', Body, config);
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
     dispatch(getTimeline({ UserID: UserID }));
@@ -489,11 +502,7 @@ export const DownVote = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    let res = await axios.put(
-      'http://localhost:5000/api/Posts/DownVote',
-      Body,
-      config
-    );
+    await axios.put('http://localhost:5000/api/Posts/DownVote', Body, config);
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
     dispatch(getTimeline({ UserID: UserID }));
@@ -513,11 +522,7 @@ export const UnDownVote = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    let res = await axios.put(
-      'http://localhost:5000/api/Posts/UnDisLike',
-      Body,
-      config
-    );
+    await axios.put('http://localhost:5000/api/Posts/UnDisLike', Body, config);
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
     dispatch(getTimeline({ UserID: UserID }));

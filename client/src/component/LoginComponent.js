@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Login } from '../redux/ActionCreater';
-import { Form, Image } from 'react-bootstrap';
-import { Label } from 'reactstrap';
-
+import { Login, resetPassword } from '../redux/ActionCreater';
+import { Form, Image, FormControl } from 'react-bootstrap';
+import { Modal, ModalBody, ModalHeader, Label } from 'reactstrap';
 const mapDispatchToProps = (dispatch) => ({
   LoginUser: (body) => {
     dispatch(Login(body));
+  },
+  resetPassword: (body) => {
+    dispatch(resetPassword(body));
   },
 });
 
@@ -17,9 +19,13 @@ class LoginComponent extends Component {
     this.state = {
       password: '',
       email: '',
+      forgotemail: '',
+      modal: false,
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.sendMail = this.sendMail.bind(this);
+    this.forgotModal = this.forgotModal.bind(this);
   }
   onChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
@@ -33,14 +39,78 @@ class LoginComponent extends Component {
     };
     this.props.LoginUser(body);
     this.setState({
+      ...this.state,
       email: '',
       password: '',
     });
   };
 
+  forgotModal() {
+    this.setState({
+      ...this.state,
+      modal: !this.state.modal,
+      forgotemail: '',
+    });
+  }
+  sendMail(e) {
+    e.preventDefault();
+    const body = {
+      email: this.state.forgotemail,
+    };
+    this.props.resetPassword(body);
+    this.setState({
+      ...this.state,
+      modal: !this.state.modal,
+      forgotemail: '',
+      email: '',
+      password: '',
+    });
+  }
   render() {
     return (
       <div>
+        <Modal
+          isOpen={this.state.modal}
+          toggle={this.forgotModal}
+          centered
+          style={{ color: '#212E36' }}
+        >
+          <ModalHeader toggle={this.forgotModal}>Reset Password </ModalHeader>
+          <ModalBody>
+            <h4>
+              It happens to the best of us. Enter your email and we'll send you
+              reset instructions.
+            </h4>
+            <Form onSubmit={this.sendMail}>
+              <Label htmlFor='forgotmail' style={{ margin: '0' }}>
+                Enter Mail
+              </Label>
+
+              <FormControl
+                type='text'
+                className='mr-sm-1'
+                id='forgotemail'
+                value={this.state.forgotemail}
+                onChange={this.onChange}
+              />
+
+              <button
+                className='btn'
+                type='submit'
+                style={{
+                  color: 'white',
+                  backgroundColor: '#248bc7',
+                  border: '0',
+                  borderRadius: '20px',
+                }}
+                // onClick={this.onDeletePost}
+              >
+                Send Mail.
+              </button>
+            </Form>
+          </ModalBody>
+        </Modal>
+
         <Form onSubmit={this.onSubmit}>
           <div style={{ textAlign: 'center' }}>
             <Image
@@ -72,6 +142,11 @@ class LoginComponent extends Component {
               onChange={this.onChange}
             />
           </Form.Row>
+          <p style={{ textAlign: 'right' }}>
+            <a href='#' onClick={this.forgotModal} style={{ color: 'black' }}>
+              forgot password
+            </a>
+          </p>
           <Form.Row style={{ marginBottom: '2%' }}>
             <button
               className='btn'

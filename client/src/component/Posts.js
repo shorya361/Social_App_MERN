@@ -530,10 +530,6 @@ class Posts extends Component {
       UserID: this.props.Auth.user._id,
     };
     this.props.updatePost(body);
-    // body = {
-    //   UserID: this.props.Auth.user._id,
-    // };
-    // this.props.getTimeline(body);
     this.setState({
       ...this.state,
       description: this.props.postDetails.description,

@@ -6,6 +6,7 @@ const Comment = require('../../models/comments');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const nodemailer = require('nodemailer');
 // GET api/users
 // Public
 // Register User
@@ -153,6 +154,74 @@ router.put('/unfollow', async (req, res) => {
     res.json({ user, following });
   } catch (error) {
     console.log('error in Following route :' + error.message);
+  }
+});
+
+//===========================================================================================
+//Reset Password section
+// Its BIG.
+const usePasswordHashToMakeToken = ({
+  password: passwordHash,
+  _id: userId,
+}) => {
+  const secret = passwordHash;
+  const token = jwt.sign({ userId }, secret, {
+    expiresIn: 3600, // 1 hour
+  });
+  return token;
+};
+
+const resetPasswordTemplate = (user, url) => {
+  const from = config.get('email');
+  const to = user.email;
+  const subject = '🌻Art App Password Reset 🌻';
+  const html = `
+  <p>Hey ${user.displayName || user.email},</p>
+  <p>We heard that you lost your password. Sorry about that!</p>
+  <p>But don’t worry! You can use the following link to reset your password:</p>
+  <a href=${url}>${url}</a>
+  <p>If you don’t use this link within 1 hour, it will expire.</p>
+  <p>Do something outside today! </p>
+  <p>–Your Friend Shorya Upadhayay.</p>
+  `;
+
+  return { from, to, subject, html };
+};
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: config.get('email'),
+    pass: config.get('password'),
+  },
+});
+
+//FOrgot Password
+router.post('/resetPassword/:email', async (req, res) => {
+  try {
+    const { email } = req.params;
+    // console.log(email);
+    let user = await User.findOne({ email });
+    if (!user) {
+      return res.json({ errors: { msg: ' This Email ID is not available' } });
+    }
+
+    const token = usePasswordHashToMakeToken(user);
+    const url =
+      'http://localhost:3000/password/reset/' + user._id + '/' + token;
+
+    const emailTemplate = resetPasswordTemplate(user, url);
+    transporter.sendMail(emailTemplate, (err, info) => {
+      if (err) {
+        console.log('Error sending email');
+        return res.json({ errors: { msg: 'Error sending email' } });
+      } else {
+        console.log(`** Email sent **`, info.response);
+        return res.json('** Email sent **');
+      }
+    });
+  } catch (error) {
+    console.log('error in reset Password route :' + error.message);
   }
 });
 
