@@ -6,9 +6,9 @@ import { Card } from 'react-bootstrap';
 import Alert from './Alert';
 import { connect } from 'react-redux';
 import Loading from './Loading';
-import Posts from './Posts';
 import { getTimeline } from '../redux/ActionCreater';
 import { Fade, Stagger } from 'react-animation-components';
+import Posts from './Posts';
 const mapStateToProps = (state) => {
   return {
     Auth: state.Auth,
@@ -25,13 +25,19 @@ const mapDispatchToProps = (dispatch) => ({
 class Home extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      name: '',
+    };
     this.showUser = this.showUser.bind(this);
     this.showAlert = this.showAlert.bind(this);
     this.showData = this.showData.bind(this);
   }
   componentWillReceiveProps(Props) {
     if (Props.Auth.user) {
-      console.log(Props);
+      // console.log(Props);
+      // this.setState({
+      //   name: Props.Auth.user.name,
+      // });
       if (Props.Timeline.Post === null) {
         this.props.getTimeline({
           UserID: Props.Auth.user._id,
@@ -115,6 +121,7 @@ class Home extends Component {
                     key={eachPost._id}
                     user={this.props.Auth.user}
                     postDetails={eachPost}
+                    // name={this.state.name}
                   />
                 </Fade>
               </Stagger>

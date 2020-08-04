@@ -234,7 +234,6 @@ export const getTimeline = (body) => async (dispatch) => {
       Body,
       config
     );
-    // console.log(res.data);
     const sortedtimeline = res.data.sort((a, b) => a.date - b.date);
     sortedtimeline.reverse();
 
@@ -391,7 +390,7 @@ export const updatePost = (body) => async (dispatch) => {
   try {
     // console.log(body);
 
-    const { name, image, description, PostID } = body;
+    const { name, image, description, PostID, UserID } = body;
     const Body = JSON.stringify({ name, image, description, PostID });
     const config = {
       headers: {
@@ -402,6 +401,7 @@ export const updatePost = (body) => async (dispatch) => {
     // console.log(res);
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
+    dispatch(getTimeline({ UserID: UserID }));
     dispatch(setAlert('Post Updated', 'success'));
   } catch (error) {
     dispatch(setAlert('Server Error, Plz try again', 'danger'));
@@ -411,7 +411,8 @@ export const updatePost = (body) => async (dispatch) => {
 //DELETE POST
 export const deletePost = (body) => async (dispatch) => {
   try {
-    // const Body = JSON.stringify({ Post });
+    const { UserID } = body;
+
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -422,6 +423,9 @@ export const deletePost = (body) => async (dispatch) => {
     await axios.put('http://localhost:5000/api/Posts/deletePost', body, config);
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
+    dispatch(LoadComments());
+    dispatch(getTimeline({ UserID: UserID }));
+
     dispatch(setAlert('Post Deleted', 'success'));
   } catch (error) {
     dispatch(setAlert('Server Error, Plz try again', 'danger'));

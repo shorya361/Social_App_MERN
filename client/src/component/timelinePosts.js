@@ -55,7 +55,7 @@ const mapDispatchToProps = (dispatch) => ({
   getTimeline: (body) => dispatch(getTimeline(body)),
 });
 
-class Posts extends Component {
+class timelinePosts extends Component {
   constructor() {
     super();
     this.state = {
@@ -623,27 +623,27 @@ class Posts extends Component {
   render = () => {
     var option = null;
 
-    if (
-      this.props.postDetails.author.id === this.props.Auth.user._id ||
-      this.props.Auth.user.isAdmin
-    ) {
-      option = (
-        <Nav style={{ padding: '0', color: 'black' }}>
-          <NavDropdown
-            title='options'
-            style={{ paddingLeft: 'auto', color: 'black' }}
-          >
-            <NavDropdown.Item onClick={this.toggleUpdatePost}>
-              <i className='far fa-edit'></i>Update
-            </NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item onClick={this.toggleDeletePost}>
-              <i className='far fa-trash-alt'></i>Delete
-            </NavDropdown.Item>
-          </NavDropdown>
-        </Nav>
-      );
-    }
+    // if (
+    //   this.props.postDetails.author.id === this.props.Auth.user._id ||
+    //   this.props.Auth.user.isAdmin
+    // ) {
+    //   option = (
+    //     <Nav style={{ padding: '0', color: 'black' }}>
+    //       <NavDropdown
+    //         title='options'
+    //         style={{ paddingLeft: 'auto', color: 'black' }}
+    //       >
+    //         <NavDropdown.Item onClick={this.toggleUpdatePost}>
+    //           <i className='far fa-edit'></i>Update
+    //         </NavDropdown.Item>
+    //         <NavDropdown.Divider />
+    //         <NavDropdown.Item onClick={this.toggleDeletePost}>
+    //           <i className='far fa-trash-alt'></i>Delete
+    //         </NavDropdown.Item>
+    //       </NavDropdown>
+    //     </Nav>
+    //   );
+    // }
 
     return (
       <div>
@@ -872,4 +872,4 @@ class Posts extends Component {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Posts);
+export default connect(mapStateToProps, mapDispatchToProps)(timelinePosts);
