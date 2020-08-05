@@ -232,7 +232,9 @@ router.post('/ChangePassword/:userID/:token', async (req, res) => {
     let user = await User.findById(userID);
     const secret = user.password;
     const payload = jwt.decode(token, secret);
-    if (payload.userId == user._id) {
+    const currentTime = parseInt(Date.now() / 1000);
+
+    if (payload.userId == user._id && currentTime < payload.exp) {
       // res.json('tada');
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, salt);

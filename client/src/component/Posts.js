@@ -754,7 +754,7 @@ class Posts extends Component {
                     roundedCircle
                     width={55}
                     height={55}
-                    src={this.props.Auth.user.image}
+                    src={this.props.postDetails.author.image}
                   />
                 </div>
                 <div
@@ -811,7 +811,7 @@ class Posts extends Component {
                     <Image
                       width={64}
                       height={64}
-                      src={this.props.Auth.user.image}
+                      src={this.props.postDetails.author.image}
                       roundedCircle
                       style={{ margin: '17%' }}
                     />

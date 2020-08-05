@@ -139,10 +139,14 @@ class Comment extends Component {
                 <ModalBody style={{ padding: '0' }}>
                   <ListGroup>
                     <ListGroup.Item onClick={this.toggleUpdateComment}>
-                      <i className='far fa-edit'>Edit Comment</i>
+                      <a href='#' style={{ color: 'black' }}>
+                        <i className='far fa-edit'> Edit Comment</i>
+                      </a>
                     </ListGroup.Item>
                     <ListGroup.Item onClick={this.toggleDelete}>
-                      <i className='far fa-trash-alt'>Delete Comment</i>
+                      <a href='#' style={{ color: 'black' }}>
+                        <i className='far fa-trash-alt'> Delete Comment</i>
+                      </a>
                     </ListGroup.Item>
                   </ListGroup>
                 </ModalBody>

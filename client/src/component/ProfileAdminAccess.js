@@ -281,16 +281,20 @@ class ProfileAdminAccess extends Component {
 
   showData() {
     if (this.state.user) {
-      const posts = this.state.user.Posts.map((eachPost) => {
-        return (
-          <Posts
-            key={eachPost._id}
-            user={this.state.user}
-            postDetails={eachPost}
-          />
-        );
-      });
-      return posts;
+      if (this.state.user.Posts.length > 0) {
+        const posts = this.state.user.Posts.map((eachPost) => {
+          return (
+            <Posts
+              key={eachPost._id}
+              user={this.state.user}
+              postDetails={eachPost}
+            />
+          );
+        });
+        return posts;
+      } else {
+        return <h3>No posts Yet.</h3>;
+      }
     }
   }
 

@@ -173,9 +173,12 @@ router.post('/getTimeline', async (req, res) => {
       });
     }
     var post = await Posts.find({});
-    post.map((each) => {
+    post.map(async (each) => {
       if (user.Followings.indexOf(each.author.id) !== -1) {
-        timeline.push(each);
+        let found = await User.findById(each.author.id);
+        if (found.activated) {
+          timeline.push(each);
+        }
       }
     });
     const sortedtimeline = timeline.sort(function (a, b) {

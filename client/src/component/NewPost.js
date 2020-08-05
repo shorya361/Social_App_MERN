@@ -39,7 +39,7 @@ class NewPost extends Component {
     this.setState({
       loading: (
         <span
-          class='spinner-border spinner-border-sm mr-2'
+          className='spinner-border spinner-border-sm mr-2'
           role='status'
           aria-hidden='true'
         ></span>

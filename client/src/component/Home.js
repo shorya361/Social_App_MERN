@@ -15,6 +15,7 @@ const mapStateToProps = (state) => {
     Timeline: state.Timeline,
     Alert: state.Alert,
     Comments: state.Comments,
+    AllUsers: state.AllUsers,
   };
 };
 
@@ -115,10 +116,9 @@ class Home extends Component {
         posts.push(
           this.props.Timeline.Post.map((eachPost) => {
             return (
-              <Stagger in>
+              <Stagger in key={eachPost._id}>
                 <Fade in>
                   <Posts
-                    key={eachPost._id}
                     user={this.props.Auth.user}
                     postDetails={eachPost}
                     // name={this.state.name}
@@ -130,7 +130,21 @@ class Home extends Component {
         );
         return posts;
       } else {
-        return <h3>No Posts yet</h3>;
+        return (
+          <div className='container'>
+            <h4>Welcome {this.props.Auth.user.name}</h4>
+            <p>
+              To Keep your dashboard filled with exciting posts, please follow
+              other users and see their exciting posts here.
+            </p>
+            <p>Since you've made this far, plz update your profile as well.</p>
+            <p>
+              {' '}
+              I am thankful to you and appreciate your efforts to see my
+              project.{' '}
+            </p>
+          </div>
+        );
       }
     }
   }

@@ -290,8 +290,8 @@ class Profile extends Component {
           style={{ color: '#212E36' }}
         >
           <ModalHeader toggle={this.toggleDeactivate}>
-            Note: If you deactivate you account, You wont be able to see your
-            friends' posts. And neither they can see yours.
+            Note: If you deactivate your account, You'll be a ghost for other
+            except yours truly Admin.
           </ModalHeader>
           <ModalBody>
             <button
