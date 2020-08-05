@@ -225,4 +225,24 @@ router.post('/resetPassword/:email', async (req, res) => {
   }
 });
 
+router.post('/ChangePassword/:userID/:token', async (req, res) => {
+  try {
+    const { userID, token } = req.params;
+    const { password } = req.body;
+    let user = await User.findById(userID);
+    const secret = user.password;
+    const payload = jwt.decode(token, secret);
+    if (payload.userId == user._id) {
+      // res.json('tada');
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(password, salt);
+      await user.save();
+      return res.json('password has been Changed!');
+    }
+    return res.json({ errors: { msg: 'Token has expired' } });
+  } catch (error) {
+    console.log('error in Change Password route :' + error.message);
+  }
+});
+
 module.exports = router;

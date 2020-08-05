@@ -60,7 +60,7 @@ class Registration extends Component {
         <Form onSubmit={this.onSubmit}>
           <div style={{ textAlign: 'center' }}>
             <Image
-              src='https://lh3.googleusercontent.com/oGbtZslNXIIOLSZssJpFURphI7xk5GEZTv2bz2k_7xFWHoO8RgKHvBZiLUEhtcghR0TCvvhANCR1uz4EWYLJzMWzNPVkVly4iOFL_AieoDI_YKOoVsw-vqOEHRMto7fzDmzQMN_qDToNu1eebGLePJU7ah08scJ57OqAeaH3ogGacgk9FO-6TTnJZIVZHf8hG-QtZfpx3S1TNfi5sxv8_jBYh5Z2cWgSfXA9N2MgQuRc6BDatpRZP7kHO4gB1lKmtZ0yh9fo1hWeRQhjayORrduIaE0on3nl1yoqfvGJ3cqP2l77f1Ain59Q6nv7PUjrxPqqDsFe5TRxxmkrr2iSSjTMETLoqtJj_afvZ7YC-0_YqTM-oUAzrR02NHAXRpoeWJcpwpcvSu-Z4gFCUCE8Yy_LYMFT6XQOwyJQsAZWunfx8BmvQHfzMCUQ0fah9diFKAXGwPZx8uoEzhrHyRvFjNePfM-5NPT0v5whnmOfatfIcd7rJOz8_bMD3WuRzlZSh7dFMeS2kaZJ3uoyMu4-qwFfTu6m0g_9TeGbTIvjpZXfI5Klz5yeONUPTq4ssqNo6eUJWbJhZV3Sv0OTD04sryn9rvJe05_6ozcD6Z7b4DDXQgU_Bzx59FpeBbU0emIZD9wMQ1_kE8CSW1oX4xCeAZ1CsWRQ4Z1sCkwuUEqmDG5DRSylZv0c3BuHLpZL=w327-h220-no?authuser=0'
+              src='https://res.cloudinary.com/shorya361/image/upload/v1596630839/Images/t4t5mbjzudefpytpbw38.png'
               alt=''
               width='100'
               height='70'

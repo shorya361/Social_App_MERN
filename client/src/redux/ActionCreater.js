@@ -269,6 +269,33 @@ export const resetPassword = (body) => async (dispatch) => {
     console.log('error in reset Password request :' + error.message);
   }
 };
+
+//Change password
+export const ChangePassword = (body) => async (dispatch) => {
+  try {
+    console.log(body);
+    const { UserID, token, password } = body;
+    const Body = JSON.stringify({ password });
+    var url =
+      'http://localhost:5000/api/users/ChangePassword/' + UserID + '/' + token;
+    console.log(url);
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const res = await axios.post(url, Body, config);
+    if (res.data.errors) {
+      dispatch(setAlert(res.data.errors.msg, 'danger'));
+    } else {
+      dispatch(setAlert(res.data, 'success'));
+    }
+  } catch (error) {
+    dispatch(setAlert('Server Error, try again', 'danger'));
+    console.log('error in reset Password request :' + error.message);
+  }
+};
 //==================================================================================
 //ALERT SECTION
 export const setAlert = (message, AlertType) => (dispatch) => {

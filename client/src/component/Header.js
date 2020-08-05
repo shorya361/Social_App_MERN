@@ -89,7 +89,7 @@ class Header extends Component {
           }}
         >
           <img
-            src='https://lh3.googleusercontent.com/pw/ACtC-3dlxShfWFc9Kn8BGyGTNZcWzLkfr87DiDB9QG85Unn10PwI-Vug3n5h6Iupu8JyHfrXR-7C9-BfPAWsdNOGtn8gyNyszFlU49_KHFrgYBlsqB55ZLHjdYNG_jNeSRmoB75bE6ulXHDfEzCG85UyUYLa=w932-h624-no?authuser=0'
+            src='https://res.cloudinary.com/shorya361/image/upload/v1596632133/Images/vh7nz4q4rafuklqdrewt.png'
             height='40'
             width='100%'
             alt='Art-App'

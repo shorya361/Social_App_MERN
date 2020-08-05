@@ -74,7 +74,7 @@ class HeaderMobile extends Component {
         <Navbar fixed='top' style={{ backgroundColor: '#248bc7' }}>
           <Navbar.Brand href='/'>
             <img
-              src='https://lh3.googleusercontent.com/pw/ACtC-3dlxShfWFc9Kn8BGyGTNZcWzLkfr87DiDB9QG85Unn10PwI-Vug3n5h6Iupu8JyHfrXR-7C9-BfPAWsdNOGtn8gyNyszFlU49_KHFrgYBlsqB55ZLHjdYNG_jNeSRmoB75bE6ulXHDfEzCG85UyUYLa=w932-h624-no?authuser=0'
+              src='https://res.cloudinary.com/shorya361/image/upload/v1596632133/Images/vh7nz4q4rafuklqdrewt.png'
               height='35'
               width='55'
               alt='Art-App'
