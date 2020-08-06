@@ -183,7 +183,7 @@ class FindFriends extends Component {
       <div style={{ height: '100%' }}>
         <div className='d-xl-none' style={{ height: '100%' }}>
           <HeaderMobile />
-          <div style={{ marginTop: '75px' }}>
+          <div style={{ marginTop: '75px', marginBottom: '70px' }}>
             <h4 style={{ textAlign: 'center' }}>Add Friends</h4>
             {this.ShowUsersMobile()}
           </div>

@@ -96,6 +96,7 @@ router.put('/updateProfile', async (req, res) => {
     user.Posts.map(async (eachPost) => {
       let post = await Posts.findById(eachPost);
       post.author.username = name;
+      post.author.image = Image;
       await post.save();
     });
     user.comments.map(async (eachComment) => {
