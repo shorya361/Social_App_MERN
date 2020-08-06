@@ -217,7 +217,7 @@ class FindFriends extends Component {
                 <h2 style={{ textAlign: 'center' }}>Add Friends</h2>
                 <div
                   className='scrollbar'
-                  style={{ height: '680px', width: '100%', overflowX: 'auto' }}
+                  style={{ height: '640px', width: '100%', overflowX: 'auto' }}
                 >
                   <CardGroup>
                     <div

@@ -567,7 +567,7 @@ class Profile extends Component {
                       <div
                         className='scrollbar'
                         style={{
-                          height: '710px',
+                          height: '650px',
                           marginTop: '2%',
                           overflowY: 'auto',
                           paddingLeft: '0px',
