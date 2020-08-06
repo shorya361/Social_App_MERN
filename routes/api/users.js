@@ -52,7 +52,7 @@ router.post(
       // console.log(user);
       jwt.sign(
         payload,
-        config.get('jwtsecret'),
+        process.env.jwtsecret,
         { expiresIn: 36000 },
         (err, token) => {
           if (err) {
@@ -172,7 +172,7 @@ const usePasswordHashToMakeToken = ({
 };
 
 const resetPasswordTemplate = (user, url) => {
-  const from = config.get('email');
+  const from = process.env.email;
   const to = user.email;
   const subject = '🌻Art App Password Reset 🌻';
   const html = `
@@ -191,8 +191,8 @@ const resetPasswordTemplate = (user, url) => {
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: config.get('email'),
-    pass: config.get('password'),
+    user: process.env.email,
+    pass: process.env.password,
   },
 });
 

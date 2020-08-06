@@ -81,7 +81,7 @@ class HeaderMobile extends Component {
             />
           </Navbar.Brand>
           <Nav className='ml-auto'>
-            <Nav.Link href='/' onClick={this.props.Logout} active>
+            <Nav.Link href='#' onClick={this.props.Logout} active>
               Logout
             </Nav.Link>
           </Nav>
