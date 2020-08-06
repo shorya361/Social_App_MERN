@@ -207,11 +207,15 @@ router.post('/resetPassword/:email', async (req, res) => {
     }
 
     const token = usePasswordHashToMakeToken(user);
-    const url =
-      'http://localhost:3000/password/reset/' + user._id + '/' + token;
+    // for local server
+    // const url =
+    //   'http://localhost:3000/password/reset/' + user._id + '/' + token;
 
-    console.log(url);
-    console.log(req);
+    const url =
+      'https://punk-gts-social-app.herokuapp.com/password/reset/' +
+      user._id +
+      '/' +
+      token;
     const emailTemplate = resetPasswordTemplate(user, url);
     transporter.sendMail(emailTemplate, (err, info) => {
       if (err) {
