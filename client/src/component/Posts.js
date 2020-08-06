@@ -134,7 +134,6 @@ class Posts extends Component {
     // const file = await res.json();
   };
   componentDidMount() {
-    console.log(this);
     if (this.props.postDetails && this.props.Auth.user) {
       // console.log(this.props.postDetails.description);
       this.setState({

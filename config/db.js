@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
-
+const config = require('config');
+const db = config.get('mongoURI');
 const connectDB = async () => {
   try {
     console.log('connecting Mongo-Atlas');
-    await mongoose.connect(process.env.mongoURI, {
+    await mongoose.connect(process.env.mongoURI || db, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,

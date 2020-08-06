@@ -76,7 +76,6 @@ class ProfileAdminAccess extends Component {
     // console.log(this);
   }
   componentWillReceiveProps(Props) {
-    console.log(Props);
     if (Props.user) {
       this.setState({
         ...this.state,

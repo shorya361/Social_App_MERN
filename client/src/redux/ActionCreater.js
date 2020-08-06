@@ -11,7 +11,7 @@ export const LoadUser = () => async (dispatch) => {
     setAuthToken(localStorage.token);
   }
   try {
-    const res = await axios.get('http://localhost:5000/api/auth');
+    const res = await axios.get('/api/auth');
     dispatch({
       type: Action_Types.USER_LOADED,
       payload: res.data,
@@ -26,7 +26,7 @@ export const LoadUser = () => async (dispatch) => {
 //AllUsers
 export const LoadAllUsers = () => async (dispatch) => {
   try {
-    const res = await axios.get('http://localhost:5000/api/users/');
+    const res = await axios.get('/api/users/');
     dispatch({
       type: Action_Types.LOAD_ALL_USERS,
       payload: res.data,
@@ -44,11 +44,7 @@ export const Register = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    const response = await axios.post(
-      'http://localhost:5000/api/users/register',
-      body,
-      config
-    );
+    const response = await axios.post('/api/users/register', body, config);
 
     // c onsole.log(response);
     if (response.data.errors) {
@@ -81,11 +77,7 @@ export const Login = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    const response = await axios.post(
-      'http://localhost:5000/api/auth/login',
-      Body,
-      config
-    );
+    const response = await axios.post('/api/auth/login', Body, config);
 
     // console.log(response);
     if (response.data.errors) {
@@ -124,11 +116,7 @@ export const deactivate = (body) => async (dispatch) => {
       },
     };
 
-    const res = await axios.post(
-      'http://localhost:5000/api/users/changeStatus',
-      Body,
-      config
-    );
+    const res = await axios.post('/api/users/changeStatus', Body, config);
     dispatch(LoadAllUsers());
     dispatch(LoadUser());
     if (res.data.user.activated) {
@@ -151,11 +139,7 @@ export const update = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    await axios.put(
-      'http://localhost:5000/api/users/updateProfile',
-      Body,
-      config
-    );
+    await axios.put('/api/users/updateProfile', Body, config);
     dispatch(LoadUser());
     dispatch(LoadComments());
     dispatch(LoadAllUsers());
@@ -175,11 +159,7 @@ export const FollowRequest = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    const res = await axios.put(
-      'http://localhost:5000/api/users/follow',
-      Body,
-      config
-    );
+    const res = await axios.put('/api/users/follow', Body, config);
     console.log(res);
     dispatch(LoadUser());
     dispatch(LoadComments());
@@ -202,11 +182,7 @@ export const UnFollowRequest = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    const res = await axios.put(
-      'http://localhost:5000/api/users/unfollow',
-      Body,
-      config
-    );
+    const res = await axios.put('/api/users/unfollow', Body, config);
     // console.log(res);
     dispatch(LoadUser());
     dispatch(LoadComments());
@@ -229,11 +205,7 @@ export const getTimeline = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    const res = await axios.post(
-      'http://localhost:5000/api/Posts/getTimeline',
-      Body,
-      config
-    );
+    const res = await axios.post('/api/Posts/getTimeline', Body, config);
     const sortedtimeline = res.data.sort((a, b) => a.date - b.date);
     sortedtimeline.reverse();
 
@@ -250,7 +222,7 @@ export const getTimeline = (body) => async (dispatch) => {
 export const resetPassword = (body) => async (dispatch) => {
   try {
     const { email } = body;
-    var url = 'http://localhost:5000/api/users/resetPassword/' + email;
+    var url = '/api/users/resetPassword/' + email;
     // console.log(url);
     const config = {
       headers: {
@@ -276,8 +248,7 @@ export const ChangePassword = (body) => async (dispatch) => {
     console.log(body);
     const { UserID, token, password } = body;
     const Body = JSON.stringify({ password });
-    var url =
-      'http://localhost:5000/api/users/ChangePassword/' + UserID + '/' + token;
+    var url = '/api/users/ChangePassword/' + UserID + '/' + token;
     console.log(url);
 
     const config = {
@@ -321,7 +292,7 @@ export const setAlert = (message, AlertType) => (dispatch) => {
 //LOAD COMMENTS
 export const LoadComments = () => async (dispatch) => {
   try {
-    const res = await axios.get('http://localhost:5000/api/comment/');
+    const res = await axios.get('/api/comment/');
     dispatch({
       type: Action_Types.LOAD_COMMENTS,
       payload: res.data,
@@ -344,11 +315,7 @@ export const addNewComment = (body) => async (dispatch) => {
       },
     };
 
-    await axios.post(
-      'http://localhost:5000/api/comment/addComment',
-      Body,
-      config
-    );
+    await axios.post('/api/comment/addComment', Body, config);
     dispatch(LoadComments());
     dispatch(LoadUser());
     dispatch(setAlert('Comment Added', 'success'));
@@ -369,11 +336,7 @@ export const updateComment = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    await axios.put(
-      'http://localhost:5000/api/comment/updateComment',
-      Body,
-      config
-    );
+    await axios.put('/api/comment/updateComment', Body, config);
     dispatch(LoadComments());
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
@@ -394,11 +357,7 @@ export const deleteComment = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    await axios.put(
-      'http://localhost:5000/api/comment/deleteComment',
-      Body,
-      config
-    );
+    await axios.put('/api/comment/deleteComment', Body, config);
     dispatch(LoadComments());
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
@@ -422,7 +381,7 @@ export const addnewPost = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    await axios.post('http://localhost:5000/api/Posts/addPost', Body, config);
+    await axios.post('/api/Posts/addPost', Body, config);
     // console.log(res);
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
@@ -445,7 +404,7 @@ export const updatePost = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    await axios.put('http://localhost:5000/api/Posts/updatePost', Body, config);
+    await axios.put('/api/Posts/updatePost', Body, config);
     // console.log(res);
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
@@ -468,7 +427,7 @@ export const deletePost = (body) => async (dispatch) => {
     };
 
     // console.log(Body);
-    await axios.put('http://localhost:5000/api/Posts/deletePost', body, config);
+    await axios.put('/api/Posts/deletePost', body, config);
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
     dispatch(LoadComments());
@@ -490,7 +449,7 @@ export const Like = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    await axios.put('http://localhost:5000/api/Posts/Like', Body, config);
+    await axios.put('/api/Posts/Like', Body, config);
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
     dispatch(getTimeline({ UserID: UserID }));
@@ -510,7 +469,7 @@ export const UnLike = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    await axios.put('http://localhost:5000/api/Posts/UnLike', Body, config);
+    await axios.put('/api/Posts/UnLike', Body, config);
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
     dispatch(getTimeline({ UserID: UserID }));
@@ -529,7 +488,7 @@ export const DownVote = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    await axios.put('http://localhost:5000/api/Posts/DownVote', Body, config);
+    await axios.put('/api/Posts/DownVote', Body, config);
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
     dispatch(getTimeline({ UserID: UserID }));
@@ -549,7 +508,7 @@ export const UnDownVote = (body) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     };
-    await axios.put('http://localhost:5000/api/Posts/UnDisLike', Body, config);
+    await axios.put('/api/Posts/UnDisLike', Body, config);
     dispatch(LoadUser());
     dispatch(LoadAllUsers());
     dispatch(getTimeline({ UserID: UserID }));

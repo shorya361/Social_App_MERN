@@ -143,9 +143,9 @@ class Header extends Component {
             paddingLeft: '4px',
           }}
         >
-          <spam href='#' onClick={this.props.Logout} style={{ color: 'black' }}>
+          <span href='#' onClick={this.props.Logout} style={{ color: 'black' }}>
             <i className='fas fa-sign-out-alt fa-3x'></i>{' '}
-          </spam>
+          </span>
         </div>
       </div>
     );

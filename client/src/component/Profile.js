@@ -261,13 +261,9 @@ class Profile extends Component {
         posts.push(
           this.props.Auth.user.Posts.map((eachPost) => {
             return (
-              <Stagger in>
+              <Stagger in key={eachPost._id}>
                 <Fade in>
-                  <Posts
-                    key={eachPost._id}
-                    user={this.state.user}
-                    postDetails={eachPost}
-                  />
+                  <Posts user={this.state.user} postDetails={eachPost} />
                 </Fade>
               </Stagger>
             );
