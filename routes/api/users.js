@@ -174,7 +174,7 @@ const usePasswordHashToMakeToken = ({
 const resetPasswordTemplate = (user, url) => {
   const from = process.env.email || config.get('email');
   const to = user.email;
-  const subject = '🌻Art App Password Reset 🌻';
+  const subject = '🌻 Social App Password Reset 🌻';
   const html = `
   <p>Hey ${user.displayName || user.email},</p>
   <p>We heard that you lost your password. Sorry about that!</p>
@@ -210,6 +210,8 @@ router.post('/resetPassword/:email', async (req, res) => {
     const url =
       'http://localhost:3000/password/reset/' + user._id + '/' + token;
 
+    console.log(url);
+    console.log(req);
     const emailTemplate = resetPasswordTemplate(user, url);
     transporter.sendMail(emailTemplate, (err, info) => {
       if (err) {
