@@ -595,7 +595,7 @@ class ProfileAdminAccess extends Component {
                       <div
                         className='scrollbar'
                         style={{
-                          height: '650px',
+                          height: '710px',
                           marginTop: '2%',
                           overflowY: 'auto',
                           paddingLeft: '0px',

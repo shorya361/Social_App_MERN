@@ -217,11 +217,11 @@ class FindFriends extends Component {
                 <h2 style={{ textAlign: 'center' }}>Add Friends</h2>
                 <div
                   className='scrollbar'
-                  style={{ height: '640px', width: '100%', overflowX: 'auto' }}
+                  style={{ height: '680px', width: '100%', overflowX: 'auto' }}
                 >
                   <CardGroup>
                     <div
-                      style={{ margin: '0', width: '100%', paddingTop: '3%' }}
+                      style={{ margin: '0', width: '100%', paddingTop: '1%' }}
                     >
                       <div className='row' style={{ width: '100%' }}>
                         {' '}
