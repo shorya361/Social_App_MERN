@@ -10,7 +10,7 @@ https://punk-gts-social-app.herokuapp.com/
 <img src="images/Register.PNG">
 
 **Login**
-<img src="images/LoginMobile"  />
+<img src="images/LoginMobile.PNG"  />
 
 **Provides Reset Password link to respective Email ID by sending mail using nodemailer**
 
@@ -28,7 +28,7 @@ https://punk-gts-social-app.herokuapp.com/
 
 <img src="images/addFriends.PNG"  />
 
-<img src="FindFriends.PNG">
+<img src="images/FindFriends.PNG">
 
 ## Share your thoughts using Pictures and Texts
 
