@@ -18,9 +18,17 @@ https://punk-gts-social-app.herokuapp.com/
 
 <img src="images/forgotPassword.PNG"  />
   
-### Dashboard to see latest Posts of the users you follow
+### Dashboard to see latest Posts of the users you follow.
 
 <img src="images/HomePage.PNG"  />
+
+### Provides functionalities such as Upvote , Downvote and Comment on any Post
+
+<img src="images/Comment.PNG">
+
+### Allows user to edit and delete their comments
+
+<img src="images/EditComment.PNG">
 
 ### Allows to edit your profile anywhere whether it is dashboard or your own profile page.
 
@@ -36,10 +44,11 @@ https://punk-gts-social-app.herokuapp.com/
 
 <img src="images/NewPost.PNG"  />
 
-### Can visit your Own Profile and Update at any time
+### Can visit your Own Profile
 
  <img src="images/Profile.PNG"  />
  
+###  Update Profile at any time 
  <img src="images/editProfile.PNG"  />
  
 ### Allows User to deactivate your account to hide your profile from the community
