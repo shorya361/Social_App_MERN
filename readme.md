@@ -24,7 +24,7 @@ https://punk-gts-social-app.herokuapp.com/
 
 ### Provides functionalities such as Upvote , Downvote and Comment on any Post
 
-<img src="images/Comment.PNG">
+<img src="images/Comment.png">
 
 ### Allows user to edit and delete their comments
 
@@ -54,6 +54,10 @@ https://punk-gts-social-app.herokuapp.com/
 ### Allows User to deactivate your account to hide your profile from the community
 
 <img src="images/DeactivateAccount.PNG">
+
+### Note: Also has Admin Feature provided to Author only .
+
+## Author : Shorya Upadhayay
 
 # Technology Used
 
