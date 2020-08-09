@@ -1,0 +1,6 @@
+{
+  "jwtsecret": "MysecretToken",
+  "mongoURI": "mongodb+srv://Shorya:py2CDsyKyCrzLl5w@artgallery.ncjaa.mongodb.net/artgallery?retryWrites=true&w=majority",
+  "email": "punkgtssocialapp@gmail.com",
+  "password": "punkgts@434"
+}
