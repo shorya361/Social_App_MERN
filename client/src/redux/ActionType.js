@@ -10,3 +10,4 @@ export const LOGOUT = 'LOGOUT';
 export const LOAD_COMMENTS = 'LOAD_COMMENTS';
 export const LOAD_ALL_USERS = 'LOAD_ALL_USERS';
 export const GETTIMELINE = 'GETTIMELINE';
+export const CLEARTIMELINE = 'CLEARTIMELINE';

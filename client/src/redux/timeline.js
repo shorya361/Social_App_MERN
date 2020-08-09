@@ -11,6 +11,10 @@ export const timeline = (
       return {
         Post: action.payload,
       };
+    case ActionTypes.CLEARTIMELINE:
+      return {
+        Post: null,
+      };
     default:
       return state;
   }

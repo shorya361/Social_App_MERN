@@ -103,6 +103,9 @@ export const Logout = () => (dispatch) => {
   dispatch({
     type: Action_Types.LOGOUT,
   });
+  dispatch({
+    type: Action_Types.CLEARTIMELINE,
+  });
 };
 
 //DEACTIVATE ACCOUNT
